@@ -1,0 +1,125 @@
+import org.apache.tools.ant.taskdefs.condition.Os
+
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 25
+    defaultConfig {
+        applicationId "cn.mw.ethwallet"
+        minSdkVersion 15
+        targetSdkVersion 25
+        flavorDimensions "fdroid"
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        externalNativeBuild {
+            cmake {
+                cppFlags ""
+            }
+        }
+        multiDexEnabled true
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+
+    compileOptions {
+        targetCompatibility 1.7
+        sourceCompatibility 1.7
+    }
+
+    packagingOptions {
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/notice'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/rxjava.properties'
+    }
+
+    lintOptions {
+        disable 'MissingTranslation'
+    }
+
+    productFlavors {
+        googleplay {
+        }
+
+        fdroid {
+        }
+    }
+
+    task ndkBuild(type: Exec) {
+        def rootDir = project.rootDir
+        def localProperties = new File(rootDir, "local.properties")
+        Properties properties = new Properties()
+        localProperties.withInputStream { instr ->
+            properties.load(instr)
+        }
+        def ndkDir = properties.getProperty('ndk.dir')
+
+        if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+            commandLine ndkDir + '\\ndk-build.cmd',
+                    'NDK_LIBS_OUT=main/jniLibs',
+                    'NDK_PROJECT_PATH=' + rootDir + '\\app\\src',
+                    'APP_BUILD_SCRIPT=jni/Android.mk',
+                    '-C',
+                    file('src').absolutePath
+        } else {
+            commandLine ndkDir + '/ndk-build',
+                    'NDK_LIBS_OUT=main/jniLibs',
+                    'NDK_PROJECT_PATH=' + rootDir + '/app/src',
+                    'APP_BUILD_SCRIPT=jni/Android.mk',
+                    '-C',
+                    file('src').absolutePath
+        }
+    }
+
+    tasks.withType(JavaCompile) {
+        compileTask -> compileTask.dependsOn ndkBuild
+    }
+}
+
+dependencies {
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.github.clans:fab:1.6.4'
+    compile 'me.dm7.barcodescanner:zxing:1.8.4'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:design:25.3.1'
+    compile 'com.squareup.okhttp3:okhttp:3.8.0'
+    compile 'com.android.support:support-v4:25.3.1'
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:multidex:1.0.1'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
+    compile 'org.web3j:core-android:2.2.1'
+    googleplayCompile 'com.google.android.gms:play-services-analytics:11.0.4'
+    googleplayCompile 'com.google.android.gms:play-services-ads:11.0.4'
+    compile 'me.zhanghai.android.patternlock:library:2.1.2'
+    compile 'com.afollestad.material-dialogs:core:0.9.4.5'
+    compile 'io.github.kobakei:ratethisapp:1.2.0'
+    compile 'com.github.apl-devs:appintro:v4.1.0'
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
+    compile 'me.grantland:autofittextview:0.2.1'
+    compile 'com.github.deano2390:MaterialShowcaseView:1.2.0@aar'
+    compile("com.mikepenz:materialdrawer:5.9.1@aar") {
+        transitive = true
+    }
+}
