@@ -50,7 +50,7 @@ import java.util.ArrayList
  */
 class FragmentDetailOverview : Fragment(), View.OnClickListener, View.OnCreateContextMenuListener, LastIconLoaded {
 
-    private lateinit var ac: AddressDetailActivity
+    private  var ac: AddressDetailActivity? = null
     private lateinit var ethaddress: String
     private var type: Byte = 0
     private var balance: TextView? = null
@@ -86,7 +86,7 @@ class FragmentDetailOverview : Fragment(), View.OnClickListener, View.OnCreateCo
         currency!!.setText(cur.name)
 
         recyclerView = rootView.findViewById(R.id.recycler_view) as RecyclerView?
-        walletAdapter = TokenAdapter(token, ac, this, this)
+        walletAdapter = TokenAdapter(token, ac!!, this, this)
         val mgr = LinearLayoutManager(ac!!.getApplicationContext())
         recyclerView!!.layoutManager = mgr
         recyclerView!!.itemAnimator = DefaultItemAnimator()
@@ -123,8 +123,8 @@ class FragmentDetailOverview : Fragment(), View.OnClickListener, View.OnCreateCo
 
         val send_ether = rootView.findViewById(R.id.send_ether) as FloatingActionButton // Send Ether to
         send_ether.setOnClickListener {
-            if (WalletStorage.getInstance(ac).fullOnly.size === 0) {
-                Dialogs.noFullWallet(ac)
+            if (WalletStorage.getInstance(ac!!).fullOnly.size === 0) {
+                Dialogs.noFullWallet(ac!!)
             } else {
                 val tx = Intent(ac, SendActivity::class.java)
                 tx.putExtra("TO_ADDRESS", ethaddress)
@@ -134,8 +134,8 @@ class FragmentDetailOverview : Fragment(), View.OnClickListener, View.OnCreateCo
 
         val send_ether_from = rootView.findViewById(R.id.send_ether_from) as FloatingActionButton
         send_ether_from.setOnClickListener {
-            if (WalletStorage.getInstance(ac).fullOnly.size === 0) {
-                Dialogs.noFullWallet(ac)
+            if (WalletStorage.getInstance(ac!!).fullOnly.size === 0) {
+                Dialogs.noFullWallet(ac!!)
             } else {
                 val tx = Intent(ac, SendActivity::class.java)
                 tx.putExtra("FROM_ADDRESS", ethaddress)
@@ -145,7 +145,7 @@ class FragmentDetailOverview : Fragment(), View.OnClickListener, View.OnCreateCo
 
         val fab_add = rootView.findViewById(R.id.add_as_watch) as FloatingActionButton
         fab_add.setOnClickListener {
-            val suc = WalletStorage.getInstance(ac).add(WatchWallet(ethaddress!!), ac)
+            val suc = WalletStorage.getInstance(ac!!).add(WatchWallet(ethaddress!!), ac!!)
             Handler().postDelayed(
                     { ac!!.snackError(ac!!.getResources().getString(if (suc) R.string.main_ac_wallet_added_suc else R.string.main_ac_wallet_added_er)) }, 100)
         }
@@ -153,7 +153,7 @@ class FragmentDetailOverview : Fragment(), View.OnClickListener, View.OnCreateCo
         if (type == AddressDetailActivity.OWN_WALLET) {
             fab_add.visibility = View.GONE
         }
-        if (!WalletStorage.getInstance(ac).isFullWallet(ethaddress!!)) {
+        if (!WalletStorage.getInstance(ac!!).isFullWallet(ethaddress!!)) {
             send_ether_from.visibility = View.GONE
         }
 
@@ -226,7 +226,7 @@ class FragmentDetailOverview : Fragment(), View.OnClickListener, View.OnCreateCo
                     val restring = response.body()!!.string()
                     if (restring != null && restring.length > 2)
                         RequestCache.instance.put(RequestCache.TYPE_TOKEN, ethaddress!!, restring)
-                    token.addAll(ResponseParser.parseTokens(ac, restring, this@FragmentDetailOverview))
+                    token.addAll(ResponseParser.parseTokens(ac!!, restring, this@FragmentDetailOverview))
 
                     balanceDouble = balanceDouble.add(BigDecimal(ExchangeCalculator.instance.sumUpTokenEther(token)))
 
@@ -259,7 +259,7 @@ class FragmentDetailOverview : Fragment(), View.OnClickListener, View.OnCreateCo
             builder.setTitle(R.string.name_this_address)
 
         val input = EditText(ac)
-        input.setText(AddressNameConverter.getInstance(ac).get(ethaddress!!))
+        input.setText(AddressNameConverter.getInstance(ac!!).get(ethaddress!!))
         input.inputType = InputType.TYPE_CLASS_TEXT
         input.setSingleLine()
         val container = FrameLayout(ac!!)
@@ -282,7 +282,7 @@ class FragmentDetailOverview : Fragment(), View.OnClickListener, View.OnCreateCo
         builder.setPositiveButton(R.string.button_ok, DialogInterface.OnClickListener { dialog, which ->
             val inputMgr = input.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             inputMgr.hideSoftInputFromWindow(input.windowToken, 0)
-            AddressNameConverter.getInstance(ac).put(ethaddress, input.text.toString(), ac)
+            AddressNameConverter.getInstance(ac!!).put(ethaddress, input.text.toString(), ac!!)
             ac!!.setTitle(input.text.toString())
         })
         builder.setNegativeButton(R.string.button_cancel, DialogInterface.OnClickListener { dialog, which ->
@@ -303,7 +303,7 @@ class FragmentDetailOverview : Fragment(), View.OnClickListener, View.OnCreateCo
         if (ac == null) return
         val itemPosition = recyclerView!!.getChildLayoutPosition(view)
         if (itemPosition == 0 || itemPosition >= token.size) return   // if clicked on Ether
-        Dialogs.showTokenetails(ac, token[itemPosition])
+        Dialogs.showTokenetails(ac!!, token[itemPosition])
     }
 
     override fun onLastIconDownloaded() {

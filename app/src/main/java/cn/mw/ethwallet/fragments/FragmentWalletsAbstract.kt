@@ -51,7 +51,7 @@ abstract class FragmentWalletsAbstract : Fragment(), View.OnClickListener, View.
     protected var recyclerView: RecyclerView? = null
     protected var walletAdapter: WalletAdapter? = null
     protected var wallets: MutableList<WalletDisplay> = java.util.ArrayList<WalletDisplay>()
-    protected lateinit var ac: MainActivity
+    protected var ac: MainActivity? = null
     internal var balance = 0.0
     protected var balanceView: TextView? = null
     protected var swipeLayout: SwipeRefreshLayout? = null
@@ -136,7 +136,7 @@ abstract class FragmentWalletsAbstract : Fragment(), View.OnClickListener, View.
             scanQR.putExtra("TYPE", QRScanActivity.SCAN_ONLY)
             ac!!.startActivityForResult(scanQR, QRScanActivity.REQUEST_CODE)
         }
-        add_fab.setOnClickListener { Dialogs.addWatchOnly(ac) }
+        add_fab.setOnClickListener { Dialogs.addWatchOnly(ac!!) }
 
         if (ac != null && ac!!.appBar != null) {
             ac!!.appBar!!.addOnOffsetChangedListener(object : AppBarStateChangeListener() {
@@ -169,7 +169,7 @@ abstract class FragmentWalletsAbstract : Fragment(), View.OnClickListener, View.
         if (ac == null) return
         wallets.clear()
         balance = 0.0
-        val storedwallets = ArrayList<StorableWallet>(WalletStorage.getInstance(ac).get())
+        val storedwallets = ArrayList<StorableWallet>(WalletStorage.getInstance(ac!!).get())
 
         if (storedwallets.size == 0) {
             nothingToShow!!.visibility = View.VISIBLE
@@ -182,7 +182,7 @@ abstract class FragmentWalletsAbstract : Fragment(), View.OnClickListener, View.
                         ac!!.snackError("Can't fetch account balances. Invalid response.")
                     val w = java.util.ArrayList<WalletDisplay>()
                     for (cur in storedwallets)
-                        w.add(WalletDisplay(AddressNameConverter.getInstance(ac).get(cur.pubKey)!!, cur.pubKey, BigInteger("-1"), WalletDisplay.CONTACT))
+                        w.add(WalletDisplay(AddressNameConverter.getInstance(ac!!).get(cur.pubKey)!!, cur.pubKey, BigInteger("-1"), WalletDisplay.CONTACT))
 
                     ac!!.runOnUiThread(Runnable {
                         wallets.addAll(w)
@@ -195,7 +195,7 @@ abstract class FragmentWalletsAbstract : Fragment(), View.OnClickListener, View.
                 override fun onResponse(call: Call, response: Response) {
                     val w: List<WalletDisplay>
                     try {
-                        w = ResponseParser.parseWallets(response.body()!!.string(), storedwallets, ac)
+                        w = ResponseParser.parseWallets(response.body()!!.string(), storedwallets, ac!!)
                     } catch (e: Exception) {
                         e.printStackTrace()
                         return
@@ -254,19 +254,19 @@ abstract class FragmentWalletsAbstract : Fragment(), View.OnClickListener, View.
             203 -> {
                 val finalPosition = position
                 if (wallets[finalPosition].type === WalletDisplay.NORMAL) {
-                    Dialogs.exportWallet(ac, DialogInterface.OnClickListener { dialog, which ->
-                        WalletStorage.getInstance(ac).setWalletForExport(wallets[finalPosition].publicKey!!)
+                    Dialogs.exportWallet(ac!!, DialogInterface.OnClickListener { dialog, which ->
+                        WalletStorage.getInstance(ac!!).setWalletForExport(wallets[finalPosition].publicKey!!)
                         export()
                         dialog.dismiss()
                     })
                 } else {
-                    Dialogs.cantExportNonWallet(ac)
+                    Dialogs.cantExportNonWallet(ac!!)
                 }
             }
             204 -> {
                 val finalPosition2 = position
                 if (wallets[finalPosition2].type === WalletDisplay.NORMAL) {
-                    Dialogs.askForPasswordAndDecode(ac, wallets[finalPosition2].publicKey!!, object : PasswordDialogCallback {
+                    Dialogs.askForPasswordAndDecode(ac!!, wallets[finalPosition2].publicKey!!, object : PasswordDialogCallback {
                         override fun success(password: String) {
                             val i = Intent(ac, PrivateKeyActivity::class.java)
                             i.putExtra(PrivateKeyActivity.PASSWORD, password)
@@ -277,7 +277,7 @@ abstract class FragmentWalletsAbstract : Fragment(), View.OnClickListener, View.
                         override fun canceled() {}
                     })
                 } else {
-                    Dialogs.cantExportNonWallet(ac)
+                    Dialogs.cantExportNonWallet(ac!!)
                 }
             }
             205 -> confirmDelete(wallets[position].publicKey!!, wallets[position].type)
@@ -286,7 +286,7 @@ abstract class FragmentWalletsAbstract : Fragment(), View.OnClickListener, View.
     }
 
     fun export() {
-        val suc = WalletStorage.getInstance(ac).exportWallet(ac)
+        val suc = WalletStorage.getInstance(ac!!).exportWallet(ac!!)
         if (suc)
             ac!!.snackError(getString(R.string.wallet_suc_exported))
         else
@@ -329,7 +329,7 @@ abstract class FragmentWalletsAbstract : Fragment(), View.OnClickListener, View.
         }
         builder.setPositiveButton(R.string.button_yes, DialogInterface.OnClickListener { dialog, which ->
             if (type == WalletDisplay.WATCH_ONLY || type == java.lang.Byte.MAX_VALUE) {
-                WalletStorage.getInstance(ac).removeWallet(address, ac)
+                WalletStorage.getInstance(ac!!).removeWallet(address, ac!!)
                 dialog.dismiss()
                 try {
                     update()
@@ -356,7 +356,7 @@ abstract class FragmentWalletsAbstract : Fragment(), View.OnClickListener, View.
         builder.setTitle(R.string.name_your_wallet)
 
         val input = EditText(ac)
-        input.setText(AddressNameConverter.getInstance(ac).get(address))
+        input.setText(AddressNameConverter.getInstance(ac!!).get(address))
         input.setSingleLine()
         val container = FrameLayout(ac!!)
         val params = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
@@ -377,7 +377,7 @@ abstract class FragmentWalletsAbstract : Fragment(), View.OnClickListener, View.
             }
         }
         builder.setPositiveButton(R.string.button_ok, DialogInterface.OnClickListener { dialog, which ->
-            AddressNameConverter.getInstance(ac).put(address, input.text.toString(), ac)
+            AddressNameConverter.getInstance(ac!!).put(address, input.text.toString(), ac!!)
             val inputMgr = input.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             inputMgr.hideSoftInputFromWindow(input.windowToken, 0)
             notifyDataSetChanged()

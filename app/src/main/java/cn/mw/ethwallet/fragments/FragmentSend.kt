@@ -47,7 +47,7 @@ class FragmentSend : Fragment() {
 
     private val DEFAULT_GAS_PRICE = 12
 
-    private lateinit var ac: SendActivity
+    private  var ac: SendActivity? = null
     //    private var send: Button? = null
 //    private var amount: EditText? = null
 //    private var toAddress: TextView? = null
@@ -125,7 +125,7 @@ class FragmentSend : Fragment() {
         }
 
         if (arguments!!.containsKey("TO_ADDRESS")) {
-            setToAddress(arguments!!.getString("TO_ADDRESS"), ac)
+            setToAddress(arguments!!.getString("TO_ADDRESS"), ac!!)
         }
 
         if (arguments!!.containsKey("AMOUNT")) {
@@ -151,7 +151,7 @@ class FragmentSend : Fragment() {
         gas!!.progress = DEFAULT_GAS_PRICE
 
 //        spinner = rootView.findViewById(R.id.spinner)
-        val spinnerArrayAdapter = object : ArrayAdapter<String>(ac, R.layout.address_spinner, WalletStorage.getInstance(ac).fullOnly) {
+        val spinnerArrayAdapter = object : ArrayAdapter<String>(ac, R.layout.address_spinner, WalletStorage.getInstance(ac!!).fullOnly) {
             override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
                 val view = super.getView(position, convertView, parent)
                 view.setPadding(0, view.paddingTop, view.paddingRight, view.paddingBottom)
@@ -212,7 +212,7 @@ class FragmentSend : Fragment() {
                 if (BuildConfig.DEBUG)
                     Log.d("etherbalance", (curTotalCost.compareTo(curAvailable) < 0).toString() + " | " + curTotalCost + " | " + curAvailable + " | " + data!!.text + " | " + curAmount)
                 if (curTotalCost.compareTo(curAvailable) < 0 || BuildConfig.DEBUG || data!!.text.length > 0) {
-                    Dialogs.askForPasswordAndDecode(ac, spinner!!.selectedItem.toString(), object : PasswordDialogCallback {
+                    Dialogs.askForPasswordAndDecode(ac!!, spinner!!.selectedItem.toString(), object : PasswordDialogCallback {
 
                         override fun success(password: String) {
                             sendEther(password, spinner!!.selectedItem.toString())
@@ -268,11 +268,11 @@ class FragmentSend : Fragment() {
         }
 
         fromicon!!.setImageBitmap(Blockies.createIcon(spinner!!.selectedItem.toString().toLowerCase()))
-        fromName!!.setText(AddressNameConverter.getInstance(ac).get(spinner!!.selectedItem.toString().toLowerCase()))
+        fromName!!.setText(AddressNameConverter.getInstance(ac!!).get(spinner!!.selectedItem.toString().toLowerCase()))
     }
 
     private fun setFromAddress(from: String?) {
-        val fullwallets = WalletStorage.getInstance(ac).fullOnly
+        val fullwallets = WalletStorage.getInstance(ac!!).fullOnly
         for (i in fullwallets.indices) {
             if (fullwallets.get(i).equals(from!!, ignoreCase = true)) {
                 spinner!!.setSelection(i)
@@ -351,7 +351,7 @@ class FragmentSend : Fragment() {
                 override fun onResponse(call: Call, response: Response) {
                     try {
                         gaslimit = ResponseParser.parseGasPrice(response.body()!!.string())
-                        ac.runOnUiThread(Runnable { userGasLimit.setText(gaslimit.toString()) })
+                        ac!!.runOnUiThread(Runnable { userGasLimit.setText(gaslimit.toString()) })
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }
