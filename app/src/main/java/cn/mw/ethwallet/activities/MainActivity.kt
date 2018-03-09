@@ -372,8 +372,8 @@ class MainActivity : SecureAppCompatActivity(), NetworkUpdateListener {
             }
             3 -> {
                 AlertDialog.Builder(this)
-                        .setTitle("About Lunary")
-                        .setMessage("Lunary is published under GPL3\n" +
+                        .setTitle("About Merculet")
+                        .setMessage("Merculet is published under GPL3\n" +
                                 "Developed by Manuel S. C. for Rehanced, 2017\n"
                                 + "www.rehanced.com\n" +
                                 getString(R.string.translator_name) + "\n" +
@@ -392,14 +392,14 @@ class MainActivity : SecureAppCompatActivity(), NetworkUpdateListener {
                                 "Ethereum Foundation for usage of the icon according to (CC A 3.0)\n" +
                                 "Powered by Etherscan.io APIs\n" +
                                 "Token balances powered by Ethplorer.io\n\n" +
-                                "Lunary is published under GPL3\n" +
-                                "This app is not associated with Ethereum or the Ethereum Foundation in any way. Lunary is an independend wallet app.")
+                                "Merculet is published under GPL3\n" +
+                                "This app is not associated with Ethereum or the Ethereum Foundation in any way. Merculet is an independend wallet app.")
                         .setIcon(android.R.drawable.ic_dialog_info)
                         .show()
             }
             4 -> {
                 val i = Intent(Intent.ACTION_VIEW)
-                i.data = Uri.parse("https://www.reddit.com/r/lunary")
+                i.data = Uri.parse("https://github.com/snailflying/ETH_Wallet_Kotlin")
                 startActivity(i)
             }
             5 -> {

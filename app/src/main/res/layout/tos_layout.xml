@@ -13,7 +13,7 @@
         android:layout_marginTop="50dp"
         android:gravity="center"
         android:paddingLeft="32dp"
-        android:text="Legal"
+        android:text="@string/legal"
         android:paddingRight="32dp"
         android:textColor="@android:color/white"
         android:textSize="28sp" />

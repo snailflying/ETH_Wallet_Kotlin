@@ -1,44 +1,48 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="translator_name">German translation by Manuel S. C.</string>
+    <string name="translator_name"></string>
+
     <string name="app_name">Merculet</string>
 
-    <string name="action_settings">Einstellungen</string>
+    <string name="action_settings">Settings</string>
     <string name="title_activity_main">Merculet</string>
 
-    <string name="fab_scan">Scanne Adresse / Schlüssel</string>
-    <string name="fab_add_watch">Adresse Suchen</string>
-    <string name="fab_add_aswatch">Als Beobachter Adresse hinzufügen</string>
-    <string name="fab_gen_new">Erstelle neues Konto</string>
-    <string name="fab_request">Anfordern</string>
-    <string name="fab_send">Senden</string>
-    <string name="fab_sendether">Sende Ether</string>
-    <string name="fab_setwalletname">Kontonamen ändern</string>
-    <string name="drawer_import">Konten importieren</string>
-    <string name="drawer_about">Über uns</string>
-    <!--<string name="drawer_donate">Spenden</string>-->
+    <string name="fab_scan">Scan Address / Key</string>
+    <string name="fab_add_watch">Lookup Address</string>
+    <string name="fab_add_aswatch">Add as Watch Only Wallet</string>
+    <string name="fab_gen_new">Generate New Wallet</string>
+    <string name="fab_request">Request</string>
+    <string name="fab_send">Send</string>
+    <string name="fab_sendether">Send Ether</string>
+    <string name="fab_setwalletname">Set Wallet Name</string>
+    <string name="drawer_import">Import Wallets</string>
+    <string name="drawer_about">About Us</string>
+    <string name="drawer_donate">Donate</string>
 
-    <string name="fr_price_current_price">Aktueller Preis</string>
-    <string name="fr_wallet_overall_balance">Gesamt Kontostand</string>
-    <string name="fr_detail_acc_balance">Kontostand</string>
+    <string name="fr_price_current_price">Current Price</string>
+    <string name="fr_wallet_overall_balance">Overall Balance</string>
+    <string name="fr_detail_acc_balance">Account Balance</string>
 
-    <string name="main_ac_wallet_added_suc">Konto erfolgreich hinzugefügt</string>
-    <string name="main_ac_wallet_added_er">Konto war bereits hinzugefügt</string>
-    <string name="main_ac_wallet_added_fatal">Err: Ungültige Ethereum Adresse</string>
-    <string name="detail_acc_name_changed_suc">Konto erfolgreich umbenannt</string>
-    <string name="title_activity_settings">Einstellungen</string>
+    <string name="main_ac_wallet_added_suc">Your wallet was added successfully</string>
+    <string name="main_ac_wallet_added_er">Wallet was already added</string>
+    <string name="main_ac_wallet_added_fatal">Err Not a valid ethereum address</string>
+    <string name="detail_acc_name_changed_suc">Wallet successfully renamed</string>
+    <string name="title_activity_settings">Settings</string>
 
-    <string name="pref_header_general">Allgemein</string>
+    <string name="pref_header_general">General</string>
 
-    <string name="pref_title_social_recommendations">0 Betrag Überweisungen anzeigen</string>
-    <string name="pref_description_social_recommendations">Wenn aktiviert werden Contract aufrufe mit leerem Betrag ebenfalls angezeigt</string>
+    <string name="pref_title_social_recommendations">Show zero amount transactions</string>
+    <string name="pref_description_social_recommendations">Whether to hide contract calls without any ether amount or not</string>
 
-    <string name="pref_title_start">Konto Ansicht als Startbildschirm</string>
-    <string name="pref_sum_start">Wenn aktiviert wird beim starten der App direkt zur Konto Ansicht gewechselt</string>
 
-    <string name="pref_title_sync_frequency">Benachrichtigungen Sync</string>
-    <string name="pref_sum_sync_frequency">Update intervall für neue Überweisungen</string>
+    <string name="pref_title_start">Wallet as default tab</string>
+    <string name="pref_sum_start">If enabled the app will start preselected in the wallet tab instead of the price tab</string>
 
-    <string name="pref_currencys_title">Anzuzeigende Währung</string>
+    <string name="pref_header_data_sync">Data &amp; sync</string>
+
+    <string name="pref_title_sync_frequency">Notification Sync</string>
+    <string name="pref_sum_sync_frequency">Sync interval to check for new transactions</string>
+
+    <string name="pref_currencys_title">Display Currency</string>
     <string-array name="pref_currencys">
         <item>USD</item>
         <item>EUR</item>
@@ -51,13 +55,13 @@
     </string-array>
 
     <string-array name="pref_sync_frequency_titles">
-        <item>1 Stunde</item>
-        <item>2 Stunden</item>
-        <item>4 Stunden</item>
-        <item>6 Stunden</item>
-        <item>8 Stunden</item>
-        <item>16 Stunden</item>
-        <item>24 Stunden</item>
+        <item>1 hour</item>
+        <item>2 hours</item>
+        <item>4 hours</item>
+        <item>6 hours</item>
+        <item>8 hours</item>
+        <item>16 hours</item>
+        <item>24 hours</item>
     </string-array>
     <string-array name="pref_sync_frequency_values">
         <item>1</item>
@@ -70,191 +74,188 @@
     </string-array>
 
 
-    <string name="notification_title">Überweisungseingang</string>
+    <string name="notification_title">Transaction Received</string>
 
     <string-array name="multi_select_list_preference_default_value" />
 
     <string name="pref_title_system_sync_settings">System sync settings</string>
 
-    <!-- Example settings for Notifications -->
-    <string name="pref_header_notifications">Benachrichtigungen</string>
+    <string name="pref_header_notifications">Notifications</string>
 
-    <string name="pref_title_new_message_notifications">Eingehende Überweisungen</string>
-    <string name="pref_title_new_message_notifications_sum">Benachrichtigt dich bei neuen eingehenden Überweisungen</string>
+    <string name="pref_title_new_message_notifications">Incoming Transactions</string>
+    <string name="pref_title_new_message_notifications_sum">Notify you about incoming transactions to any of your wallets</string>
 
     <string name="pref_title_ringtone">Ringtone</string>
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
-    <string name="title_activity_wallet_gen">Erstelle Konto</string>
+    <string name="title_activity_wallet_gen">Generate Wallet</string>
 
-    <!-- Strings related to login -->
-    <string name="prompt_email">Passwort</string>
-    <string name="prompt_password">Bestätige Passwort</string>
-    <string name="action_sign_in">Generiere</string>
+    <string name="prompt_email">Password</string>
+    <string name="prompt_password">Confirm Password</string>
+    <string name="action_sign_in">Generate</string>
 
-    <string name="error_invalid_password">Passwort zu kurz (Min: 9)</string>
-    <string name="error_incorrect_password">Passwörter stimmen nicht überein</string>
+    <string name="error_invalid_password">This password is too short (Min: 9)</string>
+    <string name="error_incorrect_password">Passwords do not match</string>
 
-    <string name="generate_text">Du bist dabei ein neues verschlüsseltes Konto anzulegen. Wir legen dir nahe ein starkes Passwort zu wählen um die bestmögliche Sicherheit für deine Ether zu gewährleisten. Bitte beachte dass das generieren eines stark geschützten und sicheren Konto ein sehr rechenintensiver Vorgang ist und schonmal einige Minuten beanspruchen kann! Damit du dein Smartphone in der Zwischenzeit normal benutzten kannst erfolgt dieser Schritt im Hintergrund, wobei du den Fortschritt jederzeit in deiner Nachrichtenbar verfolgen kannst. Außerdem werden wir dir benachrichtigen sobald der Vorgang abgeschlossen ist.</string>
+    <string name="generate_text">You are about to generate a new and encrypted offline wallet on this device. We recommend choosing a strong password in order to be able to ensure the best security possible for your funds. Please note that generating a strong and secure wallet is a highly compute-intensive task that can take up to several minutes! This process will be performed in the background so you can still use your phone as you usually would in the meantime. The progress is displayed in the notification bar of your device and as soon as we have finished generating your wallet, we will let you know.</string>
 
-    <string name="import_text">Du bist dabei einen unverschlüsselten privaten Schlüssel zu importieren. Wir legen dir nahe ein starkes Passwort zu wählen um die bestmögliche Sicherheit für deine Ether zu gewährleisten. Bitte beachte dass das importieren eines stark geschützten und sicheren Konto ein sehr rechenintensiver Vorgang ist und schonmal einige Minuten beanspruchen kann! Damit du dein Smartphone in der Zwischenzeit normal benutzten kannst erfolgt dieser Schritt im Hintergrund, wobei du den Fortschritt jederzeit in deiner Nachrichtenbar verfolgen kannst. Außerdem werden wir dir benachrichtigen sobald der Vorgang abgeschlossen ist.</string>
+    <string name="import_text">You are about to import an unencrypted private key. We recommend choosing a strong password in order to be able to ensure the best security possible for your funds. Please note that importing a strong and secure wallet is a highly compute-intensive task that can take up to several minutes! This process will be performed in the background so you can still use your phone as you usually would in the meantime. The progress is displayed in the notification bar of your device and as soon as we have finished generating your wallet, we will let you know.</string>
 
-    <string name="wallet_gen_service_title">Erstelle neues Konto</string>
-    <string name="wallet_gen_service_title_import">Importiere Konto</string>
-    <string name="choose_recipient_enterscan">Empfänger Adresse</string>
-    <string name="choose_recipient_contacts">Oder Empfänger von Adressbuch</string>
+    <string name="wallet_gen_service_title">Generating New Wallet</string>
+    <string name="wallet_gen_service_title_import">Importing Wallet</string>
+    <string name="choose_recipient_enterscan">Enter / Scan Recipient Address</string>
+    <string name="choose_recipient_contacts">Or Choose Recipient from Address Book</string>
 
-    <string name="choose_your_address">Von</string>
-    <string name="send_to">Zu</string>
-    <string name="choose_ether_amount">Verfügbare Ether</string>
-    <string name="choose_gas">Überweisungskosten</string>
-
-
-    <string name="request_activity_ether">Betrag</string>
-    <string name="request_activity_to">Deine Adresse / Konto</string>
-
-    <string name="no_tx_history">Das ist deine Transaktionsübersicht mit allen Ether Ein- und Ausgängen. Füge ein Konto mit bestehenden Betrag hinzu um dessen Transaktionen anzuzeigen.</string>
-    <string name="no_wallet_history">Zurzeit verfügst du über keine Konten. Generiere oder importiere einfach ein Konto mit der runden Schaltfläche unten.</string>
+    <string name="choose_your_address">From</string>
+    <string name="send_to">To</string>
+    <string name="choose_ether_amount">Available Ether</string>
+    <string name="choose_gas">Transaction Cost</string>
 
 
-    <string name="app_intro_text">Willkommen bei Merculet - dem kostenlosen und Open Source Ethereum Konto für Android! Bevor wir loslegen können nimm dir bitte kurz Zeit dich durch unsere AGB zu lesen.</string>
+    <string name="request_activity_ether">Request Amount</string>
+    <string name="request_activity_to">Your Wallets / Addresses</string>
+
+    <string name="no_tx_history">This is the transaction overview showing all ether sent and received to and from other people. After adding a wallet and transferring some ether to it, the transaction and all future transactions will be displayed here.</string>
+    <string name="no_wallet_history">You currently do not have any wallets. You can easily create or import one using the button below.</string>
+
+
+    <string name="app_intro_text">Welcome to Merculet - the free and Open Source Ether Wallet for Android! Before starting, please take some time to read through our terms of service.</string>
     <string name="app_intro_title">Merculet Wallet</string>
-    <string name="app_intro_please_agree">Bitte lies die AGB und stimme diesen zu</string>
-    <string name="app_intro_iagree">Ich stimme den AGB zu</string>
-    <string name="fragment_send_ether_amount">Betrag</string>
-    <string name="fragment_send_cheaper">Günstiger</string>
-    <string name="fragment_send_faster">Schneller</string>
-    <string name="fragment_send_total">Gesamt</string>
-    <string name="fragment_send_send_button">Senden</string>
-    <string name="fragment_recipient_hint_address">Adresse</string>
-    <string name="fragment_recipient_continue">Weiter</string>
-    <string name="fragment_detail_add_sharing">Adresse Teilen</string>
-    <string name="fragment_detail_share_button">Teilen</string>
-    <string name="walletgen_title">Generiere Konto</string>
-    <string name="request_ether_title">Ether Anfordern</string>
-    <string name="qr_scan_title">QR Adresse</string>
-    <string name="activity_send_title">Überweisung</string>
-    <string name="last_24_hours">Letzten 24 Stunden</string>
-    <string name="last_7_days">Letzten 7 Tage</string>
-    <string name="last_30_days">Letzten 30 Tage</string>
-    <string name="last_year">Letztes Jahr</string>
-    <string name="err_no_con">Keine Internetverbindung</string>
-    <string name="wallet_menu_title">Konto Einstellungen</string>
-    <string name="wallet_menu_changename">Bearbeite Kontonamen</string>
-    <string name="wallet_menu_copyadd">Adresse kopieren</string>
-    <string name="wallet_menu_export">Konto exportieren</string>
-    <string name="wallet_menu_delete">Konto löschen</string>
-    <string name="wallet_suc_exported">Konto erfolgreich exportiert</string>
-    <string name="wallet_no_permission">Bitte gestatte Merculet Schreibrechte um zu exportieren</string>
-    <string name="wallet_one_at_a_time">Nicht so schnell</string>
-    <string name="wallet_one_at_a_time_text">Wir generieren für dich gerade ein Konto, du siehst den Fortschritt in deiner Nachrichtenleiste. Keine Sorge, wir melden sich sobald wir mit der Erstellung fertig sind :-) Bevor du ein weiteres Konto erstellen kannst warte bitte die erste Erstellung ab.</string>
+    <string name="app_intro_please_agree">Please read and agree to the terms of service before proceeding</string>
+    <string name="app_intro_iagree">I agree to terms of service</string>
+    <string name="fragment_send_ether_amount">Amount</string>
+    <string name="fragment_send_cheaper">Cheaper</string>
+    <string name="fragment_send_faster">Faster</string>
+    <string name="fragment_send_total">Total</string>
+    <string name="fragment_send_send_button">Send</string>
+    <string name="fragment_recipient_hint_address">Address</string>
+    <string name="fragment_recipient_continue">Continue</string>
+    <string name="fragment_detail_add_sharing">Address Sharing</string>
+    <string name="fragment_detail_share_button">Share</string>
+    <string name="walletgen_title">Generate Wallet</string>
+    <string name="request_ether_title">Request Ether</string>
+    <string name="qr_scan_title">QR Address</string>
+    <string name="activity_send_title">Transaction</string>
+    <string name="last_24_hours">Last 24 Hours</string>
+    <string name="last_7_days">Last 7 Days</string>
+    <string name="last_30_days">Last 30 Days</string>
+    <string name="last_year">Last Year</string>
+    <string name="err_no_con">No internet connection</string>
+    <string name="wallet_menu_title">Wallet Settings</string>
+    <string name="wallet_menu_changename">Change Wallet Name</string>
+    <string name="wallet_menu_copyadd">Address to Clipboard</string>
+    <string name="wallet_menu_export">Export Wallet</string>
+    <string name="wallet_menu_delete">Delete Wallet</string>
+    <string name="wallet_suc_exported">Wallet successfully exported</string>
+    <string name="wallet_no_permission">Please grant write permission to export wallets</string>
+    <string name="wallet_one_at_a_time">Not So Fast</string>
+    <string name="wallet_one_at_a_time_text">We are currently generating a wallet for you, you can see the progress in your notification bar. Don\'t worry, we will notify you as soon as your wallet generation is finished :-) If you really wish to generate another one please wait for the current wallet to be completed first.</string>
     <string name="button_ok">OK</string>
-    <string name="wallet_removal_title">ACHTUNG: Konto Entfernung</string>
-    <string name="wallet_removal_sure">Möchtest du deine Beobachteradresse wirklich löschen?</string>
-    <string name="wallet_removal_privkey">! DAS IST EIN KONTO MIT PRIVATEM SCHLÜSSEL ! WENN DU KEINE SICHERUNG VON DIESEM KONTO HAST UND FORTFÄHRST WERDEN ALLE DEINE ETHER ODER TOKEN AUF DIESEM KONTO FÜR IMMER VERSCHWINDEN! BIST DU DIR SICHER DAS DU FORTFAHREN MÖCHTEST? KONTO ADRESSE:</string>
-    <string name="wallet_removal_last_warning">BIST DU DIR GANZ SICHER? KONTO UND ALLE BETRÄGE / TOKEN WERDEN FÜR IMMER GELÖSCHT. DAS IST DIE LETZTE WARNUNG FÜR DEIN KONTO:</string>
-    <string name="button_yes">JA</string>
-    <string name="button_no">NEIN</string>
-    <string name="name_your_wallet">Benenne dein Konto</string>
-    <string name="button_cancel">Abbrechen</string>
-    <string name="name_other_address">Benenne diese Adresse</string>
-    <string name="trans_menu_title">Transaktionseinstellungen</string>
-    <string name="trans_menu_changename">Bearbeite Adressnamen</string>
-    <string name="trans_menu_viewreceiver">Betrachte Empfängeradresse</string>
-    <string name="trans_menu_openinb">Öffne in Webbrowser</string>
-    <string name="trans_no_trans_found">Keine Transaktionen für diese Adresse gefunden</string>
-    <string name="err_send_not_enough_ether">Nicht genügend Ether auf diesem Konto</string>
-    <string name="err_send_invalidamount">Ungültiger Betrag</string>
-    <string name="err_send_noreceiver">Kein Empfänger angegeben</string>
-    <string name="err_send_noamount">Kein Betrag angegeben</string>
-    <string name="name_your_address">Benenne deine Adresse</string>
-    <string name="name_this_address">Benenne diese Adresse</string>
-    <string name="addressbook_menu_title">Adressbuch Einstellungen</string>
-    <string name="addressbook_menu_remove">Entfernen</string>
-    <string name="import_title">Importiere Konto</string>
-    <string name="import_button">Importieren</string>
-    <string name="main_grant_permission_export">Bitte gestatte Merculet Schreibrechte zum exportieren</string>
-    <string name="main_grant_permission_import">Bitte gestatte Merculet Leserechte zum importieren</string>
-    <string name="dialog_watch_only_title">Adresse Suchen</string>
-    <string name="dialog_importing_wallets_title">Importiere Konten?</string>
-    <string name="dialog_importing_wallets_text">Wir haben %1$d neue(s) Konto/en gefunden. Möchtest du die folgenden Importieren: %3$s</string>
-    <string name="dialog_ex_nofull_title">Kein vollständiges Konto</string>
-    <string name="dialog_ex_nofull_text">Beobachteradressen können nicht expotiert werden.</string>
-    <string name="dialog_exporting_title">Konto exportieren</string>
-    <string name="dialog_exporting_text">Eine Kopie deines Ethereum Kontos wird im \"Merculet\" Ordner vom Hauptverzeichniss deines Geräts angelegt. Bitte beachte das andere Anwendungen auf deinem Gerät technisch gesehen ebenfalls Zugriff auf jedes exportierte Konto haben. Daher legen wir dir unbedingt nahe das Konto aus dem Ordner wieder zu löschen nachdem du deine Sicherung auf zB einem PC durchgeführt hast.</string>
-    <string name="dialog_nofullwallet">Kein vollständiges Konto</string>
-    <string name="dialog_nofullwallet_text">Um Beträge versenden zu können benötigst du ein vollständiges Ethereum Konto mit privatem Schlüssel. Bitte generiere oder importiere zunächst eines.</string>
-    <string name="dialog_no_wallets">Keine Konten</string>
-    <string name="dialog_no_wallets_text">Um Beträge anfordern zu können benötigst du zuerst ein Konto oder eine Beobachteradresse.</string>
-    <string name="dialog_no_wallets_found">Keine Konten gefunden</string>
-    <string name="dialog_no_wallets_found_text">Bitte platziere die Konten die du importieren möchtest direkt in den Merculet Ordner auf eine korrekte Namensbezeichnung. Wenn du Konten von deinem PC (zB Mist) importieren möchtest muss der Name nicht mehr angepasst werden.</string>
-    <string name="notification_ticker">Eingehende Ether Überweisung…</string>
-    <string name="notification_transfersuc">Überweisung erfolgreich</string>
-    <string name="notification_transferfail">Überweisung gescheitert</string>
-    <string name="notification_transferingticker">Überweise Ether…</string>
-    <string name="notification_transfering_title">Überweise Ether</string>
-    <string name="notification_might_take_a_minute">Das dauert vielleicht eine Minute</string>
-    <string name="notification_wallgen_maytake">Das dauert vielleicht einige Minuten</string>
-    <string name="notification_wallgen_title">Generiere Konto…</string>
-    <string name="notification_wallimp_title">Importiere Konto…</string>
-    <string name="notification_wallgen_finished">Konto erstellung abgeschlossen!</string>
-    <string name="notification_wallimp_finished">Konto importierung abgeschlossen!</string>
-    <string name="notification_click_to_view">Klicken zum öffnen</string>
-    <string name="ether_and_token">Ether und Token</string>
-    <string name="prefs_lock_with_pw">Passwort aktivieren</string>
-    <string name="prefs_lock_with_pw_sum">Legt fest ob der Start von Merculet mit einem Passwort geschützt werden soll</string>
-    <string name="prefs_set_pw">Setze Password</string>
-    <string name="prefs_set_pw_sum">Lege dein Anmeldemuster fest</string>
-    <string name="prefs_cat_security">Sicherheit</string>
-    <string name="fab_sendether_from">Sende Ether von</string>
-    <string name="fab_sendether_to">Sende Ether zu</string>
-    <string name="open_in_browser">Öffne in Browser</string>
-    <string name="tx_cost">TX Gebühr</string>
-    <string name="gas_used">Benutztes Gas</string>
-    <string name="gas_price">Gas Preis</string>
+    <string name="wallet_removal_title">ATTENTION: Wallet Removal</string>
+    <string name="wallet_removal_sure">Are you sure you want to delete your watch only wallet?</string>
+    <string name="wallet_removal_privkey">! THIS IS A WALLET WITH A PRIVATE KEY ! IF YOU HAVE NO BACKUP AND CONTINUE ALL YOUR ETHER ON THAT WALLET WILL BE LOST FOR EVER! ARE YOU SURE YOU WANT TO PROCEED? WALLET ADDRESS:</string>
+    <string name="wallet_removal_last_warning">ARE YOU SURE? WALLET AND ALL COINS / TOKEN ON IT ARE GOING TO GET PERMANENTLY REMOVED. THIS IS THE LAST WARNING FOR WALLET:</string>
+    <string name="button_yes">YES</string>
+    <string name="button_no">NO</string>
+    <string name="name_your_wallet">Name Your Wallet</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="name_other_address">Name Other Address</string>
+    <string name="trans_menu_title">Transaction Settings</string>
+    <string name="trans_menu_changename">Change Address Name</string>
+    <string name="trans_menu_viewreceiver">View Receiver Address</string>
+    <string name="trans_menu_openinb">Open in Browser</string>
+    <string name="trans_no_trans_found">No transactions found for this address.</string>
+    <string name="err_send_not_enough_ether">Not enough Ether on that Address</string>
+    <string name="err_send_invalidamount">Invalid Amount</string>
+    <string name="err_send_noreceiver">No receiver specified</string>
+    <string name="err_send_noamount">No amount specified</string>
+    <string name="name_your_address">Name Your Address</string>
+    <string name="name_this_address">Name This Address</string>
+    <string name="addressbook_menu_title">Addressbook Settings</string>
+    <string name="addressbook_menu_remove">Remove</string>
+    <string name="import_title">Import Wallet</string>
+    <string name="import_button">Import</string>
+    <string name="main_grant_permission_export">Please grant write permission to export Wallets</string>
+    <string name="main_grant_permission_import">Please grant read permission to import Wallets</string>
+    <string name="dialog_watch_only_title">Lookup Address</string>
+    <string name="dialog_importing_wallets_title">Importing Wallets?</string>
+    <string name="dialog_importing_wallets_text">We have detected %1$d new wallet%2$s in our Merculet folder. Would you like to import: %3$s</string>
+    <string name="dialog_ex_nofull_title">No Full Wallet</string>
+    <string name="dialog_ex_nofull_text">Watch only wallets can not be exported.</string>
+    <string name="dialog_exporting_title">Exporting your Wallet</string>
+    <string name="dialog_exporting_text">A copy of your Ethereum wallet will be placed inside the folder \"Merculet\" in the root directory of your Android phone. Please note that other applications that run on your device can technically access any wallets that you have exported. Due to this, we highly recommend erasing all exported wallets from the Merculet folder as soon as you have finished backing them up.</string>
+    <string name="dialog_nofullwallet">No Full Wallet</string>
+    <string name="dialog_nofullwallet_text">In order to send funds you need a full wallet with a private key. Please generate or import one first.</string>
+    <string name="dialog_no_wallets">No Wallets</string>
+    <string name="dialog_no_wallets_text">In order to request funds you need a wallet or a watch only address.</string>
+    <string name="dialog_no_wallets_found">No Wallets Found</string>
+    <string name="dialog_no_wallets_found_text">Please place the wallet you want to import inside the Merculet folder and make sure it is correctly named. When importing from Mist or other desktop client you don\'t have to rename your wallet.</string>
+    <string name="notification_ticker">Incoming Ether Transaction…</string>
+    <string name="notification_transfersuc">Transfer successful</string>
+    <string name="notification_transferfail">Transfer Failed</string>
+    <string name="notification_transferingticker">Transferring Ether…</string>
+    <string name="notification_transfering_title">Transferring Ether</string>
+    <string name="notification_might_take_a_minute">This might take a minute</string>
+    <string name="notification_wallgen_maytake">This may take a couple minutes</string>
+    <string name="notification_wallgen_title">Generating Wallet…</string>
+    <string name="notification_wallimp_title">Importing Wallet…</string>
+    <string name="notification_wallgen_finished">Wallet Creation Finished!</string>
+    <string name="notification_wallimp_finished">Wallet Import Finished!</string>
+    <string name="notification_click_to_view">Click to view</string>
+    <string name="ether_and_token">Ether and Token</string>
+    <string name="prefs_lock_with_pw">Lock with Password</string>
+    <string name="prefs_lock_with_pw_sum">If enabled Merculet will ask you for a password before launching the app</string>
+    <string name="prefs_set_pw">Set Password</string>
+    <string name="prefs_set_pw_sum">Specify your login pattern</string>
+    <string name="prefs_cat_security">Security</string>
+    <string name="fab_sendether_from">Send Ether From</string>
+    <string name="fab_sendether_to">Send Ether To</string>
+    <string name="open_in_browser">Open in Browser</string>
+    <string name="tx_cost">TX Cost</string>
+    <string name="gas_used">Gas Used</string>
+    <string name="gas_price">Gas Price</string>
     <string name="nonce">Nonce</string>
-    <string name="block_height">Block Höhe</string>
-    <string name="timestamp">Zeitpunkt</string>
-    <string name="wallet_menu_share">Adresse teilen</string>
-    <string name="wallet_menu_action_copied_to_clipboard">In Zwischenablage kopiert</string>
-    <string name="created">Erstellt</string>
-    <string name="digits">Stellen</string>
-    <string name="holders">Besitzer</string>
-    <string name="market_cap">Markt Kap</string>
-    <string name="price">Preis</string>
-    <string name="total_supply">Gesamtanzahl</string>
+    <string name="block_height">Block Height</string>
+    <string name="timestamp">Timestamp</string>
+    <string name="wallet_menu_share">Share Address</string>
+    <string name="wallet_menu_action_copied_to_clipboard">Copied to Clipboard</string>
+    <string name="created">Created</string>
+    <string name="digits">Digits</string>
+    <string name="holders">Holders</string>
+    <string name="market_cap">Market Cap</string>
+    <string name="price">Price</string>
+    <string name="total_supply">Total Supply</string>
     <string name="token">Token</string>
     <string name="gas_limit">Gas Limit:</string>
-    <string name="optional_data_as_hex">Optionale Daten in Hex</string>
-    <string name="data">Daten:</string>
-    <string name="send_expert_warning">Du kannst zusätzliche Daten an deine Transaktion anhängen. Fülle diese Informationen nur aus wenn du wirklich weißt was du tust, andernfalls könnte das womöglich schlimme Folgen haben!</string>
-    <string name="expert_mode_optional">Experten Modus (Optional)</string>
-    <string name="transaction_failed">Überweisung gescheitert</string>
+    <string name="optional_data_as_hex">Optional data as hex</string>
+    <string name="data">Data:</string>
+    <string name="send_expert_warning">You can add extra data to send along with your transaction. If you don\'t know what this is then don\'t touch it or bad things may happen!</string>
+    <string name="expert_mode_optional">Expert Mode (Optional)</string>
+    <string name="transaction_failed">Transaction failed</string>
     <string name="reddit">Merculet Subreddit</string>
-    <string name="add">+</string>
-    <string name="show">Suche</string>
-    <string name="setting_erc_qr_encoding">Nutze ERC-67 QR Encoding</string>
-    <string name="setting_cat_advanced">Fortgeschritten</string>
-    <string name="password_in_clear_text">Passwort in Klartext anzeigen</string>
+    <string name="add">Add</string>
+    <string name="show">Show</string>
+    <string name="setting_erc_qr_encoding">Use ERC-67 QR Encoding</string>
+    <string name="setting_cat_advanced">Advanced</string>
+    <string name="password_in_clear_text">Show Password in clear text</string>
 
-    <string name="dialog_write_down_pw_title">Wichtig!</string>
-    <string name="dialog_write_down_pw_text">Merculet verschlüsselt dein Konto mit dem angegebenen Passwort um deine Ether sicher aufbewahren zu können.
-        Dieses passwort ist der einzige Weg um dein Konto zu entsperren und dein Ether überweisen zu können, vergiss es daher auf keinen Fall! Wir empfehlen das Passwort auf ein Stück Papier niederzuschreiben und sicher aufzubewahren.</string>
-    <string name="dialog_back_button">Abbrechen</string>
-    <string name="setting_show_ad">Werbung</string>
+    <string name="dialog_write_down_pw_title">Important!</string>
+    <string name="dialog_write_down_pw_text">Merculet will encrypt your Wallet with the password your provided to keep your ether safe. Your password is literally the only way to unlock your wallet and spend your ether, so make sure you dont forget it! We suggest to write it down on a piece of paper.</string>
+    <string name="dialog_back_button">Cancel</string>
+    <string name="setting_show_ad">Display Ads</string>
 
     <string name="dialog_disable_ad_title">:(</string>
-    <string name="dialog_disable_ad_text">Wir sind auf Spenden und Werbeeinahmen zutiefst angewiesen um Merculet weiter verbessern zu können. Wenn dich die Werbung wirklich sehr stört können wir das verstehen und lassen sie dich auch deaktivieren. Aber wenn es nicht zuviel gefragt ist würden wir dich bitten nochmal darüber nachzudenken um Merculet auch in Zukunft noch besser machen zu können.
-        Dieser kleine Banner hilft uns wirklich sehr, genauso wie jede Spende. Bitte lass den Banner aktiviert oder ziehe zumindest eine kleine Spende in betracht. Im Falle einer Änderung dieser Einstellung musst du die App neu starten damit diese Effekt zeigt. Fortfahren?</string>
+    <string name="dialog_disable_ad_text">We depend heavily on donations and ad revenue to actively work and improve Merculet. If the ad really bothers you that much thats fine, we understand that and we will let you disable it. But if it isnt too much to ask we would like to change your mind to keep Merculet getting better and better. This small ad banner really helps us, same goes for every donation we receive. Please keep the banner enabled or consider a small donation. You need to restart the app for your new setting to take affect. Continue?</string>
 
-    <string name="showcase_got_it">ALLES KLAR</string>
-    <string name="show_case_wallet_gen_text">Um ein neues Konto anzulegen klicke einfach auf das + und wähle "Erstelle neues Konto"</string>
-    <string name="show_case_backup">Um ein bestehendes Konto zu editieren oder zu sichern drücke für ein paar Sekunden auf dein Konto</string>
-    <string name="wallet_menu_private_key">Privatater Schlüssel</string>
-    <string name="activity_private_key_title">Privater Schlüssel</string>
-    <string name="activity_private_key_explanation">Dies ist dein unverschlüsselter privater Schlüssel für dein Konto. Jeder mit Zugriff zu diesem Schlüssel oder QR Code kann deine Beträge wie Ether und Token ausgeben. Speichere diese Informationen daher auf keinen Fall unverschlüsselt!</string>
-    <string name="activity_private_key_wrong_pw">Das eingegebene Passwort ist falsch - privater Schlüssel konnte nicht entschlüsselt werden!</string>
+    <string name="showcase_got_it">GOT IT</string>
+    <string name="show_case_wallet_gen_text">To generate a new wallet just press on the + and select "Generate New Wallet"</string>
+    <string name="show_case_backup">To modify existing wallets or create a backup just press and hold down on the wallet.</string>
+    <string name="wallet_menu_private_key">Show Private Key</string>
+    <string name="activity_private_key_title">Private Key</string>
+    <string name="activity_private_key_explanation">This is the unencrypted private key of your wallet. Anyone with access to this key or QR code can spend your funds like ether and tokens. Dont store this unencrypted!</string>
+    <string name="activity_private_key_wrong_pw">Your password is not correct - cant decrypt private key!</string>
+
 
     <string name="tos" tools:ignore="TypographyOther"><![CDATA[
 <p><h2>GNU GENERAL PUBLIC LICENSE</h2></p>

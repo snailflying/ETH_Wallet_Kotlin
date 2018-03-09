@@ -1,10 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="translator_name">Portuguese translation by Caio Marcos Cooter</string>
 
-    <string name="app_name">Lunary</string>
+    <string name="app_name">Merculet</string>
 
     <string name="action_settings">Configuração</string>
-    <string name="title_activity_main">Lunary</string>
+    <string name="title_activity_main">Merculet</string>
 
     <string name="fab_scan">Escanear QR Code</string>
     <string name="fab_add_watch">Verificar endereço</string>
@@ -121,8 +121,8 @@
     <string name="no_wallet_history">Você não possui nenhuma carteira. Mas você pode facilmente criar ou importar uma usando o botão abaixo.</string>
 
 
-    <string name="app_intro_text">Bem vindo ao Lunary - a carteira Ethereum livre e de código aberto para Android! Antes de começar, por favor reserve um tempo para ler nossos termos de serviço.</string>
-    <string name="app_intro_title">Carteira Lunary</string>
+    <string name="app_intro_text">Bem vindo ao Merculet - a carteira Ethereum livre e de código aberto para Android! Antes de começar, por favor reserve um tempo para ler nossos termos de serviço.</string>
+    <string name="app_intro_title">Carteira Merculet</string>
     <string name="app_intro_please_agree">Por favor leia e concorde com os termos de serviço antes de prosseguir.</string>
     <string name="app_intro_iagree">Eu concordo com os termos de serviço</string>
     <string name="fragment_send_ether_amount">Valor</string>
@@ -181,17 +181,17 @@
     <string name="main_grant_permission_import">Por favor garanta permissão de leitura para importar carteiras</string>
     <string name="dialog_watch_only_title">Verificar endereço</string>
     <string name="dialog_importing_wallets_title">Importar carteiras?</string>
-    <string name="dialog_importing_wallets_text">Detectamos %1$d nova%2$s carteira%2$s na pasta do Lunary. Você deseja importar %3$s ?</string>
+    <string name="dialog_importing_wallets_text">Detectamos %1$d nova%2$s carteira%2$s na pasta do Merculet. Você deseja importar %3$s ?</string>
     <string name="dialog_ex_nofull_title">Nenhuma carteira completa</string>
     <string name="dialog_ex_nofull_text">Carteiras de observação não podem ser exportadas.</string>
     <string name="dialog_exporting_title">Exportando carteira</string>
-    <string name="dialog_exporting_text">Uma cópia da sua carteira Ethereum será salva na pasta \"Lunary\" na raiz do seu Android. Entenda que outros apps que rodam no seu dispositivo podem tecnicamente acessar todas as carteiras que você exportou. Devido a isso, recomendamos apagar todas as carteiras exportadas da pasta do Lunary assim que salvá-las em outro lugar seguro.</string>
+    <string name="dialog_exporting_text">Uma cópia da sua carteira Ethereum será salva na pasta \"Merculet\" na raiz do seu Android. Entenda que outros apps que rodam no seu dispositivo podem tecnicamente acessar todas as carteiras que você exportou. Devido a isso, recomendamos apagar todas as carteiras exportadas da pasta do Merculet assim que salvá-las em outro lugar seguro.</string>
     <string name="dialog_nofullwallet">Nenhuma carteira completa</string>
     <string name="dialog_nofullwallet_text">Para enviar fundos você precisa de uma carteira completa com uma chave privada. Por favor crie ou importe uma primeiro.</string>
     <string name="dialog_no_wallets">Nenhuma carteira</string>
     <string name="dialog_no_wallets_text">Para receber fundos você precisa de uma carteira completa ou de observação.</string>
     <string name="dialog_no_wallets_found">Nenhuma carteira encontrada</string>
-    <string name="dialog_no_wallets_found_text">Por favor coloque a carteira que deseja importar na pasta do Lunary e certifique-se de que está nomeada corretamente. Quando importando do Mist ou outro cliente desktop, você não precisa renomear o arquivo.</string>
+    <string name="dialog_no_wallets_found_text">Por favor coloque a carteira que deseja importar na pasta do Merculet e certifique-se de que está nomeada corretamente. Quando importando do Mist ou outro cliente desktop, você não precisa renomear o arquivo.</string>
     <string name="notification_ticker">Recebendo transação…</string>
     <string name="notification_transfersuc">Transferência realizada com sucesso</string>
     <string name="notification_transferfail">Transferência falhou</string>
@@ -206,7 +206,7 @@
     <string name="notification_click_to_view">Clique para ver</string>
     <string name="ether_and_token">Ether e Token</string>
     <string name="prefs_lock_with_pw">Proteger com senha</string>
-    <string name="prefs_lock_with_pw_sum">Se habilitado, o Lunary irá pedir uma senha antes de iniciar</string>
+    <string name="prefs_lock_with_pw_sum">Se habilitado, o Merculet irá pedir uma senha antes de iniciar</string>
     <string name="prefs_set_pw">Definir senha</string>
     <string name="prefs_set_pw_sum">Desenhe seu padrão de login</string>
     <string name="prefs_cat_security">Segurança</string>
@@ -234,7 +234,7 @@
     <string name="send_expert_warning">Você pode adicionar dados extras para enviar com sua transação. Se você não sabe o que é isso, não toque em nada ou coisas ruins podem acontecer!</string>
     <string name="expert_mode_optional">Modo avançado (opcional)</string>
     <string name="transaction_failed">Transação falhou</string>
-    <string name="reddit">Lunary Subreddit</string>
+    <string name="reddit">Merculet Subreddit</string>
     <string name="add">Adicionar</string>
     <string name="show">Exibir</string>
     <string name="setting_erc_qr_encoding">Use ERC-67 QR Encoding</string>
@@ -242,12 +242,12 @@
     <string name="password_in_clear_text">Show Password in clear text</string>
 
     <string name="dialog_write_down_pw_title">Important!</string>
-    <string name="dialog_write_down_pw_text">Lunary will encrypt your Wallet with the password your provided to keep your ether safe. Your password is literally the only way to unlock your wallet and spend your ether, so make sure you dont forget it! We suggest to write it down on a piece of paper.</string>
+    <string name="dialog_write_down_pw_text">Merculet will encrypt your Wallet with the password your provided to keep your ether safe. Your password is literally the only way to unlock your wallet and spend your ether, so make sure you dont forget it! We suggest to write it down on a piece of paper.</string>
     <string name="dialog_back_button">Cancel</string>
     <string name="setting_show_ad">Display Ads</string>
 
     <string name="dialog_disable_ad_title">:(</string>
-    <string name="dialog_disable_ad_text">We depend heavily on donations and ad revenue to actively work and improve Lunary. If the ad really bothers you that much thats fine, we understand that and we will let you disable it. But if it isnt too much to ask we would like to change your mind to keep Lunary getting better and better. This small ad banner really helps us, same goes for every donation we receive. Please keep the banner enabled or consider a small donation. You need to restart the app for your new setting to take affect. Continue?</string>
+    <string name="dialog_disable_ad_text">We depend heavily on donations and ad revenue to actively work and improve Merculet. If the ad really bothers you that much thats fine, we understand that and we will let you disable it. But if it isnt too much to ask we would like to change your mind to keep Merculet getting better and better. This small ad banner really helps us, same goes for every donation we receive. Please keep the banner enabled or consider a small donation. You need to restart the app for your new setting to take affect. Continue?</string>
 
     <string name="showcase_got_it">GOT IT</string>
     <string name="show_case_wallet_gen_text">To generate a new wallet just press on the + and select "Generate New Wallet"</string>
@@ -891,7 +891,7 @@ to attach them to the start of each source file to most effectively
 state the exclusion of warranty; and each file should have at least
 the "copyright" line and a pointer to where the full notice is found.</p>
 
-<p>    Lunary is a free and open source Ethereum Wallet for Android</p>
+<p>    Merculet is a free and open source Ethereum Wallet for Android</p>
 <p>    Copyright (C) 2017  Manuel S. Caspari</p>
 
 <p>    This program is free software: you can redistribute it and/or modify
@@ -912,7 +912,7 @@ the "copyright" line and a pointer to where the full notice is found.</p>
 <p> If the program does terminal interaction, make it output a short
 notice like this when it starts in an interactive mode:</p>
 
-<p>    Lunary Ethereum Wallet  Copyright (C) 2017  Manuel S. Caspari
+<p>    Merculet Ethereum Wallet  Copyright (C) 2017  Manuel S. Caspari
     This program comes with ABSOLUTELY NO WARRANTY; for details type `show w.
     This is free software, and you are welcome to redistribute it
     under certain conditions; type `show c for details.</p>
@@ -933,7 +933,7 @@ the library.  If this is what you want to do, use the GNU Lesser General
 Public License instead of this License.  But first, please read
 <http://www.gnu.org/philosophy/why-not-lgpl.html>.</p>
 
-<p><h2>Privacy Policy - Lunary Ether Wallet</h2></p>
+<p><h2>Privacy Policy - Merculet Ether Wallet</h2></p>
 
 <p><b>Data protection</b></p>
 
@@ -943,7 +943,7 @@ If there are further questions please don\t hesitate to contact us as we are hap
 For app usage statistics we use Google Analytics. More details about Google Analytics can be found in the paragraph "Privacy Policy for the use of Google Analytics".</p>
 
 <p><b>Privacy Policy for the use of Google Analytics</b></p>
-<p>This section is only relevant for users that downloaded Lunary from Google Play or the \"Google Play flavor\" from Github. F-Droid and Amazon Appstore builds are compiled without Google Analytics!</p>
+<p>This section is only relevant for users that downloaded Merculet from Google Play or the \"Google Play flavor\" from Github. F-Droid and Amazon Appstore builds are compiled without Google Analytics!</p>
 <p>This app uses Google Analytics, an analytics service provided by Google, Inc. (“Google”). Google Analytics uses “cookies”, which are text files placed on your device, to help analyze how users use it. The information generated about your use of this app (including your IP address) is sent to and stored at a Google server in the U.S.A. Google will use this information on behalf of the operator of this app for the purpose of evaluating your use of the app, compiling reports on activity for operators and providing them other services relating to app activity and usage. The IP-address, that your device conveys within the scope of Google Analytics, will not be associated with any other data held by Google. For more information about Google Analytics visit <a href="https://google.com/analytics/terms">https://google.com/analytics/terms</a></p>
 
 
@@ -952,6 +952,7 @@ More details about this topic can be found in Google\'s Privacy Policies:
 <a href="https://google.com/policies/privacy">https://google.com/policies/privacy</a> </p>
 
 ]]></string>
+    <string name="legal">Legal</string>
 
 
 </resources>

@@ -28,7 +28,7 @@ class AddressEncoder(var address: String?) {
             else if (s.startsWith("iban:XE") || s.startsWith("IBAN:XE"))
                 decodeICAP(s)
             else
-                decodeLegacyLunary(s)
+                decodeLegacyMerculet(s)
         }
 
         @Throws(IOException::class)
@@ -79,7 +79,7 @@ class AddressEncoder(var address: String?) {
         }
 
         @Throws(IOException::class)
-        fun decodeLegacyLunary(s: String): AddressEncoder {
+        fun decodeLegacyMerculet(s: String): AddressEncoder {
             if (!s.startsWith("iban:") && !s.startsWith("IBAN:")) return AddressEncoder(s)
             var temp = s.substring(5)
             var amount: String? = null

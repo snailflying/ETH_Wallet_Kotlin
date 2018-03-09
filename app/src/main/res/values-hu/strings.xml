@@ -1,11 +1,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="translator_name"></string>
 
-    <string name="app_name">Lunary</string>
+    <string name="app_name">Merculet</string>
 
     <string name="action_settings">Beállítások
     </string>
-    <string name="title_activity_main">Lunary</string>
+    <string name="title_activity_main">Merculet</string>
 
     <string name="fab_scan">Cím / kulcs szkennelése</string>
     <string name="fab_add_watch">Cím kikeresése</string>
@@ -120,8 +120,8 @@
     <string name="no_wallet_history">Még nem hozott létre Pénztárcát. Könnyen létrehozhat egy újat, vagy importálhat egyet a lenti gomb segítségével.</string>
 
 
-    <string name="app_intro_text">Üdv a Lunary-nál - ingyenes és nyílt forráskódú virtuális Pénztárca androidra. Mielőtt belekezdne, kérjük, olvassa el a szolgáltatás feltételeit.</string>
-    <string name="app_intro_title">Lunary Pénztárca</string>
+    <string name="app_intro_text">Üdv a Merculet-nál - ingyenes és nyílt forráskódú virtuális Pénztárca androidra. Mielőtt belekezdne, kérjük, olvassa el a szolgáltatás feltételeit.</string>
+    <string name="app_intro_title">Merculet Pénztárca</string>
     <string name="app_intro_please_agree">Kérjük, olvassa el, és fogadja el a szolgáltatás feltételeit mielőtt továbblépne.</string>
     <string name="app_intro_iagree">Elfogadom a szolgáltatás feltételeit</string>
     <string name="fragment_send_ether_amount">Összeg</string>
@@ -180,17 +180,17 @@
     <string name="main_grant_permission_import">Pénztárcák importálásához olvasási engedély</string>
     <string name="dialog_watch_only_title">Cím kikeresése</string>
     <string name="dialog_importing_wallets_title">Pénztárcák importálása?</string>
-    <string name="dialog_importing_wallets_text">A következő %1$d Pénztárcákat %2$s találtuk a Lunary mappájában. Szeretné importálni a következőt: %3$s</string>
+    <string name="dialog_importing_wallets_text">A következő %1$d Pénztárcákat %2$s találtuk a Merculet mappájában. Szeretné importálni a következőt: %3$s</string>
     <string name="dialog_ex_nofull_title">Nincs megfelelő Pénztárca</string>
     <string name="dialog_ex_nofull_text">Csak befizetésre használt Pénztárca nem exportálható.</string>
     <string name="dialog_exporting_title">Pénztárca exportálása</string>
-    <string name="dialog_exporting_text">A Pénztárcáról másolat készül a \"Lunary\" mappába az android telefon root könyvtárában. Kérjük vegye figyelembe, hogy a telefonján futó többi alkalmazás is elérheti bármelyik Pénztárcát, amit ide exportál. Ezért javasoljuk, hogy töröljön minden exportált Pénztárcát a Lunary mappából, amint készen van a biztonsági mentésükkel.</string>
+    <string name="dialog_exporting_text">A Pénztárcáról másolat készül a \"Merculet\" mappába az android telefon root könyvtárában. Kérjük vegye figyelembe, hogy a telefonján futó többi alkalmazás is elérheti bármelyik Pénztárcát, amit ide exportál. Ezért javasoljuk, hogy töröljön minden exportált Pénztárcát a Merculet mappából, amint készen van a biztonsági mentésükkel.</string>
     <string name="dialog_nofullwallet">Nem megfelelő Pénztárca</string>
     <string name="dialog_nofullwallet_text">Ahhoz, hogy pénzt utaljon egy Pénztárcára van szüksége egyedi azonosítóval. Kérjük, hozzon létre vagy importáljon egyet.</string>
     <string name="dialog_no_wallets">Nem található Pénztárca</string>
     <string name="dialog_no_wallets_text">Ahhoz, hogy bekérjen pénzt, szüksége van egy Pénztárcára vagy egy címre.</string>
     <string name="dialog_no_wallets_found">Nem található Pénztárca</string>
-    <string name="dialog_no_wallets_found_text">Kérjük helyezze az importálni kívánt Pénztárcát a Lunary mappába, és ellenőrizze, hogy helyes-e a név. Amikor a Mist-ből vagy másik asztali kliensből importál, nem kell átneveznie a Pénztárcát.</string>
+    <string name="dialog_no_wallets_found_text">Kérjük helyezze az importálni kívánt Pénztárcát a Merculet mappába, és ellenőrizze, hogy helyes-e a név. Amikor a Mist-ből vagy másik asztali kliensből importál, nem kell átneveznie a Pénztárcát.</string>
     <string name="notification_ticker">Beérkező tranzakció…</string>
     <string name="notification_transfersuc">Sikeres átutalás</string>
     <string name="notification_transferfail">Átutalás sikertelen</string>
@@ -205,7 +205,7 @@
     <string name="notification_click_to_view">Kattintson a megtekintéshez</string>
     <string name="ether_and_token">Pénz és Token</string>
     <string name="prefs_lock_with_pw">Jelszóval lezár</string>
-    <string name="prefs_lock_with_pw_sum">Ha engedélyezi, a Lunary jelszót kér, mielőtt elindulna.</string>
+    <string name="prefs_lock_with_pw_sum">Ha engedélyezi, a Merculet jelszót kér, mielőtt elindulna.</string>
     <string name="prefs_set_pw">Jelszó beállítása</string>
     <string name="prefs_set_pw_sum">Bejelentkezés beállításai</string>
     <string name="prefs_cat_security">Biztonság</string>
@@ -233,7 +233,7 @@
     <string name="send_expert_warning">Hozzáadhat további adatokat is a tranzakcióhoz. Ha nem tudja hogy mire jó, akkor ne módosítson benne semmit.</string>
     <string name="expert_mode_optional">Szakértő mód (Opcionális)</string>
     <string name="transaction_failed">Tranzakció sikertelen</string>
-    <string name="reddit">Lunary Subreddit</string>
+    <string name="reddit">Merculet Subreddit</string>
     <string name="add">Hozzáad</string>
     <string name="show">Mutasd</string>
     <string name="setting_erc_qr_encoding">ERC-67 QR kódolás használata</string>
@@ -241,12 +241,12 @@
     <string name="password_in_clear_text">Jelszó mutatása</string>
 
     <string name="dialog_write_down_pw_title">Fontos!</string>
-    <string name="dialog_write_down_pw_text">A Lunary titkosítja a Pénztárcáját az Ön által megadott jelszóval. Ez a jelszó az egyetlen mód arra, hogy hozzáférjen a Pénztárcához, ezért ne felejtse el. Javasoljuk, hogy jegyezze fel valahova.</string>
+    <string name="dialog_write_down_pw_text">A Merculet titkosítja a Pénztárcáját az Ön által megadott jelszóval. Ez a jelszó az egyetlen mód arra, hogy hozzáférjen a Pénztárcához, ezért ne felejtse el. Javasoljuk, hogy jegyezze fel valahova.</string>
     <string name="dialog_back_button">Mégse</string>
     <string name="setting_show_ad">Reklámok megjelenítése</string>
 
     <string name="dialog_disable_ad_title">:(</string>
-    <string name="dialog_disable_ad_text">A hozzájárulások és a reklámbevétel teszi lehetővé hogy aktívan dolgozzunk és továbbfejlesszük a Lunary-t. Ha nagyon zavarja a reklám, megértjük, és kikapcsolhatja. De ha nem nagy kérés, hagyja így, hogy tovább tökéletesíthessük a Lunary-t. Ez a kis reklám sokat segít nekünk ebben. Ugyanígy, minden hozzájárulás, amit kapunk. Kérjük, ne kapcsolja ki a reklámot, és járuljon hozzá a munkánkhoz egy kisebb összeggel. A változtatásokhoz újra kell indítania az applikációt. Folytatja?</string>
+    <string name="dialog_disable_ad_text">A hozzájárulások és a reklámbevétel teszi lehetővé hogy aktívan dolgozzunk és továbbfejlesszük a Merculet-t. Ha nagyon zavarja a reklám, megértjük, és kikapcsolhatja. De ha nem nagy kérés, hagyja így, hogy tovább tökéletesíthessük a Merculet-t. Ez a kis reklám sokat segít nekünk ebben. Ugyanígy, minden hozzájárulás, amit kapunk. Kérjük, ne kapcsolja ki a reklámot, és járuljon hozzá a munkánkhoz egy kisebb összeggel. A változtatásokhoz újra kell indítania az applikációt. Folytatja?</string>
 
     <string name="showcase_got_it">Értem</string>
     <string name="show_case_wallet_gen_text">Új Pénztárca létrehozásához kattintson a + jelre, és válassza az "Új Pénztárca létrehozását"</string>
@@ -890,7 +890,7 @@ to attach them to the start of each source file to most effectively
 state the exclusion of warranty; and each file should have at least
 the "copyright" line and a pointer to where the full notice is found.</p>
 
-<p>    Lunary is a free and open source Ethereum Wallet for Android</p>
+<p>    Merculet is a free and open source Ethereum Wallet for Android</p>
 <p>    Copyright (C) 2017  Manuel S. Caspari</p>
 
 <p>    This program is free software: you can redistribute it and/or modify
@@ -911,7 +911,7 @@ the "copyright" line and a pointer to where the full notice is found.</p>
 <p> If the program does terminal interaction, make it output a short
 notice like this when it starts in an interactive mode:</p>
 
-<p>    Lunary Ethereum Wallet  Copyright (C) 2017  Manuel S. Caspari
+<p>    Merculet Ethereum Wallet  Copyright (C) 2017  Manuel S. Caspari
     This program comes with ABSOLUTELY NO WARRANTY; for details type `show w.
     This is free software, and you are welcome to redistribute it
     under certain conditions; type `show c for details.</p>
@@ -932,7 +932,7 @@ the library.  If this is what you want to do, use the GNU Lesser General
 Public License instead of this License.  But first, please read
 <http://www.gnu.org/philosophy/why-not-lgpl.html>.</p>
 
-<p><h2>Privacy Policy - Lunary Ether Wallet</h2></p>
+<p><h2>Privacy Policy - Merculet Ether Wallet</h2></p>
 
 <p><b>Data protection</b></p>
 
@@ -942,7 +942,7 @@ If there are further questions please don\t hesitate to contact us as we are hap
 For app usage statistics we use Google Analytics. More details about Google Analytics can be found in the paragraph "Privacy Policy for the use of Google Analytics".</p>
 
 <p><b>Privacy Policy for the use of Google Analytics</b></p>
-<p>This section is only relevant for users that downloaded Lunary from Google Play or the \"Google Play flavor\" from Github. F-Droid and Amazon Appstore builds are compiled without Google Analytics!</p>
+<p>This section is only relevant for users that downloaded Merculet from Google Play or the \"Google Play flavor\" from Github. F-Droid and Amazon Appstore builds are compiled without Google Analytics!</p>
 <p>This app uses Google Analytics, an analytics service provided by Google, Inc. (“Google”). Google Analytics uses “cookies”, which are text files placed on your device, to help analyze how users use it. The information generated about your use of this app (including your IP address) is sent to and stored at a Google server in the U.S.A. Google will use this information on behalf of the operator of this app for the purpose of evaluating your use of the app, compiling reports on activity for operators and providing them other services relating to app activity and usage. The IP-address, that your device conveys within the scope of Google Analytics, will not be associated with any other data held by Google. For more information about Google Analytics visit <a href="https://google.com/analytics/terms">https://google.com/analytics/terms</a></p>
 
 
@@ -951,7 +951,7 @@ More details about this topic can be found in Google\'s Privacy Policies:
 <a href="https://google.com/policies/privacy">https://google.com/policies/privacy</a> </p>
 
 ]]></string>
-
+    <string name="legal">Legal</string>
 
 
 </resources>

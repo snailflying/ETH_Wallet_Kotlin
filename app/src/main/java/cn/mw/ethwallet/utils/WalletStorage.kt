@@ -129,7 +129,7 @@ class WalletStorage private constructor(context: Context) {
             ExternalStorageHandler.askForPermissionRead(c)
             return
         }
-        val wallets = File(Environment.getExternalStorageDirectory().absolutePath + "/Lunary/").listFiles()
+        val wallets = File(Environment.getExternalStorageDirectory().absolutePath + "/merculet/").listFiles()
         if (wallets == null) {
             Dialogs.noImportWalletsFound(c)
             return
@@ -144,7 +144,7 @@ class WalletStorage private constructor(context: Context) {
                     if (position < 0) continue
                     val addr = wallets[i].name.substring(0, position)
                     if (addr.length == 40 && !mapdb!!.toString().contains("0x" + wallets[i].name)) {
-                        foundImports.add(wallets[i]) // Exported with Lunary
+                        foundImports.add(wallets[i]) // Exported with Merculet
                     }
                 }
             }
@@ -191,7 +191,7 @@ class WalletStorage private constructor(context: Context) {
             walletToExport = walletToExport!!.substring(2)
 
         if (ExternalStorageHandler.hasPermission(c)) {
-            val folder = File(Environment.getExternalStorageDirectory(), "Lunary")
+            val folder = File(Environment.getExternalStorageDirectory(), "merculet")
             if (!folder.exists()) folder.mkdirs()
 
             val storeFile = File(folder, walletToExport!! + ".json")

@@ -108,7 +108,7 @@ class AppLockActivity : BasePatternActivity(), PatternView.OnPatternListener, Fi
 
         try {
             keyStore!!.load(null)
-            val key = keyStore!!.getKey("Lunary", null) as SecretKey
+            val key = keyStore!!.getKey("Merculet", null) as SecretKey
             cipher!!.init(Cipher.ENCRYPT_MODE, key)
             return true
         } catch (e: Exception) {
@@ -131,7 +131,7 @@ class AppLockActivity : BasePatternActivity(), PatternView.OnPatternListener, Fi
             val keyGenerator = KeyGenerator.getInstance(KeyProperties.KEY_ALGORITHM_AES, "AndroidKeyStore")
 
             keyStore!!.load(null)
-            keyGenerator.init(KeyGenParameterSpec.Builder("Lunary",
+            keyGenerator.init(KeyGenParameterSpec.Builder("Merculet",
                     KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT)
                     .setBlockModes(KeyProperties.BLOCK_MODE_CBC)
                     .setUserAuthenticationRequired(true)
