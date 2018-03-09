@@ -1,0 +1,354 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="translator_name"></string>
+
+    <string name="app_name">Merculet</string>
+
+    <string name="action_settings">设置</string>
+    <string name="title_activity_main">Merculet</string>
+
+    <string name="fab_scan">扫描二维码</string>
+    <string name="fab_add_watch">浏览地址</string>
+    <string name="fab_add_aswatch">新增只读钱包</string>
+    <string name="fab_gen_new">新增钱包</string>
+    <string name="fab_request">收取</string>
+    <string name="fab_send">发送</string>
+    <string name="fab_sendether">发送Ether</string>
+    <string name="fab_setwalletname">设置钱包地址</string>
+    <string name="drawer_import">导入钱包</string>
+    <string name="drawer_about">关于我们</string>
+    <!--<string name="drawer_donate">Donate</string>-->
+
+    <string name="fr_price_current_price">现价</string>
+    <string name="fr_wallet_overall_balance">总余额</string>
+    <string name="fr_detail_acc_balance">账户余额</string>
+
+    <string name="main_ac_wallet_added_suc">添加成功</string>
+    <string name="main_ac_wallet_added_er">钱包已存在</string>
+    <string name="main_ac_wallet_added_fatal">非法以太地址</string>
+    <string name="detail_acc_name_changed_suc">重命名成功</string>
+    <string name="title_activity_settings">设置</string>
+
+    <string name="pref_header_general">普通</string>
+
+    <string name="pref_title_social_recommendations">空余额账户处理</string>
+    <string name="pref_description_social_recommendations">是否显示空余额账户</string>
+
+
+    <string name="pref_title_start">设置钱包为默认tab页</string>
+    <string name="pref_sum_start">如果设置了则默认以钱包tab页为首页而不是价格tab页</string>
+
+    <string name="pref_header_data_sync">数据同步</string>
+
+    <string name="pref_title_sync_frequency">通知同步</string>
+    <string name="pref_sum_sync_frequency">交易同步间隔</string>
+
+    <string name="pref_currencys_title">显示当前余额</string>
+    <string-array name="pref_currencys">
+        <item>USD</item>
+        <item>EUR</item>
+        <item>CHF</item>
+        <item>GBP</item>
+        <item>AUD</item>
+        <item>CAD</item>
+        <item>JPY</item>
+        <item>RUB</item>
+    </string-array>
+
+    <string-array name="pref_sync_frequency_titles">
+        <item>1 小时</item>
+        <item>2 小时</item>
+        <item>4 小时</item>
+        <item>6 小时</item>
+        <item>8 小时</item>
+        <item>16 小时</item>
+        <item>24 小时</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_values">
+        <item>1</item>
+        <item>2</item>
+        <item>4</item>
+        <item>6</item>
+        <item>8</item>
+        <item>16</item>
+        <item>24</item>
+    </string-array>
+
+
+    <string name="notification_title">收到的交易</string>
+
+    <string-array name="multi_select_list_preference_default_value" />
+
+    <string name="pref_title_system_sync_settings">同步设置</string>
+
+    <string name="pref_header_notifications">通知</string>
+
+    <string name="pref_title_new_message_notifications">交易接收通知</string>
+    <string name="pref_title_new_message_notifications_sum">任何钱包接收的交易都会通知你</string>
+
+    <string name="pref_title_ringtone">铃声</string>
+    <string name="pref_ringtone_silent">静音</string>
+
+    <string name="pref_title_vibrate">振动</string>
+    <string name="title_activity_wallet_gen">创建钱包</string>
+
+    <string name="prompt_email">密码</string>
+    <string name="prompt_password">确认密码</string>
+    <string name="action_sign_in">登录</string>
+
+    <string name="error_invalid_password">密码太短 (至少9位)</string>
+    <string name="error_incorrect_password">密码不匹配</string>
+
+    <string name="generate_text">您即将在此设备上生成新的加密离线钱包。
+         我们建议您选择一个强有力的密码，以确保您的资金安全性。
+         请注意，生成强大而安全的钱包是一项高度计算密集型任务，可能需要几分钟的时间！
+         该过程将在后台执行，因此您仍然可以像往常一样使用手机。
+         进度会显示在您设备的通知栏中，只要我们完成了钱包的生成，我们会通知您。</string>
+
+    <string name="import_text">您即将导入未加密的私钥。
+         我们建议您选择一个强有力的密码，以确保您的资金安全性。
+         请注意，导入强大而安全的钱包是一项高度计算密集型任务，可能需要几分钟的时间！
+         该过程将在后台执行，因此您仍然可以像往常一样使用手机。
+         进度会显示在您设备的通知栏中，只要我们完成了钱包的生成，我们会通知您。</string>
+
+    <string name="wallet_gen_service_title">正在生成钱包</string>
+    <string name="wallet_gen_service_title_import">正在导入钱包</string>
+    <string name="choose_recipient_enterscan">输入/扫描收件人地址</string>
+    <string name="choose_recipient_contacts">或从通讯录中选择收件人</string>
+
+    <string name="choose_your_address">来自</string>
+    <string name="send_to">发送到</string>
+    <string name="choose_ether_amount">可用输入</string>
+    <string name="choose_gas">交易成本</string>
+
+
+    <string name="request_activity_ether">请求金额</string>
+    <string name="request_activity_to">您的钱包/地址</string>
+
+    <string name="no_tx_history">这是交易概览，显示所有他人从以太网发送和接收的信息。在添加一个钱包后，所有交易将显示在此处。</string>
+    <string name="no_wallet_history">您目前没有任何钱包。您可以使用下面的按钮轻松创建或导入一个。</string>
+
+
+    <string name="app_intro_text">欢迎来到Merculet—免费和开放源代码的虚拟币钱包！开始之前，请花一些时间阅读我们的服务条款。</string>
+    <string name="app_intro_title">Merculet钱包</string>
+    <string name="app_intro_please_agree">在继续之前，请阅读并同意服务条款</string>
+    <string name="app_intro_iagree">同意服务条款</string>
+    <string name="fragment_send_ether_amount">总量</string>
+    <string name="fragment_send_cheaper">更便宜</string>
+    <string name="fragment_send_faster">更快</string>
+    <string name="fragment_send_total">总数</string>
+    <string name="fragment_send_send_button">发送</string>
+    <string name="fragment_recipient_hint_address">地址</string>
+    <string name="fragment_recipient_continue">继续</string>
+    <string name="fragment_detail_add_sharing">分享地址</string>
+    <string name="fragment_detail_share_button">分享</string>
+    <string name="walletgen_title">生成钱包</string>
+    <string name="request_ether_title">请求以太</string>
+    <string name="qr_scan_title">二维码地址</string>
+    <string name="activity_send_title">交易</string>
+    <string name="last_24_hours">过去24小时</string>
+    <string name="last_7_days">过去7天</string>
+    <string name="last_30_days">过去30天</string>
+    <string name="last_year">去年</string>
+    <string name="err_no_con">没有联网</string>
+    <string name="wallet_menu_title">钱包设置</string>
+    <string name="wallet_menu_changename">重命名钱包</string>
+    <string name="wallet_menu_copyadd">复制地址</string>
+    <string name="wallet_menu_export">导出钱包</string>
+    <string name="wallet_menu_delete">删除钱包</string>
+    <string name="wallet_suc_exported">钱包导出成功</string>
+    <string name="wallet_no_permission">请授予写入外部存储权限导出钱包</string>
+    <string name="wallet_one_at_a_time">稍后片刻</string>
+    <string name="wallet_one_at_a_time_text">我们目前正在为您生成一个钱包，您可以在通知栏中看到进度。别担心，我们会在您的钱包生成完成后立即通知您:-)如果您确实希望生成另一个钱包，请先等待当前的钱包完成。</string>
+    <string name="button_ok">OK</string>
+    <string name="wallet_removal_title">警告：钱包清除</string>
+    <string name="wallet_removal_sure">确定要删除唯一的可见钱包吗？</string>
+    <string name="wallet_removal_privkey">这是一个有私钥的钱包！如果您没有备份，此操作将导致钱包永远失去！你确定你想要继续吗？钱包地址：</string>
+    <string name="wallet_removal_last_warning">你确定？钱包和所有虚拟币将永久消除。这是最后警告：</string>
+    <string name="button_yes">确认</string>
+    <string name="button_no">取消</string>
+    <string name="name_your_wallet">为您的钱包命名</string>
+    <string name="button_cancel">取消</string>
+    <string name="name_other_address">给其他地址命名</string>
+    <string name="trans_menu_title">交易设置</string>
+    <string name="trans_menu_changename">修改地址名称</string>
+    <string name="trans_menu_viewreceiver">查看收件人地址</string>
+    <string name="trans_menu_openinb">在浏览器中打开</string>
+    <string name="trans_no_trans_found">没有找到此地址的交易。</string>
+    <string name="err_send_not_enough_ether">该地址上没有足够的以太币</string>
+    <string name="err_send_invalidamount">无效金额</string>
+    <string name="err_send_noreceiver">未指定接收者</string>
+    <string name="err_send_noamount">没有指定金额</string>
+    <string name="name_your_address">命名您的地址</string>
+    <string name="name_this_address">命名此地址</string>
+    <string name="addressbook_menu_title">地址簿设置</string>
+    <string name="addressbook_menu_remove">清除</string>
+    <string name="import_title">导入钱包</string>
+    <string name="import_button">导入</string>
+    <string name="main_grant_permission_export">请授予写入权限导出钱包</string>
+    <string name="main_grant_permission_import">请授予读出权限导入钱包</string>
+    <string name="dialog_watch_only_title">查找地址</string>
+    <string name="dialog_importing_wallets_title">导入钱包？</string>
+    <string name="dialog_importing_wallets_text">我们已在Merculet文件夹中检测到%1$d的新钱包%2$s。您想导入: %3$s</string>
+    <string name="dialog_ex_nofull_title">没有完整的钱包</string>
+    <string name="dialog_ex_nofull_text">只读钱包不能导出</string>
+    <string name="dialog_exporting_title">正在导出您的钱包</string>
+    <string name="dialog_exporting_text">您的以太钱包副本将放置在Android手机根目录中的\merculet\文件夹内。
+         请注意，在您的设备上运行的其他应用程序可以在技术上访问您导出的任何钱包。因此我们强烈建议您在完成备份后从merculet文件夹中删除所有导出的钱包。</string>
+    <string name="dialog_nofullwallet">没有完整的钱包</string>
+    <string name="dialog_nofullwallet_text">为了发送资金，您需要一个带有私钥的完整钱包。 请先生成或导入一个。</string>
+    <string name="dialog_no_wallets">没有钱包</string>
+    <string name="dialog_no_wallets_text">为了接收资金，您需要一个钱包或手表专用地址。</string>
+    <string name="dialog_no_wallets_found">没有发现钱包</string>
+    <string name="dialog_no_wallets_found_text">请将您想要导入的钱包放入merculet文件夹中，并确保其名称正确。从Mist或其他桌面客户端导入时，您不必重命名您的钱包。</string>
+    <string name="notification_ticker">正在转入…</string>
+    <string name="notification_transfersuc">转移成功</string>
+    <string name="notification_transferfail">转移失败</string>
+    <string name="notification_transferingticker">正在转移…</string>
+    <string name="notification_transfering_title">正在转移以太币</string>
+    <string name="notification_might_take_a_minute">这可能需要等一分钟</string>
+    <string name="notification_wallgen_maytake">这可能需要几分钟时间</string>
+    <string name="notification_wallgen_title">正在生成钱包…</string>
+    <string name="notification_wallimp_title">正在导入钱包…</string>
+    <string name="notification_wallgen_finished">钱包创建失败!</string>
+    <string name="notification_wallimp_finished">钱包导入完成!</string>
+    <string name="notification_click_to_view">点击查看</string>
+    <string name="ether_and_token">以太币和代币</string>
+    <string name="prefs_lock_with_pw">用密码锁定</string>
+    <string name="prefs_lock_with_pw_sum">如果启用，Merculet会在启动应用程序时向您询问密码</string>
+    <string name="prefs_set_pw">设置密码</string>
+    <string name="prefs_set_pw_sum">指定您的登录模式</string>
+    <string name="prefs_cat_security">安全</string>
+    <string name="fab_sendether_from">来自</string>
+    <string name="fab_sendether_to">发送到</string>
+    <string name="open_in_browser">在浏览器中打开</string>
+    <string name="tx_cost">TX消耗</string>
+    <string name="gas_used">使用的Gas</string>
+    <string name="gas_price">Gas价格</string>
+    <string name="nonce">临时</string>
+    <string name="block_height">区块高度</string>
+    <string name="timestamp">时间戳</string>
+    <string name="wallet_menu_share">分享地址</string>
+    <string name="wallet_menu_action_copied_to_clipboard">复制到剪切板</string>
+    <string name="created">创建</string>
+    <string name="digits">数子</string>
+    <string name="holders">持有</string>
+    <string name="market_cap">市值</string>
+    <string name="price">价格</string>
+    <string name="total_supply">总供给</string>
+    <string name="token">代币</string>
+    <string name="gas_limit">Gas限额:</string>
+    <string name="optional_data_as_hex">以十六进制表示</string>
+    <string name="data">日期:</string>
+    <string name="send_expert_warning">您可以添加额外的数据与您的交易一起发送。 如果你不知道这是什么，那么就不要碰它！</string>
+    <string name="expert_mode_optional">专家模式（可选）</string>
+    <string name="transaction_failed">交易失败</string>
+    <string name="reddit">Merculet 版本</string>
+    <string name="add">新增</string>
+    <string name="show">展示</string>
+    <string name="setting_erc_qr_encoding">使用ERC-67 QR编码</string>
+    <string name="setting_cat_advanced">高级设置</string>
+    <string name="password_in_clear_text">明文显示密码</string>
+
+    <string name="dialog_write_down_pw_title">重要！</string>
+    <string name="dialog_write_down_pw_text">Merculet会使用您提供的密码加密您的电子钱包，以确保您的乙太网安全。
+         你的密码是解锁钱包的唯一方法，所以请确保你不要忘记它！建议你把它写在一张纸上。</string>
+    <string name="dialog_back_button">取消</string>
+    <string name="setting_show_ad">显示广告</string>
+
+    <string name="dialog_disable_ad_title">:(</string>
+    <string name="dialog_disable_ad_text">我们在很大程度上依靠捐款和广告收入来积极工作和改进Merculet。
+         如果广告真的让您感到困扰，那么我们明白，我们会让您停用它。
+         这个小小的广告横幅确实对我们有帮助，您的每一笔捐款亦是如此。 请保持横幅启用或考虑一小笔捐款。
+         您需要重新启动应用才能使新设置生效。继续？</string>
+
+    <string name="showcase_got_it">了解</string>
+    <string name="show_case_wallet_gen_text">要生成新钱包，只需按+并选择“生成新钱包”</string>
+    <string name="show_case_backup">要修改现有钱包或创建备份，只需按住钱包即可。</string>
+    <string name="wallet_menu_private_key">显示私钥</string>
+    <string name="activity_private_key_title">私钥</string>
+    <string name="activity_private_key_explanation">这是您钱包的未加密私钥。任何有权访问此密钥或二维码的人都可以动用您的资金。 不要存储这个未加密的！</string>
+    <string name="activity_private_key_wrong_pw">您的密码不正确 - 无法解密私钥！</string>
+    <string name="legal">协议条款</string>
+    <string name="about_us">关于Merculet</string>
+    <string name="about_us_content">基于Lunary-Ethereum-Wallet以太钱包的Kotlin版本。\n由Etherscan.io以及Ethplorer.io提供相应API支持。\n此程序与以太坊或以太坊基金会无关。\n有问题欢迎Github留言或者联系我\nGithub:https://github.com/manuelsc/Lunary-Ethereum-Wallet\nEmail:bravoon@126.com</string>
+
+
+    <string name="tos" tools:ignore="TypographyOther"><![CDATA[
+<html>
+<body>
+    <p>&nbsp;</p>
+    <h2>GNU 通用公共授权</font></h2>
+    <p>
+        <font size="2">允许每个人复制和发布本授权文件的完整副本，
+            <br /> 但不允许对它进行任何修改。
+        </font>
+    </p>
+    <P>本版本由 Leo-Hong (leohca (at) yahoo.com) 翻译整理, Chao-Hong Liu、Zhiqiang Liu 校正.</P>
+    <P>
+        <br />
+        <font SIZE="2"> </font>
+    </P>
+    <font SIZE="2">
+        <h2>导言</font></h2>
+        <p>大多数软件授权声明是设计用以剥夺您共享与修改软件的自由。相反地，GNU通用公共授权力图保证您分享与修改自由软件的自由-确保软件对所有的使用者都是自由的。通用公共授权适用于大多数自由软件基金会的软件，以及任何作者指定使用本授权的其他软件。（有些自由软件基金会的软件，则适用GNU函式库通用公共授权规定。）您也可以让您的软件适用本授权规定。</p>
+        <p>当我们在谈论自由软件时，我们所指的是自由，而不是价格。我们的通用公共授权是设计用以确保使您拥有发布自由软件备份的自由（以及您可以决定此一服务是否收费），确保您能收到源码或者在您需要时能得到它，确保您能变更软件或将它的一部分用于新的自由软件；并且确保您知道您可以做上述的这些事情。</p>
+        <p>为了保障您的权利，我们需要作出限制：禁止任何人否认您上述的权利，或者要求您放弃这些权利。如果您发布软件的副本，或者对之加以修改，这些限制就转化成为您的责任。</p>
+        <p>例如，假如您发布此类程序的副本，无论是免费或收取费用，您必须将您所享有的一切权利给予收受者。您也必须确保他们也能收到或得到原始程序码。而且您必须向他们展示这些条款的內容，使他们知到他们所享有的权利。</p>
+        <p>我们采取两项措施來保护您的权利：(1)以著作权保护软件，以及(2)提供您本授权，赋与您复制、发布并且／或者修改软件的法律许可。</p>
+        <p>同时，为了保护作者与我们（按：指自由软件基金会），我们想要确定每个人都明白，自由软件是沒有担保责任的。如果软件被他人修改并加以传播，我们需要其收受者知道，他们所得到的并非原始版本，因此由他人所引出的任何问题对原作者的声誉将不会有任何的影响。</p>
+        <p>最后，所有自由软件不断地受到软件专利的威胁。我们希望能避免自由软件的再发布者以个人名义取得专利授权而使程序专有化的风险。为了防止上述的情事发生，我们在此明确声明：任何专利都必须为了每个人的自由使用而核准，否则就不应授与专利。</p>
+        <p>以下是有关复制、发布及修改的明确条款及条件。</p>
+        <br />
+        <h2>复制、发布与修改的条款与条件</font></h2>
+        <p>0. 凡著作权人在其程序或其他著作中声明，该程序或著作会在通用公共授权条款下发布，本授权对其均有适用。以下所称的&quot;程序&quot;，是指任何一种适用通用公共授权的程序或著作；并且一个&quot;基于本程序的著作&quot;，则指本程序或任何基于著作权法所产生的衍生著作，换言之，是指包含本程序全部或一部的著作，不论是完整的或经过修改的程序，以及（或）翻译成其他语言的程序（以下&quot;修改&quot;一词包括但不限于翻译行为在內）。被授权人则称为&quot;您&quot;。</p>
+        <p>本授权不适用于复制、发布与修改以外的行为；这些行为不在本授权范围内。执行本程序的行为并不受限制，而本程序的输出只有在其內容构成基于本程序所生的著作（而非只是因为执行本程序所造成）时，始受本授权拘束。至于程序的输出內容是否构成本程序的衍生著作，则取决于本程序的具体用途。</p>
+        <p>1. 您可以对所收受的本程序源代码，无论以何种媒介，复制与发布其完整的复制物，然而您必须符合以下要件：以显著及适当的方式在每一份复制物上发布适当的著作权标示及无担保声明；维持所有有关本授权以及无担保声明的原貌；并将本授权的副本连同本程序一起交付予其他任何一位本程序的收受者。
+        </p>
+        <p>您可以对让与复制物的实际行为收取一定的费用，您也可以自由决定是否提供担保以作为对价的交换。</p>
+        <p>2. 您可以修改本程序的一个或数个复制物或者本程序的任何部份，以此形成基于本程序所生的著作，并依前述第一条规定，复制与发布此一修改过的程序或著作，但您必须符合以下要件：
+        </p>
+        <p>(a) 您必须在所修改的挡案上附加显著的标示，阐明您修改过这些挡案，以及修改日期。
+        </p>
+        <p>(b) 您必须就您所发布或发行的著作，无论是包含本程序全部或一部的著作，或者是自本程序或其任何部份所衍生的著作，整体授权所有第三人依本授权规定使用，且不得因此项授权行为而收取任何费用。</p>
+        <p>(c) 若经过修改的程序在执行时通常以交互方式读取命令时，您必须在最常被使用的方式下，于开始进入这种交互式使用时，列印或展示以下宣告：适当的著作权标示及无担保声明（或者声明您提供担保）、使用者可以依这些条件再发布此程序，以及告知使用者如何浏览本授权的副本。（例外：若本程序本身是以交互的方式执行，然而通常却不会列印该宣告时，则您基于本程序所生的著作便无需列印该宣告。）
+        </p>
+        <p>这些要求对修改过的著作是整体适用的。倘著作中可识別的一部份并非衍生自本程序，并且可以合理地认为是一独立的、个別的著作，则当您将其作为个別著作加以发布时，本授权及其条款将不适用于该部分。然而当您将上述部分，作为基于本程序所生著作的一部而发布时，整个著作的发布必须符合本授权条款的规定，而本授权对于其他被授权人所为的许可及于著作整体。</p>
+        <p>因此，本条规定的意图不在于主张或剥夺您对于完全由您所完成著作的权利；应该說，本条规定意在行使对基于程序所生的之衍生著作或集合著作发布行为的控制权。</p>
+        <p>此外，非基于本程序所生的其他著作与本程序（或基于本程序所生的著作）在同一储存或发布的媒介上的单纯聚集行为，并不会使该著作因此受本授权条款约束。</p>
+        <p>3. 您可以依前述第一、二条规定，复制与发布本程序（或第二条所述基于本程序所产生的著作）的目的码或可执行形式，但您必须符合以下要件：
+        </p>
+        <p>(a) 附上完整、相对应的机器可判读源码，而这些源码必须依前述第一、二条规定在经常用以作为软件交换的媒介物上发布；或</p>
+        <p>(b) 附上至少三年有效的书面报价文件，提供任何第三人在支付不超过实际发布源码所需成本的费用下，取得相同源码的完整机器可读复制物，并依前述第一、二条规定在经常用以作为软件交换的媒介物上发布该复制物；或
+        </p>
+        <p>(c) 附上您所收受有关发布相同源码的报价资讯。（本项选择仅在非赢利发布、且仅在您依前述b项方式自该书面报价文件收受程序目的码或可执行形式时，始有适用。）
+        </p>
+        <p>著作的源码，是指对著作进行修改时适用的形式。对于一个可执行的著作而言，完整的源码是指著作中所包含所有模组的全部源码，加上相关介面的定义挡，还加上用以控制该著作编译与安裝的描述。然而，特別的例外情况是，所发布的源码并不需包含任何通常会随著所执行作业系统的主要组成部分（编译器、核心等等）而发布的软件（无论以源码或二进位格式），除非该部分本身即附加在可执行程序中。</p>
+        <p>若可执行码或目的码的发布方式，是以指定的地点提供存取位置供人复制，则提供可自相同地点复制源码的使用机会，视同对于源码的发布，然而第三人并不因此而负有将目的码连同源码一起复制的义务。</p>
+        <p>4. 除本授权所明示的方式外，您不得对本程序加以复制、修改、再授权或发布。任何试图以其他方式进行复制、修改、再授权或者发布本程序的行为均为无效，并且将自动终止您基于本授权所得享有的权利。然而，依本授权规定自您手中收受复制物或权利之人，只要遵守本授权规定，他们所获得的授权并不会因此终止。
+        </p>
+        <p>5. 因为您并未在本授权上签名，所以您无须接受本授权。然而，除此之外您別无其他修改或发布本程序或其衍生著作的授权许可。若您不接受本授权，则这些行为在法律上都是被禁止的。因此，藉由对本程序（或任何基于本程序所生的著作）的修改或发布行为，您表示了对于本授权的接受，以及接受所有关于复制、发布或修改本程序或基于本程序所生著作的条款与条件。
+        </p>
+        <p>6. 每当您再发布本程序（或任何基于本程序所生的著作）时，收受者即自动获得原授权人所授予依本授权条款与条件复制、发布或修改本程序的权利。您不得就本授权所赋予收受者行使的权利附加任何进一步的限制。您对于第三人是否履行本授权一事，无须负责。
+        </p>
+        <p>7. 若法院判决、专利侵权主张或者其他任何理由（不限于专利争议）的结果，使得加诸于您的条件（无论是由法院命令、协议书或其他方式造成）与本授权规定有所冲突，他们并不免除您对于本授权规定的遵守。若您无法同时符合依本授权所生义务及其他相关义务而进行发布，那么其结果便是您不得发布该程序。例如，若专利授权不允许其他人直接或间接取得复制物，通过您以免付权利金的方式再发布该程序，您唯一能同时滿足该义务及本授权的方式就是徹底避免进行该程序的发布。
+        </p>
+        <p>若本条任一部份在特殊情况下被认定无效或无法执行时，本条其余部分仍应适用，且本条全部于其他情况下仍应适用。</p>
+        <p>本条的目的并不在诱使您侵害专利或其他財产权的权利主张，或就此类主张的有效性加以争执；本条的唯一目的，是在保障藉由公共授权惯例所执行自由软件发布系统的完整性。许多人信赖该系统一贯使用的应用程序，而对经由此系统发布的大量软件有相当多的贡献；作者／贡献者有权决定他或她是否希望经由其他的系统发布软件，而被授权人则无该种选择权。</p>
+        <p>本条的用意在于将本授权其他不确定的部分徹底解释清楚。</p>
+        <p>8. 若因为专利或享有著作权保护的介面问题，而使得本程序的发布与／或使用局限于某些国家时，则将本程序置于本授权规范之下的原著作权人得增列明确的发布地区限制条款，将这些国家排除在外，而使发布的许可只限在未受排除的国家之內或之中。在该等情况下，该限制条款如同以书面方式订定于本授权內容中，而成为本授权的条款。
+        </p>
+        <p>9. 自由软件基金会得随时发表通用公共授权的修正版与／或新版本。新版本在精神上将近似于目前的版本，然而在细节上或所不同以因应新的问题或状况。
+        </p>
+        <p>每一个版本都有个別的版本号码。若本程序指定有授权版本号码，表示其适用该版本或是&quot;任何新版本&quot;时，您可以选择遵循该版本或任何由自由软件基金会日后所发表新版本的条款与条件。若本程序并未指定授权版本号码时，您可以选择任一自由软件基金会所发表的版本。</p>
+        <p>10. 若您想将部分本程序纳入其他自由程序，而其发布的条件有所不同时，请写信取得作者的许可。若为自由软件基金会享有著作权的软件，请写信至自由软件基金会；我们有时会以例外方式予以处理。我们的决定取决于两项目标：确保我们自由软件的所有衍生著作均维持在自由的状态，并广泛地促进软件的分享与再利用。
+        </p>
+        <p>无担保声明</p>
+        <p>11. 由于本程序是无偿授权，因此在法律许可范围內，本授权对本程序并不负担保责任。非经书面声明，著作权人与／或其他提供程序之人，无论明示或默许，均是依「现况」提供本程序而并无任何形式的担保责任，其包括但不限于，就适售性以及特定目的的适用性为默示性担保。有关本程序品质与效能的全部风险均由您承担。如本程序被证明有瑕疵，您应承担所有服务、修复或改正的费用。
+        </p>
+        <p>12. 非经法律要求或书面同意，任何著作权人或任何可能依前述方式修改与／或发布本程序者，对于您因为使用或不能使用本程序所造成的一般性、特殊性、意外性或间接性损失，不负任何责任（包括但不限于，资料损失，资料执行不精确，或应由您或第三人承担的损失，或本程序无法与其他程序运作等），即便前述的著作权人或其他人已被告知该等损失的可能性时，也是一样。
+        </p>
+</body>
+</html>
+]]></string>
+
+</resources>

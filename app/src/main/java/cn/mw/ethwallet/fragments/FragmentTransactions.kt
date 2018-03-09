@@ -11,7 +11,6 @@ import cn.mw.ethwallet.domain.TransactionDisplay
 import cn.mw.ethwallet.network.EtherscanAPI
 import cn.mw.ethwallet.network.RequestCache
 import cn.mw.ethwallet.network.ResponseParser
-import kotlinx.android.synthetic.main.fragment_transaction.*
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response

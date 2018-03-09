@@ -372,28 +372,8 @@ class MainActivity : SecureAppCompatActivity(), NetworkUpdateListener {
             }
             3 -> {
                 AlertDialog.Builder(this)
-                        .setTitle("About Merculet")
-                        .setMessage("Merculet is published under GPL3\n" +
-                                "Developed by Manuel S. C. for Rehanced, 2017\n"
-                                + "www.rehanced.com\n" +
-                                getString(R.string.translator_name) + "\n" +
-                                "\nCredits:\n" +
-                                "MaterialDrawer by Mike Penz\n" +
-                                "MPAndroidChart by Philipp Jahoda\n" +
-                                "Mobile Vision Barcode Scanner by KingsMentor\n" +
-                                "XZING\n" +
-                                "FloatingActionButton by Dmytro Tarianyk\n" +
-                                "RateThisApp by Keisuke Kobayashi\n" +
-                                "AppIntro by Maximilian Narr\n" +
-                                "Material Dialogs by Aidan Michael Follestad\n" +
-                                "Poloniex for price data\n" +
-                                "Web3j by Conor Svensson\n" +
-                                "PatternLock by Zhang Hai\n" +
-                                "Ethereum Foundation for usage of the icon according to (CC A 3.0)\n" +
-                                "Powered by Etherscan.io APIs\n" +
-                                "Token balances powered by Ethplorer.io\n\n" +
-                                "Merculet is published under GPL3\n" +
-                                "This app is not associated with Ethereum or the Ethereum Foundation in any way. Merculet is an independend wallet app.")
+                        .setTitle(R.string.about_us)
+                        .setMessage(R.string.about_us_content)
                         .setIcon(android.R.drawable.ic_dialog_info)
                         .show()
             }

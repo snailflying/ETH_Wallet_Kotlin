@@ -40,7 +40,11 @@ class EtherscanAPI private constructor() {
     @Throws(IOException::class)
     fun getInternalTransactions(address: String, b: Callback, force: Boolean) {
         if (!force && RequestCache.instance.contains(RequestCache.TYPE_TXS_INTERNAL, address)) {
-            b.onResponse(null!!, Response.Builder().code(200).message("").request(Request.Builder()
+            val request =Request.Builder()
+                    .url("http://api.etherscan.io/api?module=account&action=txlistinternal&address=$address&startblock=0&endblock=99999999&sort=asc&apikey=$token")
+                    .build()
+            val call = OkHttpClient().newCall(request)
+            b.onResponse(call, Response.Builder().code(200).message("").request(Request.Builder()
                     .url("http://api.etherscan.io/api?module=account&action=txlistinternal&address=$address&startblock=0&endblock=99999999&sort=asc&apikey=$token")
                     .build()).protocol(Protocol.HTTP_1_0).body(ResponseBody.create(MediaType.parse("JSON"), RequestCache.instance.get(RequestCache.TYPE_TXS_INTERNAL, address))).build())
             return
@@ -60,7 +64,12 @@ class EtherscanAPI private constructor() {
     @Throws(IOException::class)
     fun getNormalTransactions(address: String, b: Callback, force: Boolean) {
         if (!force && RequestCache.instance.contains(RequestCache.TYPE_TXS_NORMAL, address)) {
-            b.onResponse(null!!, Response.Builder().code(200).message("").request(Request.Builder()
+
+            val request =Request.Builder()
+                    .url("http://api.etherscan.io/api?module=account&action=txlist&address=$address&startblock=0&endblock=99999999&sort=asc&apikey=$token")
+                    .build()
+            val call = OkHttpClient().newCall(request)
+            b.onResponse(call, Response.Builder().code(200).message("").request(Request.Builder()
                     .url("http://api.etherscan.io/api?module=account&action=txlist&address=$address&startblock=0&endblock=99999999&sort=asc&apikey=$token")
                     .build()).protocol(Protocol.HTTP_1_0).body(ResponseBody.create(MediaType.parse("JSON"), RequestCache.instance.get(RequestCache.TYPE_TXS_NORMAL, address))).build())
             return
@@ -92,7 +101,12 @@ class EtherscanAPI private constructor() {
     @Throws(IOException::class)
     fun getTokenBalances(address: String, b: Callback, force: Boolean) {
         if (!force && RequestCache.instance.contains(RequestCache.TYPE_TOKEN, address)) {
-            b.onResponse(null!!, Response.Builder().code(200).message("").request(Request.Builder()
+
+            val request =Request.Builder()
+                    .url("https://api.ethplorer.io/getAddressInfo/$address?apiKey=freekey")
+                    .build()
+            val call = OkHttpClient().newCall(request)
+            b.onResponse(call, Response.Builder().code(200).message("").request(Request.Builder()
                     .url("https://api.ethplorer.io/getAddressInfo/$address?apiKey=freekey")
                     .build()).protocol(Protocol.HTTP_1_0).body(ResponseBody.create(MediaType.parse("JSON"), RequestCache.instance.get(RequestCache.TYPE_TOKEN, address))).build())
             return

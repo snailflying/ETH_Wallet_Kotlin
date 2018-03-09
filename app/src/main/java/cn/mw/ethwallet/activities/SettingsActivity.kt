@@ -29,9 +29,10 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun setupActionBar() {
-        val rootView = findViewById(R.id.action_bar_root) as ViewGroup //id from appcompat
+        val rootView = findViewById(R.id.action_bar_root)//id from appcompat
 
         if (rootView != null) {
+            rootView as ViewGroup
             val view = layoutInflater.inflate(R.layout.activity_settings, rootView, false)
             rootView.addView(view, 0)
 
