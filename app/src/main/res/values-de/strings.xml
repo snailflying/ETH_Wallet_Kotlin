@@ -1,9 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="translator_name">German translation by Manuel S. C.</string>
-    <string name="app_name">Merculet</string>
+    <string name="app_name">Mercury</string>
 
     <string name="action_settings">Einstellungen</string>
-    <string name="title_activity_main">Merculet</string>
+    <string name="title_activity_main">Mercury</string>
 
     <string name="fab_scan">Scanne Adresse / Schlüssel</string>
     <string name="fab_add_watch">Adresse Suchen</string>
@@ -118,8 +118,8 @@
     <string name="no_wallet_history">Zurzeit verfügst du über keine Konten. Generiere oder importiere einfach ein Konto mit der runden Schaltfläche unten.</string>
 
 
-    <string name="app_intro_text">Willkommen bei Merculet - dem kostenlosen und Open Source Ethereum Konto für Android! Bevor wir loslegen können nimm dir bitte kurz Zeit dich durch unsere AGB zu lesen.</string>
-    <string name="app_intro_title">Merculet Wallet</string>
+    <string name="app_intro_text">Willkommen bei Mercury - dem kostenlosen und Open Source Ethereum Konto für Android! Bevor wir loslegen können nimm dir bitte kurz Zeit dich durch unsere AGB zu lesen.</string>
+    <string name="app_intro_title">Mercury Wallet</string>
     <string name="app_intro_please_agree">Bitte lies die AGB und stimme diesen zu</string>
     <string name="app_intro_iagree">Ich stimme den AGB zu</string>
     <string name="fragment_send_ether_amount">Betrag</string>
@@ -146,7 +146,7 @@
     <string name="wallet_menu_export">Konto exportieren</string>
     <string name="wallet_menu_delete">Konto löschen</string>
     <string name="wallet_suc_exported">Konto erfolgreich exportiert</string>
-    <string name="wallet_no_permission">Bitte gestatte Merculet Schreibrechte um zu exportieren</string>
+    <string name="wallet_no_permission">Bitte gestatte Mercury Schreibrechte um zu exportieren</string>
     <string name="wallet_one_at_a_time">Nicht so schnell</string>
     <string name="wallet_one_at_a_time_text">Wir generieren für dich gerade ein Konto, du siehst den Fortschritt in deiner Nachrichtenleiste. Keine Sorge, wir melden sich sobald wir mit der Erstellung fertig sind :-) Bevor du ein weiteres Konto erstellen kannst warte bitte die erste Erstellung ab.</string>
     <string name="button_ok">OK</string>
@@ -174,21 +174,21 @@
     <string name="addressbook_menu_remove">Entfernen</string>
     <string name="import_title">Importiere Konto</string>
     <string name="import_button">Importieren</string>
-    <string name="main_grant_permission_export">Bitte gestatte Merculet Schreibrechte zum exportieren</string>
-    <string name="main_grant_permission_import">Bitte gestatte Merculet Leserechte zum importieren</string>
+    <string name="main_grant_permission_export">Bitte gestatte Mercury Schreibrechte zum exportieren</string>
+    <string name="main_grant_permission_import">Bitte gestatte Mercury Leserechte zum importieren</string>
     <string name="dialog_watch_only_title">Adresse Suchen</string>
     <string name="dialog_importing_wallets_title">Importiere Konten?</string>
     <string name="dialog_importing_wallets_text">Wir haben %1$d neue(s) Konto/en gefunden. Möchtest du die folgenden Importieren: %3$s</string>
     <string name="dialog_ex_nofull_title">Kein vollständiges Konto</string>
     <string name="dialog_ex_nofull_text">Beobachteradressen können nicht expotiert werden.</string>
     <string name="dialog_exporting_title">Konto exportieren</string>
-    <string name="dialog_exporting_text">Eine Kopie deines Ethereum Kontos wird im \"Merculet\" Ordner vom Hauptverzeichniss deines Geräts angelegt. Bitte beachte das andere Anwendungen auf deinem Gerät technisch gesehen ebenfalls Zugriff auf jedes exportierte Konto haben. Daher legen wir dir unbedingt nahe das Konto aus dem Ordner wieder zu löschen nachdem du deine Sicherung auf zB einem PC durchgeführt hast.</string>
+    <string name="dialog_exporting_text">Eine Kopie deines Ethereum Kontos wird im \"Mercury\" Ordner vom Hauptverzeichniss deines Geräts angelegt. Bitte beachte das andere Anwendungen auf deinem Gerät technisch gesehen ebenfalls Zugriff auf jedes exportierte Konto haben. Daher legen wir dir unbedingt nahe das Konto aus dem Ordner wieder zu löschen nachdem du deine Sicherung auf zB einem PC durchgeführt hast.</string>
     <string name="dialog_nofullwallet">Kein vollständiges Konto</string>
     <string name="dialog_nofullwallet_text">Um Beträge versenden zu können benötigst du ein vollständiges Ethereum Konto mit privatem Schlüssel. Bitte generiere oder importiere zunächst eines.</string>
     <string name="dialog_no_wallets">Keine Konten</string>
     <string name="dialog_no_wallets_text">Um Beträge anfordern zu können benötigst du zuerst ein Konto oder eine Beobachteradresse.</string>
     <string name="dialog_no_wallets_found">Keine Konten gefunden</string>
-    <string name="dialog_no_wallets_found_text">Bitte platziere die Konten die du importieren möchtest direkt in den Merculet Ordner auf eine korrekte Namensbezeichnung. Wenn du Konten von deinem PC (zB Mist) importieren möchtest muss der Name nicht mehr angepasst werden.</string>
+    <string name="dialog_no_wallets_found_text">Bitte platziere die Konten die du importieren möchtest direkt in den Mercury Ordner auf eine korrekte Namensbezeichnung. Wenn du Konten von deinem PC (zB Mist) importieren möchtest muss der Name nicht mehr angepasst werden.</string>
     <string name="notification_ticker">Eingehende Ether Überweisung…</string>
     <string name="notification_transfersuc">Überweisung erfolgreich</string>
     <string name="notification_transferfail">Überweisung gescheitert</string>
@@ -203,7 +203,7 @@
     <string name="notification_click_to_view">Klicken zum öffnen</string>
     <string name="ether_and_token">Ether und Token</string>
     <string name="prefs_lock_with_pw">Passwort aktivieren</string>
-    <string name="prefs_lock_with_pw_sum">Legt fest ob der Start von Merculet mit einem Passwort geschützt werden soll</string>
+    <string name="prefs_lock_with_pw_sum">Legt fest ob der Start von Mercury mit einem Passwort geschützt werden soll</string>
     <string name="prefs_set_pw">Setze Password</string>
     <string name="prefs_set_pw_sum">Lege dein Anmeldemuster fest</string>
     <string name="prefs_cat_security">Sicherheit</string>
@@ -231,7 +231,7 @@
     <string name="send_expert_warning">Du kannst zusätzliche Daten an deine Transaktion anhängen. Fülle diese Informationen nur aus wenn du wirklich weißt was du tust, andernfalls könnte das womöglich schlimme Folgen haben!</string>
     <string name="expert_mode_optional">Experten Modus (Optional)</string>
     <string name="transaction_failed">Überweisung gescheitert</string>
-    <string name="reddit">Merculet Subreddit</string>
+    <string name="reddit">Mercury Subreddit</string>
     <string name="add">+</string>
     <string name="show">Suche</string>
     <string name="setting_erc_qr_encoding">Nutze ERC-67 QR Encoding</string>
@@ -239,13 +239,13 @@
     <string name="password_in_clear_text">Passwort in Klartext anzeigen</string>
 
     <string name="dialog_write_down_pw_title">Wichtig!</string>
-    <string name="dialog_write_down_pw_text">Merculet verschlüsselt dein Konto mit dem angegebenen Passwort um deine Ether sicher aufbewahren zu können.
+    <string name="dialog_write_down_pw_text">Mercury verschlüsselt dein Konto mit dem angegebenen Passwort um deine Ether sicher aufbewahren zu können.
         Dieses passwort ist der einzige Weg um dein Konto zu entsperren und dein Ether überweisen zu können, vergiss es daher auf keinen Fall! Wir empfehlen das Passwort auf ein Stück Papier niederzuschreiben und sicher aufzubewahren.</string>
     <string name="dialog_back_button">Abbrechen</string>
     <string name="setting_show_ad">Werbung</string>
 
     <string name="dialog_disable_ad_title">:(</string>
-    <string name="dialog_disable_ad_text">Wir sind auf Spenden und Werbeeinahmen zutiefst angewiesen um Merculet weiter verbessern zu können. Wenn dich die Werbung wirklich sehr stört können wir das verstehen und lassen sie dich auch deaktivieren. Aber wenn es nicht zuviel gefragt ist würden wir dich bitten nochmal darüber nachzudenken um Merculet auch in Zukunft noch besser machen zu können.
+    <string name="dialog_disable_ad_text">Wir sind auf Spenden und Werbeeinahmen zutiefst angewiesen um Mercury weiter verbessern zu können. Wenn dich die Werbung wirklich sehr stört können wir das verstehen und lassen sie dich auch deaktivieren. Aber wenn es nicht zuviel gefragt ist würden wir dich bitten nochmal darüber nachzudenken um Mercury auch in Zukunft noch besser machen zu können.
         Dieser kleine Banner hilft uns wirklich sehr, genauso wie jede Spende. Bitte lass den Banner aktiviert oder ziehe zumindest eine kleine Spende in betracht. Im Falle einer Änderung dieser Einstellung musst du die App neu starten damit diese Effekt zeigt. Fortfahren?</string>
 
     <string name="showcase_got_it">ALLES KLAR</string>
@@ -890,7 +890,7 @@ to attach them to the start of each source file to most effectively
 state the exclusion of warranty; and each file should have at least
 the "copyright" line and a pointer to where the full notice is found.</p>
 
-<p>    Merculet is a free and open source Ethereum Wallet for Android</p>
+<p>    Mercury is a free and open source Ethereum Wallet for Android</p>
 <p>    Copyright (C) 2017  Manuel S. Caspari</p>
 
 <p>    This program is free software: you can redistribute it and/or modify
@@ -911,7 +911,7 @@ the "copyright" line and a pointer to where the full notice is found.</p>
 <p> If the program does terminal interaction, make it output a short
 notice like this when it starts in an interactive mode:</p>
 
-<p>    Merculet Ethereum Wallet  Copyright (C) 2017  Manuel S. Caspari
+<p>    Mercury Ethereum Wallet  Copyright (C) 2017  Manuel S. Caspari
     This program comes with ABSOLUTELY NO WARRANTY; for details type `show w.
     This is free software, and you are welcome to redistribute it
     under certain conditions; type `show c for details.</p>
@@ -932,7 +932,7 @@ the library.  If this is what you want to do, use the GNU Lesser General
 Public License instead of this License.  But first, please read
 <http://www.gnu.org/philosophy/why-not-lgpl.html>.</p>
 
-<p><h2>Privacy Policy - Merculet Ether Wallet</h2></p>
+<p><h2>Privacy Policy - Mercury Ether Wallet</h2></p>
 
 <p><b>Data protection</b></p>
 
@@ -942,7 +942,7 @@ If there are further questions please don\t hesitate to contact us as we are hap
 For app usage statistics we use Google Analytics. More details about Google Analytics can be found in the paragraph "Privacy Policy for the use of Google Analytics".</p>
 
 <p><b>Privacy Policy for the use of Google Analytics</b></p>
-<p>This section is only relevant for users that downloaded Merculet from Google Play or the \"Google Play flavor\" from Github. F-Droid and Amazon Appstore builds are compiled without Google Analytics!</p>
+<p>This section is only relevant for users that downloaded Mercury from Google Play or the \"Google Play flavor\" from Github. F-Droid and Amazon Appstore builds are compiled without Google Analytics!</p>
 <p>This app uses Google Analytics, an analytics service provided by Google, Inc. (“Google”). Google Analytics uses “cookies”, which are text files placed on your device, to help analyze how users use it. The information generated about your use of this app (including your IP address) is sent to and stored at a Google server in the U.S.A. Google will use this information on behalf of the operator of this app for the purpose of evaluating your use of the app, compiling reports on activity for operators and providing them other services relating to app activity and usage. The IP-address, that your device conveys within the scope of Google Analytics, will not be associated with any other data held by Google. For more information about Google Analytics visit <a href="https://google.com/analytics/terms">https://google.com/analytics/terms</a></p>
 
 

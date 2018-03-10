@@ -14,9 +14,9 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import cn.mw.ethwallet.R
-import cn.mw.ethwallet.qr.AddressEncoder
-import cn.mw.ethwallet.qr.Contents
-import cn.mw.ethwallet.qr.QREncoder
+import cn.mw.ethwallet.utils.qr.AddressEncoder
+import cn.mw.ethwallet.utils.qr.Contents
+import cn.mw.ethwallet.utils.qr.QREncoder
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.WriterException
 

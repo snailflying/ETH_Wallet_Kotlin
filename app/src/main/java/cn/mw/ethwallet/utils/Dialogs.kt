@@ -19,9 +19,9 @@ import cn.mw.ethwallet.R
 import cn.mw.ethwallet.activities.AddressDetailActivity
 import cn.mw.ethwallet.activities.MainActivity
 import cn.mw.ethwallet.activities.WalletGenActivity
-import cn.mw.ethwallet.domain.TokenDisplay
-import cn.mw.ethwallet.domain.TransactionDisplay
-import cn.mw.ethwallet.domain.WatchWallet
+import cn.mw.ethwallet.domain.request.TokenDisplay
+import cn.mw.ethwallet.domain.request.TransactionDisplay
+import cn.mw.ethwallet.domain.request.WatchWallet
 import cn.mw.ethwallet.fragments.FragmentWallets
 import cn.mw.ethwallet.interfaces.AdDialogResponseHandler
 import cn.mw.ethwallet.interfaces.PasswordDialogCallback

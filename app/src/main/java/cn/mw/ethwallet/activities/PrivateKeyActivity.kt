@@ -7,8 +7,8 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
 import cn.mw.ethwallet.R
-import cn.mw.ethwallet.qr.Contents
-import cn.mw.ethwallet.qr.QREncoder
+import cn.mw.ethwallet.utils.qr.Contents
+import cn.mw.ethwallet.utils.qr.QREncoder
 import cn.mw.ethwallet.utils.WalletStorage
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.WriterException

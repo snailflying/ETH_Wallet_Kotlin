@@ -10,7 +10,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import cn.mw.ethwallet.R
-import cn.mw.ethwallet.domain.TransactionDisplay
+import cn.mw.ethwallet.domain.request.TransactionDisplay
 import cn.mw.ethwallet.utils.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -110,7 +110,7 @@ class TransactionAdapter(private val boxlist: List<TransactionDisplay>, private 
                 holder.month.setTextColor(context.resources.getColor(R.color.unconfirmed))
             }
 
-            holder.type.visibility = if (box.type === cn.mw.ethwallet.domain.TransactionDisplay.NORMAL) View.INVISIBLE else View.VISIBLE
+            holder.type.visibility = if (box.type === TransactionDisplay.NORMAL) View.INVISIBLE else View.VISIBLE
             holder.error.visibility = if (box.isError) View.VISIBLE else View.GONE
             holder.my_addressicon.setImageBitmap(Blockies.createIcon(box.getFromAddress().toLowerCase()))
             holder.other_addressicon.setImageBitmap(Blockies.createIcon(box.getToAddress().toLowerCase()))

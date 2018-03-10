@@ -9,7 +9,7 @@ import android.graphics.Color
 import android.support.v4.app.NotificationCompat
 import cn.mw.ethwallet.R
 import cn.mw.ethwallet.activities.MainActivity
-import cn.mw.ethwallet.domain.FullWallet
+import cn.mw.ethwallet.domain.request.FullWallet
 import cn.mw.ethwallet.utils.*
 import org.spongycastle.util.encoders.Hex
 import org.web3j.crypto.CipherException

@@ -26,7 +26,7 @@ import cn.mw.ethwallet.activities.BaseApplication
 import cn.mw.ethwallet.activities.RequestEtherActivity
 import cn.mw.ethwallet.activities.SendActivity
 import cn.mw.ethwallet.adapters.TransactionAdapter
-import cn.mw.ethwallet.domain.TransactionDisplay
+import cn.mw.ethwallet.domain.request.TransactionDisplay
 import cn.mw.ethwallet.utils.AddressNameConverter
 import cn.mw.ethwallet.utils.Dialogs
 import cn.mw.ethwallet.utils.WalletStorage

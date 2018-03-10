@@ -20,7 +20,7 @@ import android.widget.*
 import cn.mw.ethwallet.R
 import cn.mw.ethwallet.activities.*
 import cn.mw.ethwallet.adapters.WalletAdapter
-import cn.mw.ethwallet.domain.WalletDisplay
+import cn.mw.ethwallet.domain.request.WalletDisplay
 import cn.mw.ethwallet.interfaces.AppBarStateChangeListener
 import cn.mw.ethwallet.interfaces.PasswordDialogCallback
 import cn.mw.ethwallet.interfaces.StorableWallet

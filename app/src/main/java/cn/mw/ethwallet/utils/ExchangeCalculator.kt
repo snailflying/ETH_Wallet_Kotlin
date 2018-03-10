@@ -1,7 +1,7 @@
 package cn.mw.ethwallet.utils
 
-import cn.mw.ethwallet.domain.CurrencyEntry
-import cn.mw.ethwallet.domain.TokenDisplay
+import cn.mw.ethwallet.domain.request.CurrencyEntry
+import cn.mw.ethwallet.domain.request.TokenDisplay
 import cn.mw.ethwallet.interfaces.NetworkUpdateListener
 import cn.mw.ethwallet.network.EtherscanAPI
 import cn.mw.ethwallet.network.ResponseParser

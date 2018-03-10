@@ -11,11 +11,11 @@ import android.view.View
 import android.widget.TextView
 import cn.mw.ethwallet.R
 import cn.mw.ethwallet.adapters.WalletAdapter
-import cn.mw.ethwallet.domain.WalletDisplay
+import cn.mw.ethwallet.domain.request.WalletDisplay
 import cn.mw.ethwallet.interfaces.StorableWallet
-import cn.mw.ethwallet.qr.AddressEncoder
-import cn.mw.ethwallet.qr.Contents
-import cn.mw.ethwallet.qr.QREncoder
+import cn.mw.ethwallet.utils.qr.AddressEncoder
+import cn.mw.ethwallet.utils.qr.Contents
+import cn.mw.ethwallet.utils.qr.QREncoder
 import cn.mw.ethwallet.utils.AddressNameConverter
 import cn.mw.ethwallet.utils.ExchangeCalculator
 import cn.mw.ethwallet.utils.WalletStorage

@@ -1,4 +1,4 @@
-package cn.mw.ethwallet.domain
+package cn.mw.ethwallet.domain.request
 
 import cn.mw.ethwallet.interfaces.StorableWallet
 import java.io.Serializable
@@ -6,10 +6,10 @@ import java.io.Serializable
 /**
  * @author Aaron
  * @email aaron@magicwindow.cn
- * @date 08/03/2018 17:00
+ * @date 08/03/2018 16:58
  * @description
  */
-class WatchWallet(override var pubKey: String) : StorableWallet, Serializable {
+class FullWallet(override var pubKey: String, var path: String?) : StorableWallet, Serializable {
     override var dateAdded: Long = 0
 
     init {
@@ -19,6 +19,6 @@ class WatchWallet(override var pubKey: String) : StorableWallet, Serializable {
 
     companion object {
 
-        private const val serialVersionUID = -146500951598835658L
+        private const val serialVersionUID = 2622313531196422839L
     }
 }

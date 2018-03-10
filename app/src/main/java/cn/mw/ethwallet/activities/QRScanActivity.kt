@@ -14,7 +14,7 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import cn.mw.ethwallet.R
-import cn.mw.ethwallet.qr.AddressEncoder
+import cn.mw.ethwallet.utils.qr.AddressEncoder
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.Result
 import me.dm7.barcodescanner.zxing.ZXingScannerView

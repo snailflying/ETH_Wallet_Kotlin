@@ -1,10 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="translator_name"></string>
 
-    <string name="app_name">Merculet</string>
+    <string name="app_name">Mercury</string>
 
     <string name="action_settings">Settings</string>
-    <string name="title_activity_main">Merculet</string>
+    <string name="title_activity_main">Mercury</string>
 
     <string name="fab_scan">Scan Address / Key</string>
     <string name="fab_add_watch">Lookup Address</string>
@@ -120,8 +120,8 @@
     <string name="no_wallet_history">You currently do not have any wallets. You can easily create or import one using the button below.</string>
 
 
-    <string name="app_intro_text">Welcome to Merculet - the free and Open Source Ether Wallet for Android! Before starting, please take some time to read through our terms of service.</string>
-    <string name="app_intro_title">Merculet Wallet</string>
+    <string name="app_intro_text">Welcome to Mercury - the free and Open Source Ether Wallet for Android! Before starting, please take some time to read through our terms of service.</string>
+    <string name="app_intro_title">Mercury Wallet</string>
     <string name="app_intro_please_agree">Please read and agree to the terms of service before proceeding</string>
     <string name="app_intro_iagree">I agree to terms of service</string>
     <string name="fragment_send_ether_amount">Amount</string>
@@ -180,17 +180,17 @@
     <string name="main_grant_permission_import">Please grant read permission to import Wallets</string>
     <string name="dialog_watch_only_title">Lookup Address</string>
     <string name="dialog_importing_wallets_title">Importing Wallets?</string>
-    <string name="dialog_importing_wallets_text">We have detected %1$d new wallet%2$s in our Merculet folder. Would you like to import: %3$s</string>
+    <string name="dialog_importing_wallets_text">We have detected %1$d new wallet%2$s in our Mercury folder. Would you like to import: %3$s</string>
     <string name="dialog_ex_nofull_title">No Full Wallet</string>
     <string name="dialog_ex_nofull_text">Watch only wallets can not be exported.</string>
     <string name="dialog_exporting_title">Exporting your Wallet</string>
-    <string name="dialog_exporting_text">A copy of your Ethereum wallet will be placed inside the folder \"Merculet\" in the root directory of your Android phone. Please note that other applications that run on your device can technically access any wallets that you have exported. Due to this, we highly recommend erasing all exported wallets from the Merculet folder as soon as you have finished backing them up.</string>
+    <string name="dialog_exporting_text">A copy of your Ethereum wallet will be placed inside the folder \"Mercury\" in the root directory of your Android phone. Please note that other applications that run on your device can technically access any wallets that you have exported. Due to this, we highly recommend erasing all exported wallets from the Mercury folder as soon as you have finished backing them up.</string>
     <string name="dialog_nofullwallet">No Full Wallet</string>
     <string name="dialog_nofullwallet_text">In order to send funds you need a full wallet with a private key. Please generate or import one first.</string>
     <string name="dialog_no_wallets">No Wallets</string>
     <string name="dialog_no_wallets_text">In order to request funds you need a wallet or a watch only address.</string>
     <string name="dialog_no_wallets_found">No Wallets Found</string>
-    <string name="dialog_no_wallets_found_text">Please place the wallet you want to import inside the Merculet folder and make sure it is correctly named. When importing from Mist or other desktop client you don\'t have to rename your wallet.</string>
+    <string name="dialog_no_wallets_found_text">Please place the wallet you want to import inside the Mercury folder and make sure it is correctly named. When importing from Mist or other desktop client you don\'t have to rename your wallet.</string>
     <string name="notification_ticker">Incoming Ether Transaction…</string>
     <string name="notification_transfersuc">Transfer successful</string>
     <string name="notification_transferfail">Transfer Failed</string>
@@ -205,7 +205,7 @@
     <string name="notification_click_to_view">Click to view</string>
     <string name="ether_and_token">Ether and Token</string>
     <string name="prefs_lock_with_pw">Lock with Password</string>
-    <string name="prefs_lock_with_pw_sum">If enabled Merculet will ask you for a password before launching the app</string>
+    <string name="prefs_lock_with_pw_sum">If enabled Mercury will ask you for a password before launching the app</string>
     <string name="prefs_set_pw">Set Password</string>
     <string name="prefs_set_pw_sum">Specify your login pattern</string>
     <string name="prefs_cat_security">Security</string>
@@ -233,7 +233,7 @@
     <string name="send_expert_warning">You can add extra data to send along with your transaction. If you don\'t know what this is then don\'t touch it or bad things may happen!</string>
     <string name="expert_mode_optional">Expert Mode (Optional)</string>
     <string name="transaction_failed">Transaction failed</string>
-    <string name="reddit">Merculet Subreddit</string>
+    <string name="reddit">Mercury Subreddit</string>
     <string name="add">Add</string>
     <string name="show">Show</string>
     <string name="setting_erc_qr_encoding">Use ERC-67 QR Encoding</string>
@@ -241,12 +241,12 @@
     <string name="password_in_clear_text">Show Password in clear text</string>
 
     <string name="dialog_write_down_pw_title">Important!</string>
-    <string name="dialog_write_down_pw_text">Merculet will encrypt your Wallet with the password your provided to keep your ether safe. Your password is literally the only way to unlock your wallet and spend your ether, so make sure you dont forget it! We suggest to write it down on a piece of paper.</string>
+    <string name="dialog_write_down_pw_text">Mercury will encrypt your Wallet with the password your provided to keep your ether safe. Your password is literally the only way to unlock your wallet and spend your ether, so make sure you dont forget it! We suggest to write it down on a piece of paper.</string>
     <string name="dialog_back_button">Cancel</string>
     <string name="setting_show_ad">Display Ads</string>
 
     <string name="dialog_disable_ad_title">:(</string>
-    <string name="dialog_disable_ad_text">We depend heavily on donations and ad revenue to actively work and improve Merculet. If the ad really bothers you that much thats fine, we understand that and we will let you disable it. But if it isnt too much to ask we would like to change your mind to keep Merculet getting better and better. This small ad banner really helps us, same goes for every donation we receive. Please keep the banner enabled or consider a small donation. You need to restart the app for your new setting to take affect. Continue?</string>
+    <string name="dialog_disable_ad_text">We depend heavily on donations and ad revenue to actively work and improve Mercury. If the ad really bothers you that much thats fine, we understand that and we will let you disable it. But if it isnt too much to ask we would like to change your mind to keep Mercury getting better and better. This small ad banner really helps us, same goes for every donation we receive. Please keep the banner enabled or consider a small donation. You need to restart the app for your new setting to take affect. Continue?</string>
 
     <string name="showcase_got_it">GOT IT</string>
     <string name="show_case_wallet_gen_text">To generate a new wallet just press on the + and select "Generate New Wallet"</string>
@@ -256,12 +256,12 @@
     <string name="activity_private_key_explanation">This is the unencrypted private key of your wallet. Anyone with access to this key or QR code can spend your funds like ether and tokens. Dont store this unencrypted!</string>
     <string name="activity_private_key_wrong_pw">Your password is not correct - cant decrypt private key!</string>
 
-    <string name="about_us">About Merculet</string>
+    <string name="about_us">About Mercury</string>
     <string name="about_us_content">"Ethereum Foundation for usage of the icon according to (CC A 3.0)\n" +
                                 "Powered by Etherscan.io APIs\n" +
                                 "Token balances powered by Ethplorer.io\n\n" +
-                                "Merculet is published under GPL3\n" +
-                                "This app is not associated with Ethereum or the Ethereum Foundation in any way. Merculet is an independend wallet app.\n
+                                "Mercury is published under GPL3\n" +
+                                "This app is not associated with Ethereum or the Ethereum Foundation in any way. Mercury is an independend wallet app.\n
         Github:https://github.com/manuelsc/Lunary-Ethereum-Wallet\nEmail:bravoon@126.com"</string>
 
     <string name="tos" tools:ignore="TypographyOther"><![CDATA[
@@ -898,7 +898,7 @@ to attach them to the start of each source file to most effectively
 state the exclusion of warranty; and each file should have at least
 the "copyright" line and a pointer to where the full notice is found.</p>
 
-<p>    Merculet is a free and open source Ethereum Wallet for Android</p>
+<p>    Mercury is a free and open source Ethereum Wallet for Android</p>
 <p>    Copyright (C) 2017  Manuel S. Caspari</p>
 
 <p>    This program is free software: you can redistribute it and/or modify
@@ -919,7 +919,7 @@ the "copyright" line and a pointer to where the full notice is found.</p>
 <p> If the program does terminal interaction, make it output a short
 notice like this when it starts in an interactive mode:</p>
 
-<p>    Merculet Ethereum Wallet  Copyright (C) 2017  Manuel S. Caspari
+<p>    Mercury Ethereum Wallet  Copyright (C) 2017  Manuel S. Caspari
     This program comes with ABSOLUTELY NO WARRANTY; for details type `show w.
     This is free software, and you are welcome to redistribute it
     under certain conditions; type `show c for details.</p>
@@ -940,7 +940,7 @@ the library.  If this is what you want to do, use the GNU Lesser General
 Public License instead of this License.  But first, please read
 <http://www.gnu.org/philosophy/why-not-lgpl.html>.</p>
 
-<p><h2>Privacy Policy - Merculet Ether Wallet</h2></p>
+<p><h2>Privacy Policy - Mercury Ether Wallet</h2></p>
 
 <p><b>Data protection</b></p>
 
@@ -950,7 +950,7 @@ If there are further questions please don\t hesitate to contact us as we are hap
 For app usage statistics we use Google Analytics. More details about Google Analytics can be found in the paragraph "Privacy Policy for the use of Google Analytics".</p>
 
 <p><b>Privacy Policy for the use of Google Analytics</b></p>
-<p>This section is only relevant for users that downloaded Merculet from Google Play or the \"Google Play flavor\" from Github. F-Droid and Amazon Appstore builds are compiled without Google Analytics!</p>
+<p>This section is only relevant for users that downloaded Mercury from Google Play or the \"Google Play flavor\" from Github. F-Droid and Amazon Appstore builds are compiled without Google Analytics!</p>
 <p>This app uses Google Analytics, an analytics service provided by Google, Inc. (“Google”). Google Analytics uses “cookies”, which are text files placed on your device, to help analyze how users use it. The information generated about your use of this app (including your IP address) is sent to and stored at a Google server in the U.S.A. Google will use this information on behalf of the operator of this app for the purpose of evaluating your use of the app, compiling reports on activity for operators and providing them other services relating to app activity and usage. The IP-address, that your device conveys within the scope of Google Analytics, will not be associated with any other data held by Google. For more information about Google Analytics visit <a href="https://google.com/analytics/terms">https://google.com/analytics/terms</a></p>
 
 

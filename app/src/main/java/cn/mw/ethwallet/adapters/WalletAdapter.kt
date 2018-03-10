@@ -10,8 +10,8 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import cn.mw.ethwallet.R
-import cn.mw.ethwallet.domain.TransactionDisplay
-import cn.mw.ethwallet.domain.WalletDisplay
+import cn.mw.ethwallet.domain.request.TransactionDisplay
+import cn.mw.ethwallet.domain.request.WalletDisplay
 import cn.mw.ethwallet.utils.AddressNameConverter
 import cn.mw.ethwallet.utils.Blockies
 import cn.mw.ethwallet.utils.ExchangeCalculator

@@ -168,7 +168,8 @@ class FragmentPrice : Fragment() {
                     val commas = (if (displayInUsd) 100 else 10000).toFloat()
                     for (i in 0 until data.length()) {
                         val o = data.getJSONObject(i)
-                        yVals.add(Entry(o.getLong("date").toFloat(), Math.floor(o.getDouble("high") * exchangeRate * commas.toDouble()).toFloat() / commas))
+                        yVals.add(Entry(o.getLong("date").toFloat(),
+                                Math.floor(o.getDouble("high") * exchangeRate * commas.toDouble()).toFloat() / commas))
                     }
                     if (ac == null) return
                     ac!!.runOnUiThread(Runnable {

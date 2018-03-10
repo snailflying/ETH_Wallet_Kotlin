@@ -7,7 +7,7 @@ import android.view.View.GONE
 import android.view.ViewGroup
 import cn.mw.ethwallet.R
 import cn.mw.ethwallet.activities.AddressDetailActivity
-import cn.mw.ethwallet.domain.TransactionDisplay
+import cn.mw.ethwallet.domain.request.TransactionDisplay
 import cn.mw.ethwallet.network.EtherscanAPI
 import cn.mw.ethwallet.network.RequestCache
 import cn.mw.ethwallet.network.ResponseParser

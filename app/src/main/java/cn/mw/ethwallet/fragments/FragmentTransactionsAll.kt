@@ -7,14 +7,13 @@ import android.view.View
 import android.view.View.GONE
 import android.view.ViewGroup
 import cn.mw.ethwallet.activities.MainActivity
-import cn.mw.ethwallet.domain.TransactionDisplay
+import cn.mw.ethwallet.domain.request.TransactionDisplay
 import cn.mw.ethwallet.interfaces.AppBarStateChangeListener
 import cn.mw.ethwallet.interfaces.StorableWallet
 import cn.mw.ethwallet.network.EtherscanAPI
 import cn.mw.ethwallet.network.RequestCache
 import cn.mw.ethwallet.network.ResponseParser
 import cn.mw.ethwallet.utils.WalletStorage
-import kotlinx.android.synthetic.main.fragment_transaction.*
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response

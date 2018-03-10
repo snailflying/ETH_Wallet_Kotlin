@@ -1,4 +1,4 @@
-package cn.mw.ethwallet.qr
+package cn.mw.ethwallet.utils.qr
 
 import java.io.IOException
 import java.math.BigInteger
@@ -28,7 +28,7 @@ class AddressEncoder(var address: String?) {
             else if (s.startsWith("iban:XE") || s.startsWith("IBAN:XE"))
                 decodeICAP(s)
             else
-                decodeLegacyMerculet(s)
+                decodeLegacyMercury(s)
         }
 
         @Throws(IOException::class)
@@ -79,7 +79,7 @@ class AddressEncoder(var address: String?) {
         }
 
         @Throws(IOException::class)
-        fun decodeLegacyMerculet(s: String): AddressEncoder {
+        fun decodeLegacyMercury(s: String): AddressEncoder {
             if (!s.startsWith("iban:") && !s.startsWith("IBAN:")) return AddressEncoder(s)
             var temp = s.substring(5)
             var amount: String? = null

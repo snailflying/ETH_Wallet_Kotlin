@@ -1,7 +1,7 @@
 package cn.mw.ethwallet.utils
 
 import android.content.Context
-import cn.mw.ethwallet.domain.WalletDisplay
+import cn.mw.ethwallet.domain.request.WalletDisplay
 import java.io.*
 import java.util.*
 
@@ -30,11 +30,11 @@ class AddressNameConverter private constructor(context: Context) {
         try {
             load(context)
             if (!contains("0xa9981a33f6b1a18da5db58148b2357f22b44e1e0")) {
-                put("0xa9981a33f6b1a18da5db58148b2357f22b44e1e0", "Merculet Development ✓", context)
+                put("0xa9981a33f6b1a18da5db58148b2357f22b44e1e0", "Mercury Development ✓", context)
             }
         } catch (e: Exception) {
             addressbook = HashMap()
-            put("0xa9981a33f6b1a18da5db58148b2357f22b44e1e0", "Merculet Development ✓", context)
+            put("0xa9981a33f6b1a18da5db58148b2357f22b44e1e0", "Mercury Development ✓", context)
         }
 
         wellknown_addresses = WellKnownAddresses()

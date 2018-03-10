@@ -8,8 +8,8 @@ import android.os.Environment
 import android.preference.PreferenceManager
 import cn.mw.ethwallet.BuildConfig
 import cn.mw.ethwallet.activities.MainActivity
-import cn.mw.ethwallet.domain.FullWallet
-import cn.mw.ethwallet.domain.WatchWallet
+import cn.mw.ethwallet.domain.request.FullWallet
+import cn.mw.ethwallet.domain.request.WatchWallet
 import cn.mw.ethwallet.interfaces.StorableWallet
 import org.json.JSONException
 import org.web3j.crypto.CipherException
@@ -129,7 +129,7 @@ class WalletStorage private constructor(context: Context) {
             ExternalStorageHandler.askForPermissionRead(c)
             return
         }
-        val wallets = File(Environment.getExternalStorageDirectory().absolutePath + "/merculet/").listFiles()
+        val wallets = File(Environment.getExternalStorageDirectory().absolutePath + "/mercury/").listFiles()
         if (wallets == null) {
             Dialogs.noImportWalletsFound(c)
             return
@@ -144,7 +144,7 @@ class WalletStorage private constructor(context: Context) {
                     if (position < 0) continue
                     val addr = wallets[i].name.substring(0, position)
                     if (addr.length == 40 && !mapdb!!.toString().contains("0x" + wallets[i].name)) {
-                        foundImports.add(wallets[i]) // Exported with Merculet
+                        foundImports.add(wallets[i]) // Exported with Mercury
                     }
                 }
             }
@@ -191,7 +191,7 @@ class WalletStorage private constructor(context: Context) {
             walletToExport = walletToExport!!.substring(2)
 
         if (ExternalStorageHandler.hasPermission(c)) {
-            val folder = File(Environment.getExternalStorageDirectory(), "merculet")
+            val folder = File(Environment.getExternalStorageDirectory(), "mercury")
             if (!folder.exists()) folder.mkdirs()
 
             val storeFile = File(folder, walletToExport!! + ".json")

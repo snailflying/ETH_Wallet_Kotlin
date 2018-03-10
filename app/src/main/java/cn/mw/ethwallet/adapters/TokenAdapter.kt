@@ -11,7 +11,7 @@ import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
 import android.widget.TextView
 import cn.mw.ethwallet.R
-import cn.mw.ethwallet.domain.TokenDisplay
+import cn.mw.ethwallet.domain.request.TokenDisplay
 import cn.mw.ethwallet.network.TokenIconCache
 import cn.mw.ethwallet.utils.ExchangeCalculator
 

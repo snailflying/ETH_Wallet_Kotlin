@@ -100,18 +100,30 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.github.clans:fab:1.6.4'
-    compile 'me.dm7.barcodescanner:zxing:1.8.4'
+    //[start]android support库，升级会导致依赖库重复，所以一般不要升级
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
-    compile 'com.squareup.okhttp3:okhttp:3.8.0'
-    compile 'com.android.support:support-v4:25.3.1'
-    testCompile 'junit:junit:4.12'
     compile 'com.android.support:multidex:1.0.1'
     compile 'com.android.support:recyclerview-v7:25.3.1'
-    compile 'org.web3j:core-android:2.2.1'
+    compile 'com.android.support:support-v4:25.3.1'
     googleplayCompile 'com.google.android.gms:play-services-analytics:11.0.4'
     googleplayCompile 'com.google.android.gms:play-services-ads:11.0.4'
+    //[end]
+    testCompile 'junit:junit:4.12'
+
+    //[start]网络框架
+    compile 'com.squareup.okhttp3:okhttp:3.9.0'
+    compile "com.squareup.retrofit2:retrofit:2.3.0"
+    compile "com.squareup.retrofit2:adapter-rxjava2:2.3.0"
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+    compile 'com.google.code.gson:gson:2.8.1'
+    //[end]
+    compile "io.reactivex.rxjava2:rxandroid:2.0.1"
+    compile "io.reactivex.rxjava2:rxjava:2.1.9"
+
+    compile 'com.github.clans:fab:1.6.4'
+    compile 'me.dm7.barcodescanner:zxing:1.8.4'
+    compile 'org.web3j:core-android:2.2.1'
     compile 'me.zhanghai.android.patternlock:library:2.1.2'
     compile 'com.afollestad.material-dialogs:core:0.9.4.5'
     compile 'io.github.kobakei:ratethisapp:1.2.0'

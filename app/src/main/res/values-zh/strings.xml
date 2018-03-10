@@ -1,10 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="translator_name"></string>
 
-    <string name="app_name">Merculet</string>
+    <string name="app_name">Mercury</string>
 
     <string name="action_settings">设置</string>
-    <string name="title_activity_main">Merculet</string>
+    <string name="title_activity_main">Mercury</string>
 
     <string name="fab_scan">扫描二维码</string>
     <string name="fab_add_watch">浏览地址</string>
@@ -128,8 +128,8 @@
     <string name="no_wallet_history">您目前没有任何钱包。您可以使用下面的按钮轻松创建或导入一个。</string>
 
 
-    <string name="app_intro_text">欢迎来到Merculet—免费和开放源代码的虚拟币钱包！开始之前，请花一些时间阅读我们的服务条款。</string>
-    <string name="app_intro_title">Merculet钱包</string>
+    <string name="app_intro_text">欢迎来到Mercury—免费和开放源代码的虚拟币钱包！开始之前，请花一些时间阅读我们的服务条款。</string>
+    <string name="app_intro_title">Mercury钱包</string>
     <string name="app_intro_please_agree">在继续之前，请阅读并同意服务条款</string>
     <string name="app_intro_iagree">同意服务条款</string>
     <string name="fragment_send_ether_amount">总量</string>
@@ -188,18 +188,18 @@
     <string name="main_grant_permission_import">请授予读出权限导入钱包</string>
     <string name="dialog_watch_only_title">查找地址</string>
     <string name="dialog_importing_wallets_title">导入钱包？</string>
-    <string name="dialog_importing_wallets_text">我们已在Merculet文件夹中检测到%1$d的新钱包%2$s。您想导入: %3$s</string>
+    <string name="dialog_importing_wallets_text">我们已在Mercury文件夹中检测到%1$d的新钱包%2$s。您想导入: %3$s</string>
     <string name="dialog_ex_nofull_title">没有完整的钱包</string>
     <string name="dialog_ex_nofull_text">只读钱包不能导出</string>
     <string name="dialog_exporting_title">正在导出您的钱包</string>
-    <string name="dialog_exporting_text">您的以太钱包副本将放置在Android手机根目录中的\merculet\文件夹内。
-         请注意，在您的设备上运行的其他应用程序可以在技术上访问您导出的任何钱包。因此我们强烈建议您在完成备份后从merculet文件夹中删除所有导出的钱包。</string>
+    <string name="dialog_exporting_text">您的以太钱包副本将放置在Android手机根目录中的\mercury\文件夹内。
+         请注意，在您的设备上运行的其他应用程序可以在技术上访问您导出的任何钱包。因此我们强烈建议您在完成备份后从mercury文件夹中删除所有导出的钱包。</string>
     <string name="dialog_nofullwallet">没有完整的钱包</string>
     <string name="dialog_nofullwallet_text">为了发送资金，您需要一个带有私钥的完整钱包。 请先生成或导入一个。</string>
     <string name="dialog_no_wallets">没有钱包</string>
     <string name="dialog_no_wallets_text">为了接收资金，您需要一个钱包或手表专用地址。</string>
     <string name="dialog_no_wallets_found">没有发现钱包</string>
-    <string name="dialog_no_wallets_found_text">请将您想要导入的钱包放入merculet文件夹中，并确保其名称正确。从Mist或其他桌面客户端导入时，您不必重命名您的钱包。</string>
+    <string name="dialog_no_wallets_found_text">请将您想要导入的钱包放入mercury文件夹中，并确保其名称正确。从Mist或其他桌面客户端导入时，您不必重命名您的钱包。</string>
     <string name="notification_ticker">正在转入…</string>
     <string name="notification_transfersuc">转移成功</string>
     <string name="notification_transferfail">转移失败</string>
@@ -214,7 +214,7 @@
     <string name="notification_click_to_view">点击查看</string>
     <string name="ether_and_token">以太币和代币</string>
     <string name="prefs_lock_with_pw">用密码锁定</string>
-    <string name="prefs_lock_with_pw_sum">如果启用，Merculet会在启动应用程序时向您询问密码</string>
+    <string name="prefs_lock_with_pw_sum">如果启用，Mercury会在启动应用程序时向您询问密码</string>
     <string name="prefs_set_pw">设置密码</string>
     <string name="prefs_set_pw_sum">指定您的登录模式</string>
     <string name="prefs_cat_security">安全</string>
@@ -242,7 +242,7 @@
     <string name="send_expert_warning">您可以添加额外的数据与您的交易一起发送。 如果你不知道这是什么，那么就不要碰它！</string>
     <string name="expert_mode_optional">专家模式（可选）</string>
     <string name="transaction_failed">交易失败</string>
-    <string name="reddit">Merculet 版本</string>
+    <string name="reddit">Mercury 版本</string>
     <string name="add">新增</string>
     <string name="show">展示</string>
     <string name="setting_erc_qr_encoding">使用ERC-67 QR编码</string>
@@ -250,13 +250,13 @@
     <string name="password_in_clear_text">明文显示密码</string>
 
     <string name="dialog_write_down_pw_title">重要！</string>
-    <string name="dialog_write_down_pw_text">Merculet会使用您提供的密码加密您的电子钱包，以确保您的乙太网安全。
+    <string name="dialog_write_down_pw_text">Mercury会使用您提供的密码加密您的电子钱包，以确保您的乙太网安全。
          你的密码是解锁钱包的唯一方法，所以请确保你不要忘记它！建议你把它写在一张纸上。</string>
     <string name="dialog_back_button">取消</string>
     <string name="setting_show_ad">显示广告</string>
 
     <string name="dialog_disable_ad_title">:(</string>
-    <string name="dialog_disable_ad_text">我们在很大程度上依靠捐款和广告收入来积极工作和改进Merculet。
+    <string name="dialog_disable_ad_text">我们在很大程度上依靠捐款和广告收入来积极工作和改进Mercury。
          如果广告真的让您感到困扰，那么我们明白，我们会让您停用它。
          这个小小的广告横幅确实对我们有帮助，您的每一笔捐款亦是如此。 请保持横幅启用或考虑一小笔捐款。
          您需要重新启动应用才能使新设置生效。继续？</string>
@@ -269,7 +269,7 @@
     <string name="activity_private_key_explanation">这是您钱包的未加密私钥。任何有权访问此密钥或二维码的人都可以动用您的资金。 不要存储这个未加密的！</string>
     <string name="activity_private_key_wrong_pw">您的密码不正确 - 无法解密私钥！</string>
     <string name="legal">协议条款</string>
-    <string name="about_us">关于Merculet</string>
+    <string name="about_us">关于Mercury</string>
     <string name="about_us_content">基于Lunary-Ethereum-Wallet以太钱包的Kotlin版本。\n由Etherscan.io以及Ethplorer.io提供相应API支持。\n此程序与以太坊或以太坊基金会无关。\n有问题欢迎Github留言或者联系我\nGithub:https://github.com/manuelsc/Lunary-Ethereum-Wallet\nEmail:bravoon@126.com</string>
 
 

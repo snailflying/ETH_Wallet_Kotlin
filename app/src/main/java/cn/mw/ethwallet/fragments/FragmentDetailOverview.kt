@@ -24,8 +24,8 @@ import cn.mw.ethwallet.R
 import cn.mw.ethwallet.activities.AddressDetailActivity
 import cn.mw.ethwallet.activities.SendActivity
 import cn.mw.ethwallet.adapters.TokenAdapter
-import cn.mw.ethwallet.domain.TokenDisplay
-import cn.mw.ethwallet.domain.WatchWallet
+import cn.mw.ethwallet.domain.request.TokenDisplay
+import cn.mw.ethwallet.domain.request.WatchWallet
 import cn.mw.ethwallet.interfaces.AppBarStateChangeListener
 import cn.mw.ethwallet.interfaces.LastIconLoaded
 import cn.mw.ethwallet.network.EtherscanAPI

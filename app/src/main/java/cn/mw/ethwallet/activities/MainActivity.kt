@@ -19,7 +19,7 @@ import android.support.v4.view.ViewPager
 import android.support.v7.widget.Toolbar
 import android.view.View
 import cn.mw.ethwallet.R
-import cn.mw.ethwallet.domain.WatchWallet
+import cn.mw.ethwallet.domain.request.WatchWallet
 import cn.mw.ethwallet.fragments.FragmentPrice
 import cn.mw.ethwallet.fragments.FragmentTransactionsAll
 import cn.mw.ethwallet.fragments.FragmentWallets

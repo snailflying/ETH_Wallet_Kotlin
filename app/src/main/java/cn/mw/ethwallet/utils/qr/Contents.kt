@@ -1,4 +1,4 @@
-package cn.mw.ethwallet.qr
+package cn.mw.ethwallet.utils.qr
 
 import android.provider.ContactsContract
 

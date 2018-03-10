@@ -2,10 +2,10 @@ package cn.mw.ethwallet.network
 
 import android.content.Context
 import android.util.Log
-import cn.mw.ethwallet.domain.TokenDisplay
-import cn.mw.ethwallet.domain.TransactionDisplay
-import cn.mw.ethwallet.domain.WalletDisplay
-import cn.mw.ethwallet.domain.WatchWallet
+import cn.mw.ethwallet.domain.request.TokenDisplay
+import cn.mw.ethwallet.domain.request.TransactionDisplay
+import cn.mw.ethwallet.domain.request.WalletDisplay
+import cn.mw.ethwallet.domain.request.WatchWallet
 import cn.mw.ethwallet.interfaces.LastIconLoaded
 import cn.mw.ethwallet.interfaces.StorableWallet
 import cn.mw.ethwallet.utils.AddressNameConverter
