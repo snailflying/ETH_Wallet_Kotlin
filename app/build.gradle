@@ -118,8 +118,14 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
     compile 'com.google.code.gson:gson:2.8.1'
     //[end]
+
+    //[start]rxjava框架
     compile "io.reactivex.rxjava2:rxandroid:2.0.1"
     compile "io.reactivex.rxjava2:rxjava:2.1.9"
+    compile('com.safframework:saf-rxlifecycle:1.0.0', {
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+    })
+    //[end]
 
     compile 'com.github.clans:fab:1.6.4'
     compile 'me.dm7.barcodescanner:zxing:1.8.4'

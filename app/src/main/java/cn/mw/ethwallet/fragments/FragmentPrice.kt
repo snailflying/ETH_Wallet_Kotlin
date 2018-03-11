@@ -10,6 +10,7 @@ import android.os.Looper
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +20,8 @@ import android.widget.TextView
 import cn.mw.ethwallet.R
 import cn.mw.ethwallet.activities.BaseApplication
 import cn.mw.ethwallet.activities.MainActivity
-import cn.mw.ethwallet.network.EtherscanAPI
+import cn.mw.ethwallet.domain.response.PriceChart
+import cn.mw.ethwallet.network.EtherscanAPI1
 import cn.mw.ethwallet.utils.ExchangeCalculator
 import cn.mw.ethwallet.views.DontShowNegativeFormatter
 import cn.mw.ethwallet.views.HourXFormatter
@@ -32,11 +34,7 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IFillFormatter
-import okhttp3.Call
-import okhttp3.Callback
-import okhttp3.Response
-import org.json.JSONArray
-import org.json.JSONException
+import rx.SingleSubscriber
 import java.io.IOException
 import java.util.*
 
@@ -54,7 +52,7 @@ class FragmentPrice : Fragment() {
     private var swipeLayout: SwipeRefreshLayout? = null
     private var left: ImageView? = null
     private var right: ImageView? = null
-    private  var ac: MainActivity? = null
+    private var ac: MainActivity? = null
     private var colorPadding: LinearLayout? = null
     private var priceSwitch: LinearLayout? = null
 
@@ -147,7 +145,7 @@ class FragmentPrice : Fragment() {
     @Throws(IOException::class)
     private fun loadPriceData(time: Long, period: Int) {
 
-        EtherscanAPI.instance.getPriceChart(System.currentTimeMillis() / 1000 - time, period, displayInUsd, object : Callback { // 1467321600,
+        /*EtherscanAPI.instance.getPriceChart(System.currentTimeMillis() / 1000 - time, period, displayInUsd, object : Callback { // 1467321600,
             override fun onFailure(call: Call, e: IOException) {
                 if (ac == null) return
                 ac!!.runOnUiThread(Runnable {
@@ -176,7 +174,7 @@ class FragmentPrice : Fragment() {
                         priceChart!!.visibility = View.VISIBLE
                         onItemsLoadComplete()
                         if (isAdded) {
-                            setupChart(priceChart, getData(yVals), resources.getColor(R.color.colorPrimaryLittleDarker))
+//                            setupChart(priceChart, getData(yVals), resources.getColor(R.color.colorPrimaryLittleDarker))
                             update(false)
                         }
                     })
@@ -186,7 +184,48 @@ class FragmentPrice : Fragment() {
                 }
 
             }
-        })
+        }
+
+
+        )*/
+        EtherscanAPI1.instance.getPriceChart(ac!!, System.currentTimeMillis() / 1000 - time, period, displayInUsd)
+                .subscribe({
+                    object : SingleSubscriber<List<PriceChart>>() {
+                        override fun onSuccess(value: List<PriceChart>?) {
+                            Log.e("aaron","success")
+                            if (value == null || value.isEmpty()) {
+                                return
+                            }
+                            val yVals = ArrayList<Entry>()
+                            val exchangeRate = ExchangeCalculator.instance.rateForChartDisplay
+                            val commas = (if (displayInUsd) 100 else 10000).toFloat()
+                            for (price in value) {
+                                Log.e("aaron","success:"+price.date)
+                                yVals.add(Entry(price.date.toFloat(),
+                                        Math.floor(price.high * exchangeRate * commas.toDouble()).toFloat() / commas))
+                            }
+                            priceChart!!.visibility = View.VISIBLE
+                            onItemsLoadComplete()
+                            if (isAdded) {
+                                setupChart(priceChart, getData(yVals), resources.getColor(R.color.colorPrimaryLittleDarker))
+                                update(false)
+                            }
+                        }
+
+                        override fun onError(error: Throwable?) {
+                            onItemsLoadComplete()
+                            ac!!.snackError(getString(R.string.err_no_con), Snackbar.LENGTH_LONG)
+                            Log.e("aaron","error:"+error)
+
+                        }
+
+                    }
+                }, {
+                    onItemsLoadComplete()
+                    ac!!.snackError(getString(R.string.err_no_con), Snackbar.LENGTH_LONG)
+                    Log.e("aaron","throw:"+it)
+
+                })
     }
 
     private fun setupChart(chart: LineChart?, data: LineData, color: Int) {

@@ -10,7 +10,7 @@ import cn.mw.ethwallet.utils.Key
 import okhttp3.*
 import java.io.BufferedInputStream
 import java.io.IOException
-import java.util.ArrayList
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 /**
@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit
  */
 class EtherscanAPI private constructor() {
 
-    private val token: String
+    private val token: String = Key(APIKey.API_KEY).toString()
 
     @Throws(IOException::class)
     fun getPriceChart(starttime: Long, period: Int, usd: Boolean, b: Callback) {
@@ -40,7 +40,7 @@ class EtherscanAPI private constructor() {
     @Throws(IOException::class)
     fun getInternalTransactions(address: String, b: Callback, force: Boolean) {
         if (!force && RequestCache.instance.contains(RequestCache.TYPE_TXS_INTERNAL, address)) {
-            val request =Request.Builder()
+            val request = Request.Builder()
                     .url("http://api.etherscan.io/api?module=account&action=txlistinternal&address=$address&startblock=0&endblock=99999999&sort=asc&apikey=$token")
                     .build()
             val call = OkHttpClient().newCall(request)
@@ -65,7 +65,7 @@ class EtherscanAPI private constructor() {
     fun getNormalTransactions(address: String, b: Callback, force: Boolean) {
         if (!force && RequestCache.instance.contains(RequestCache.TYPE_TXS_NORMAL, address)) {
 
-            val request =Request.Builder()
+            val request = Request.Builder()
                     .url("http://api.etherscan.io/api?module=account&action=txlist&address=$address&startblock=0&endblock=99999999&sort=asc&apikey=$token")
                     .build()
             val call = OkHttpClient().newCall(request)
@@ -102,7 +102,7 @@ class EtherscanAPI private constructor() {
     fun getTokenBalances(address: String, b: Callback, force: Boolean) {
         if (!force && RequestCache.instance.contains(RequestCache.TYPE_TOKEN, address)) {
 
-            val request =Request.Builder()
+            val request = Request.Builder()
                     .url("https://api.ethplorer.io/getAddressInfo/$address?apiKey=freekey")
                     .build()
             val call = OkHttpClient().newCall(request)
@@ -209,10 +209,10 @@ class EtherscanAPI private constructor() {
         client.newCall(request).enqueue(b)
     }
 
-
-    init {
-        token = Key(APIKey.API_KEY).toString()
-    }
+//
+//    init {
+//        token = Key(APIKey.API_KEY).toString()
+//    }
 
     companion object {
 
