@@ -93,7 +93,7 @@
 
     <string name="prompt_email">密码</string>
     <string name="prompt_password">确认密码</string>
-    <string name="action_sign_in">登录</string>
+    <string name="action_sign_in">确认</string>
 
     <string name="error_invalid_password">密码太短 (至少9位)</string>
     <string name="error_incorrect_password">密码不匹配</string>

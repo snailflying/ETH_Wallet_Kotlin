@@ -36,7 +36,6 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IFillFormatter
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
-import rx.SingleSubscriber
 import java.io.IOException
 import java.util.*
 
@@ -198,7 +197,7 @@ class FragmentPrice : Fragment() {
                         }
 
                         override fun onSuccess(value: List<PriceChart>) {
-                            Log.e("aaron","success")
+                            Log.e("aaron", "success")
                             if (value.isEmpty()) {
                                 return
                             }
@@ -206,7 +205,7 @@ class FragmentPrice : Fragment() {
                             val exchangeRate = ExchangeCalculator.instance.rateForChartDisplay
                             val commas = (if (displayInUsd) 100 else 10000).toFloat()
                             for (price in value) {
-                                Log.e("aaron","success:"+price.date)
+                                Log.e("aaron", "success:" + price.date)
                                 yVals.add(Entry(price.date.toFloat(),
                                         Math.floor(price.high * exchangeRate * commas.toDouble()).toFloat() / commas))
 
@@ -223,15 +222,18 @@ class FragmentPrice : Fragment() {
                         override fun onError(error: Throwable) {
                             onItemsLoadComplete()
                             ac!!.snackError(getString(R.string.err_no_con), Snackbar.LENGTH_LONG)
-                            Log.e("aaron","error:"+error)
+                            Log.e("aaron", "error:" + error)
 
                         }
 
                     }
                 }, {
                     onItemsLoadComplete()
-                    ac!!.snackError(getString(R.string.err_no_con), Snackbar.LENGTH_LONG)
-                    Log.e("aaron","throw:"+it)
+                    if (ac != null) {
+                        onItemsLoadComplete()
+                        ac!!.snackError(getString(R.string.err_no_con), Snackbar.LENGTH_LONG)
+                        Log.e("aaron", "throw:" + it)
+                    }
 
                 })
     }
@@ -317,7 +319,7 @@ class FragmentPrice : Fragment() {
     fun updateExchangeRates() {
         try {
             refreshChart = false
-            ExchangeCalculator.instance.updateExchangeRates(ac!!,if (ac != null) ac!!.getPreferences(Context.MODE_PRIVATE).getString("maincurrency", "USD") else "USD", ac!!)
+            ExchangeCalculator.instance.updateExchangeRates(ac!!, if (ac != null) ac!!.getPreferences(Context.MODE_PRIVATE).getString("maincurrency", "USD") else "USD", ac!!)
             onItemsLoadComplete()
         } catch (e: IOException) {
             e.printStackTrace()
