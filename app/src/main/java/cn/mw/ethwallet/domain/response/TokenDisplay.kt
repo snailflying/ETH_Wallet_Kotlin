@@ -1,4 +1,4 @@
-package cn.mw.ethwallet.domain.request
+package cn.mw.ethwallet.domain.response
 
 import java.math.BigDecimal
 import java.math.BigInteger

@@ -34,6 +34,8 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IFillFormatter
+import io.reactivex.SingleObserver
+import io.reactivex.disposables.Disposable
 import rx.SingleSubscriber
 import java.io.IOException
 import java.util.*
@@ -190,10 +192,14 @@ class FragmentPrice : Fragment() {
         )*/
         EtherscanAPI1.instance.getPriceChart(ac!!, System.currentTimeMillis() / 1000 - time, period, displayInUsd)
                 .subscribe({
-                    object : SingleSubscriber<List<PriceChart>>() {
-                        override fun onSuccess(value: List<PriceChart>?) {
+                    object : SingleObserver<List<PriceChart>> {
+
+                        override fun onSubscribe(d: Disposable) {
+                        }
+
+                        override fun onSuccess(value: List<PriceChart>) {
                             Log.e("aaron","success")
-                            if (value == null || value.isEmpty()) {
+                            if (value.isEmpty()) {
                                 return
                             }
                             val yVals = ArrayList<Entry>()
@@ -203,6 +209,7 @@ class FragmentPrice : Fragment() {
                                 Log.e("aaron","success:"+price.date)
                                 yVals.add(Entry(price.date.toFloat(),
                                         Math.floor(price.high * exchangeRate * commas.toDouble()).toFloat() / commas))
+
                             }
                             priceChart!!.visibility = View.VISIBLE
                             onItemsLoadComplete()
@@ -210,9 +217,10 @@ class FragmentPrice : Fragment() {
                                 setupChart(priceChart, getData(yVals), resources.getColor(R.color.colorPrimaryLittleDarker))
                                 update(false)
                             }
+
                         }
 
-                        override fun onError(error: Throwable?) {
+                        override fun onError(error: Throwable) {
                             onItemsLoadComplete()
                             ac!!.snackError(getString(R.string.err_no_con), Snackbar.LENGTH_LONG)
                             Log.e("aaron","error:"+error)
@@ -309,7 +317,7 @@ class FragmentPrice : Fragment() {
     fun updateExchangeRates() {
         try {
             refreshChart = false
-            ExchangeCalculator.instance.updateExchangeRates(if (ac != null) ac!!.getPreferences(Context.MODE_PRIVATE).getString("maincurrency", "USD") else "USD", ac!!)
+            ExchangeCalculator.instance.updateExchangeRates(ac!!,if (ac != null) ac!!.getPreferences(Context.MODE_PRIVATE).getString("maincurrency", "USD") else "USD", ac!!)
             onItemsLoadComplete()
         } catch (e: IOException) {
             e.printStackTrace()

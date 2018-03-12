@@ -280,7 +280,7 @@ open class LruCache<K, V>
     }
 
     /**
-     * Returns the number of times [.get] returned a value that was
+     * Returns the number of times [.getInstance] returned a value that was
      * already present in the cache.
      */
     @Synchronized
@@ -289,7 +289,7 @@ open class LruCache<K, V>
     }
 
     /**
-     * Returns the number of times [.get] returned null or required a new
+     * Returns the number of times [.getInstance] returned null or required a new
      * value to be created.
      */
     @Synchronized

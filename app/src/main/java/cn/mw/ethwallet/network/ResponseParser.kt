@@ -1,12 +1,9 @@
 package cn.mw.ethwallet.network
 
 import android.content.Context
-import android.util.Log
-import cn.mw.ethwallet.domain.request.TokenDisplay
-import cn.mw.ethwallet.domain.request.TransactionDisplay
-import cn.mw.ethwallet.domain.request.WalletDisplay
-import cn.mw.ethwallet.domain.request.WatchWallet
-import cn.mw.ethwallet.interfaces.LastIconLoaded
+import cn.mw.ethwallet.domain.mod.WalletDisplay
+import cn.mw.ethwallet.domain.mod.WatchWallet
+import cn.mw.ethwallet.domain.response.TransactionDisplay
 import cn.mw.ethwallet.interfaces.StorableWallet
 import cn.mw.ethwallet.utils.AddressNameConverter
 import cn.mw.ethwallet.utils.Settings
@@ -14,7 +11,7 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.math.BigDecimal
 import java.math.BigInteger
-import java.util.ArrayList
+import java.util.*
 
 /**
  * @author Aaron
@@ -91,7 +88,7 @@ object ResponseParser {
         return display
     }
 
-    @Throws(Exception::class)
+    /*@Throws(Exception::class)
     fun parseTokens(c: Context, response: String, callback: LastIconLoaded): ArrayList<TokenDisplay> {
         Log.d("tokentest", response)
         val display = ArrayList<TokenDisplay>()
@@ -116,10 +113,9 @@ object ResponseParser {
 
             // Download icon and cache it
             EtherscanAPI.instance.loadTokenIcon(c, currentToken.getJSONObject("tokenInfo").getString("name"), i == data.length() - 1, callback)
-
         }
         return display
-    }
+    }*/
 
     @Throws(JSONException::class)
     @JvmOverloads
@@ -140,8 +136,8 @@ object ResponseParser {
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(c);
             long curNonce = -1;
             for(int i=tx.size()-1; i >= 0; i--){
-                if(tx.get(i).getFromAddress().equals(address)) { // From address is always our address (thanks to @parseTransactions above for that)
-                    curNonce = Long.parseLong(tx.get(tx.size() - 1).getNounce());
+                if(tx.getInstance(i).getFromAddress().equals(address)) { // From address is always our address (thanks to @parseTransactions above for that)
+                    curNonce = Long.parseLong(tx.getInstance(tx.size() - 1).getNounce());
                     break;
                 }
             }

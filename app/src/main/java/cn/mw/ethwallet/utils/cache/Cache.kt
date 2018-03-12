@@ -16,23 +16,23 @@ object Cache {
      * @param context
      * @return
      */
-    operator fun get(context: Context): CacheApi {
-        return get(context, "Cache", true)
+    fun getInstance(context: Context): CacheApi {
+        return getInstance(context, "Cache", true)
     }
 
-    fun getWithoutDisc(context: Context): CacheApi {
-        return get(context, "Cache", false)
+    fun getInstanceWithoutDisc(context: Context): CacheApi {
+        return getInstance(context, "Cache", false)
     }
 
-    operator fun get(context: Context, cacheName: String): CacheApi {
-        return get(context, cacheName, true)
+    fun getInstance(context: Context, cacheName: String): CacheApi {
+        return getInstance(context, cacheName, true)
     }
 
-    fun getWithoutDisc(context: Context, cacheName: String): CacheApi {
-        return get(context, cacheName, false)
+    fun getInstanceWithoutDisc(context: Context, cacheName: String): CacheApi {
+        return getInstance(context, cacheName, false)
     }
 
-    private operator fun get(context: Context, cacheName: String, withDisc: Boolean): CacheApi {
+    private fun getInstance(context: Context, cacheName: String, withDisc: Boolean): CacheApi {
         return CacheProxy.get(context, cacheName, withDisc)
     }
 

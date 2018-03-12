@@ -91,10 +91,10 @@ object RxJavaUtils {
 
         return SingleTransformer { upstream ->
             upstream.map { t ->
-                Cache.get(context.applicationContext).put(key, t as Serializable)
+                Cache.getInstance(context.applicationContext).put(key, t as Serializable)
                 t
             }
-//            Cache.get(context.applicationContext).put(key, upstream as Serializable)
+//            Cache.getInstance(context.applicationContext).put(key, upstream as Serializable)
 //            upstream
         }
     }
@@ -103,10 +103,10 @@ object RxJavaUtils {
     fun <T> toMemCacheTransformer(context: Context, key: String): SingleTransformer<T, T> {
 
         return SingleTransformer { upstream ->
-            //            Cache.get(context.applicationContext).put(key, upstream as Serializable)
+            //            Cache.getInstance(context.applicationContext).put(key, upstream as Serializable)
 //            upstream
             upstream.map { t ->
-                Cache.getWithoutDisc(context.applicationContext).put(key, t as Serializable)
+                Cache.getInstanceWithoutDisc(context.applicationContext).put(key, t as Serializable)
                 t
             }
 

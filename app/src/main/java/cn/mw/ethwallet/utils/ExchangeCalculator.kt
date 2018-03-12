@@ -1,15 +1,11 @@
 package cn.mw.ethwallet.utils
 
-import cn.mw.ethwallet.domain.request.CurrencyEntry
-import cn.mw.ethwallet.domain.request.TokenDisplay
+import android.support.v7.app.AppCompatActivity
+import android.util.Log
+import cn.mw.ethwallet.domain.mod.CurrencyEntry
+import cn.mw.ethwallet.domain.response.TokenDisplay
 import cn.mw.ethwallet.interfaces.NetworkUpdateListener
-import cn.mw.ethwallet.network.EtherscanAPI
-import cn.mw.ethwallet.network.ResponseParser
-import okhttp3.Call
-import okhttp3.Callback
-import okhttp3.Response
-import org.json.JSONException
-import org.json.JSONObject
+import cn.mw.ethwallet.network.EtherscanAPI1
 import java.io.IOException
 import java.math.BigDecimal
 import java.math.RoundingMode
@@ -22,6 +18,8 @@ import java.text.DecimalFormat
  * @description
  */
 class ExchangeCalculator private constructor() {
+    private val TAG = "ExchangeCalculator"
+
     private val lastUpdateTimestamp: Long = 0
     var rateForChartDisplay = 1.0
         private set
@@ -132,7 +130,7 @@ class ExchangeCalculator private constructor() {
     }
 
     @Throws(IOException::class)
-    fun updateExchangeRates(currency: String, update: NetworkUpdateListener) {
+    fun updateExchangeRates(activity: AppCompatActivity,currency: String, update: NetworkUpdateListener) {
         if (lastUpdateTimestamp + 40 * 60 * 1000 > System.currentTimeMillis() && currency == conversionNames[2].name) { // Dont refresh if not older than 40 min and currency hasnt changed
             return
         }
@@ -159,7 +157,7 @@ class ExchangeCalculator private constructor() {
         }
 
         //Log.d("updateingn", "Initialize price update");
-        EtherscanAPI.instance.getEtherPrice(object : Callback {
+        /*EtherscanAPI.instance.getEtherPrice(object : Callback {
             override fun onFailure(call: Call, e: IOException) {}
 
             @Throws(IOException::class)
@@ -172,29 +170,50 @@ class ExchangeCalculator private constructor() {
                     if (currency != "USD")
                         convert(currency, update)
                     else
-                        update.onUpdate(response)
+                        update.onUpdate()
 
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
 
             }
-        })
+        })*/
+        EtherscanAPI1.instance.getEtherPrice(activity)
+                .subscribe({
+                    conversionNames[1].rate = it.result.ethbtc
+                    conversionNames[2].rate = it.result.ethusd
+                    if (currency != "USD")
+                        convert(currency, update)
+                    else
+                        update.onUpdate()
+                },{
+                    Log.e(TAG,"throw:"+it)
+
+                })
     }
 
     @Throws(IOException::class)
     private fun convert(currency: String, update: NetworkUpdateListener) {
-        EtherscanAPI.instance.getPriceConversionRates(currency, object : Callback {
-            override fun onFailure(call: Call, e: IOException) {}
+//        EtherscanAPI.instance.getPriceConversionRates(currency, object : Callback {
+//            override fun onFailure(call: Call, e: IOException) {}
+//
+//            @Throws(IOException::class)
+//            override fun onResponse(call: Call, response: Response) {
+//
+//                rateForChartDisplay = ResponseParser.parsePriceConversionRate(response.body()!!.string())
+//                conversionNames[2].rate =(Math.floor(conversionNames[2].rate * rateForChartDisplay * 100) / 100)
+//                update.onUpdate()
+//            }
+//        })
+        EtherscanAPI1.instance.getPriceConversionRates(currency)
+                .subscribe({
+                    rateForChartDisplay = it.rates
+                    conversionNames[2].rate =(Math.floor(conversionNames[2].rate * rateForChartDisplay * 100) / 100)
+                    update.onUpdate()
+                },{
+                    Log.e(TAG,"throw:"+it)
+                })
 
-            @Throws(IOException::class)
-            override fun onResponse(call: Call, response: Response) {
-
-                rateForChartDisplay = ResponseParser.parsePriceConversionRate(response.body()!!.string())
-                conversionNames[2].rate =(Math.floor(conversionNames[2].rate * rateForChartDisplay * 100) / 100)
-                update.onUpdate(response)
-            }
-        })
     }
 
     companion object {

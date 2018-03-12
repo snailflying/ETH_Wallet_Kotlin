@@ -7,16 +7,15 @@ import android.view.View
 import android.view.View.GONE
 import android.view.ViewGroup
 import cn.mw.ethwallet.activities.MainActivity
-import cn.mw.ethwallet.domain.request.TransactionDisplay
+import cn.mw.ethwallet.domain.response.TransactionDisplay
 import cn.mw.ethwallet.interfaces.AppBarStateChangeListener
 import cn.mw.ethwallet.interfaces.StorableWallet
-import cn.mw.ethwallet.network.EtherscanAPI
+import cn.mw.ethwallet.network.EtherscanAPI1
 import cn.mw.ethwallet.network.RequestCache
 import cn.mw.ethwallet.network.ResponseParser
 import cn.mw.ethwallet.utils.WalletStorage
-import okhttp3.Call
-import okhttp3.Callback
-import okhttp3.Response
+import io.reactivex.SingleObserver
+import io.reactivex.disposables.Disposable
 import java.io.IOException
 import java.math.BigInteger
 
@@ -65,7 +64,7 @@ class FragmentTransactionsAll : FragmentTransactionsAbstract() {
                 try {
                     val currentWallet = storedwallets.get(i)
 
-                    EtherscanAPI.instance.getNormalTransactions(currentWallet.pubKey, object : Callback {
+                    /*EtherscanAPI.instance.getNormalTransactions(currentWallet.pubKey, object : Callback {
                         override fun onFailure(call: Call, e: IOException) {
                             if (isAdded) {
                                 ac!!.runOnUiThread(Runnable {
@@ -85,8 +84,37 @@ class FragmentTransactionsAll : FragmentTransactionsAbstract() {
                                 ac!!.runOnUiThread(Runnable { onComplete(w, storedwallets) })
                             }
                         }
-                    }, force)
-                    EtherscanAPI.instance.getInternalTransactions(currentWallet.pubKey, object : Callback {
+                    }, force)*/
+                    EtherscanAPI1.instance.getNormalTransactions(ac!!, currentWallet.pubKey, force)
+                            .subscribe({
+                                object : SingleObserver<String> {
+                                    override fun onSuccess(t: String) {
+                                        if (t.length > 2)
+                                            RequestCache.instance.put(RequestCache.TYPE_TXS_NORMAL, currentWallet.pubKey, t)
+                                        val w = ArrayList<TransactionDisplay>(ResponseParser.parseTransactions(t, "Unnamed Address", currentWallet.pubKey, TransactionDisplay.NORMAL))
+                                        if (isAdded) {
+                                            ac!!.runOnUiThread(Runnable { onComplete(w, storedwallets) })
+                                        }
+                                    }
+
+                                    override fun onSubscribe(d: Disposable) {
+                                    }
+
+                                    override fun onError(e: Throwable) {
+                                        if (isAdded) {
+                                            onItemsLoadComplete()
+                                            (ac as MainActivity).snackError("No internet connection")
+                                        }
+                                    }
+                                }
+
+                            }, {
+                                if (isAdded) {
+                                    onItemsLoadComplete()
+                                    (ac as MainActivity).snackError("No internet connection")
+                                }
+                            })
+                    /*EtherscanAPI.instance.getInternalTransactions(currentWallet.pubKey, object : Callback {
                         override fun onFailure(call: Call, e: IOException) {
                             if (isAdded) {
                                 ac!!.runOnUiThread(Runnable {
@@ -106,7 +134,36 @@ class FragmentTransactionsAll : FragmentTransactionsAbstract() {
                                 ac!!.runOnUiThread(Runnable { onComplete(w, storedwallets) })
                             }
                         }
-                    }, force)
+                    }, force)*/
+                    EtherscanAPI1.instance.getInternalTransactions(ac!!, currentWallet.pubKey, force)
+                            .subscribe({
+                                object : SingleObserver<String> {
+                                    override fun onSuccess(t: String) {
+                                        if (t.length > 2)
+                                            RequestCache.instance.put(RequestCache.TYPE_TXS_INTERNAL, currentWallet.pubKey, t)
+                                        val w = ArrayList<TransactionDisplay>(ResponseParser.parseTransactions(t, "Unnamed Address", currentWallet.pubKey, TransactionDisplay.CONTRACT))
+                                        if (isAdded) {
+                                            ac!!.runOnUiThread(Runnable { onComplete(w, storedwallets) })
+                                        }
+                                    }
+
+                                    override fun onSubscribe(d: Disposable) {
+                                    }
+
+                                    override fun onError(e: Throwable) {
+                                        if (isAdded) {
+                                            onItemsLoadComplete()
+                                            (ac as MainActivity).snackError("No internet connection")
+                                        }
+                                    }
+                                }
+
+                            }, {
+                                if (isAdded) {
+                                    onItemsLoadComplete()
+                                    (ac as MainActivity).snackError("No internet connection")
+                                }
+                            })
                 } catch (e: IOException) {
                     if (isAdded) {
                         if (ac != null)

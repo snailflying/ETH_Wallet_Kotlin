@@ -19,7 +19,7 @@ import android.support.v4.view.ViewPager
 import android.support.v7.widget.Toolbar
 import android.view.View
 import cn.mw.ethwallet.R
-import cn.mw.ethwallet.domain.request.WatchWallet
+import cn.mw.ethwallet.domain.mod.WatchWallet
 import cn.mw.ethwallet.fragments.FragmentPrice
 import cn.mw.ethwallet.fragments.FragmentTransactionsAll
 import cn.mw.ethwallet.fragments.FragmentWallets
@@ -31,7 +31,6 @@ import com.mikepenz.materialdrawer.AccountHeaderBuilder
 import com.mikepenz.materialdrawer.Drawer
 import com.mikepenz.materialdrawer.DrawerBuilder
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
-import okhttp3.Response
 import java.io.IOException
 import java.math.BigDecimal
 import java.security.Security
@@ -49,12 +48,12 @@ class MainActivity : SecureAppCompatActivity(), NetworkUpdateListener {
         private set
     private var generateRefreshCount: Int = 0
 
-    override protected fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         // App Intro
-        preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+        preferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
         if (preferences!!.getLong("APP_INSTALLED", 0) == 0L) {
             val intro = Intent(this, AppIntroActivity::class.java)
             startActivityForResult(intro, AppIntroActivity.REQUEST_CODE)
@@ -79,10 +78,10 @@ class MainActivity : SecureAppCompatActivity(), NetworkUpdateListener {
                 .withSelectedItem(-1)
 
                 .addDrawerItems(
-                        PrimaryDrawerItem().withName(getResources().getString(R.string.drawer_import)).withIcon(R.drawable.ic_action_wallet3),
-                        PrimaryDrawerItem().withName(getResources().getString(R.string.action_settings)).withIcon(R.drawable.ic_setting),
-                        PrimaryDrawerItem().withName(getResources().getString(R.string.drawer_about)).withIcon(R.drawable.ic_about),
-                        PrimaryDrawerItem().withName(getResources().getString(R.string.reddit)).withIcon(R.drawable.ic_reddit)
+                        PrimaryDrawerItem().withName(resources.getString(R.string.drawer_import)).withIcon(R.drawable.ic_action_wallet3),
+                        PrimaryDrawerItem().withName(resources.getString(R.string.action_settings)).withIcon(R.drawable.ic_setting),
+                        PrimaryDrawerItem().withName(resources.getString(R.string.drawer_about)).withIcon(R.drawable.ic_about),
+                        PrimaryDrawerItem().withName(resources.getString(R.string.reddit)).withIcon(R.drawable.ic_reddit)
                 )
                 .withOnDrawerItemClickListener { view, position, drawerItem ->
                     selectItem(position)
@@ -120,7 +119,7 @@ class MainActivity : SecureAppCompatActivity(), NetworkUpdateListener {
         fragments[2] = FragmentTransactionsAll()
 
 
-        mSectionsPagerAdapter = SectionsPagerAdapter(getSupportFragmentManager())
+        mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
         mViewPager = findViewById(R.id.container) as ViewPager
         mViewPager!!.adapter = mSectionsPagerAdapter
 
@@ -133,7 +132,7 @@ class MainActivity : SecureAppCompatActivity(), NetworkUpdateListener {
         tabLayout!!.getTabAt(2)!!.setIcon(R.drawable.ic_transactions)
 
         try {
-            ExchangeCalculator.instance.updateExchangeRates(preferences!!.getString("maincurrency", "USD"), this)
+            ExchangeCalculator.instance.updateExchangeRates(this,preferences!!.getString("maincurrency", "USD"), this)
         } catch (e: IOException) {
             e.printStackTrace()
         }
@@ -141,9 +140,9 @@ class MainActivity : SecureAppCompatActivity(), NetworkUpdateListener {
         Settings.initiate(this)
         NotificationLauncher.instance.start(this)
 
-        if (getIntent().hasExtra("STARTAT")) { //  Click on Notification, show Transactions
+        if (intent.hasExtra("STARTAT")) { //  Click on Notification, show Transactions
             if (tabLayout != null)
-                tabLayout!!.getTabAt(getIntent().getIntExtra("STARTAT", 2))!!.select()
+                tabLayout!!.getTabAt(intent.getIntExtra("STARTAT", 2))!!.select()
             broadCastDataSetChanged()
         } else if (Settings.startWithWalletTab) { // if enabled in setting select wallet tab instead of price tab
             if (tabLayout != null)
@@ -166,8 +165,8 @@ class MainActivity : SecureAppCompatActivity(), NetworkUpdateListener {
         when (requestCode) {
             ExternalStorageHandler.REQUEST_WRITE_STORAGE -> {
                 if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    if (fragments != null && fragments!![1] != null)
-                        (fragments!![1] as FragmentWallets).export()
+                    if (fragments[1] != null)
+                        (fragments[1] as FragmentWallets).export()
                 } else {
                     snackError(getString(R.string.main_grant_permission_export))
                 }
@@ -194,24 +193,14 @@ class MainActivity : SecureAppCompatActivity(), NetworkUpdateListener {
         broadCastDataSetChanged()
 
         // Update wallets if activity resumed and a new wallet was found (finished generation or added as watch only address)
-        if (fragments != null && fragments!![1] != null && WalletStorage.getInstance(this).get()!!.size !== (fragments!![1] as FragmentWallets).displayedWalletCount) {
+        if (fragments != null && fragments[1] != null && WalletStorage.getInstance(this).get()!!.size !== (fragments[1] as FragmentWallets).displayedWalletCount) {
             try {
-                (fragments!![1] as FragmentWallets).update()
+                (fragments[1] as FragmentWallets).update()
             } catch (e: IOException) {
                 e.printStackTrace()
             }
 
         }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        /* if(preferences == null)
-            preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("APP_PAUSED", true);
-        editor.apply();*/
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
@@ -235,9 +224,9 @@ class MainActivity : SecureAppCompatActivity(), NetworkUpdateListener {
                     val suc = WalletStorage.getInstance(this).add(WatchWallet(data.getStringExtra("ADDRESS")), this)
                     Handler().postDelayed(
                             {
-                                if (fragments != null && fragments!![1] != null) {
+                                if (fragments[1] != null) {
                                     try {
-                                        (fragments!![1] as FragmentWallets).update()
+                                        (fragments[1] as FragmentWallets).update()
                                     } catch (e: IOException) {
                                         e.printStackTrace()
                                     }
@@ -245,8 +234,8 @@ class MainActivity : SecureAppCompatActivity(), NetworkUpdateListener {
                                 }
                                 if (tabLayout != null)
                                     tabLayout!!.getTabAt(1)!!.select()
-                                val mySnackbar = Snackbar.make(this!!.coord!!,
-                                        this@MainActivity.getResources().getString(if (suc) R.string.main_ac_wallet_added_suc else R.string.main_ac_wallet_added_er), Snackbar.LENGTH_SHORT)
+                                val mySnackbar = Snackbar.make(this.coord!!,
+                                        this@MainActivity.resources.getString(if (suc) R.string.main_ac_wallet_added_suc else R.string.main_ac_wallet_added_er), Snackbar.LENGTH_SHORT)
                                 if (suc)
                                     AddressNameConverter.getInstance(this@MainActivity).put(data.getStringExtra("ADDRESS"), "Watch " + data.getStringExtra("ADDRESS").substring(0, 6), this@MainActivity)
 
@@ -270,7 +259,7 @@ class MainActivity : SecureAppCompatActivity(), NetworkUpdateListener {
                 }
             } else {
                 val mySnackbar = Snackbar.make(coord!!,
-                        this@MainActivity.getResources().getString(R.string.main_ac_wallet_added_fatal), Snackbar.LENGTH_SHORT)
+                        this@MainActivity.resources.getString(R.string.main_ac_wallet_added_fatal), Snackbar.LENGTH_SHORT)
                 mySnackbar.show()
             }
         } else if (requestCode == WalletGenActivity.REQUEST_CODE) {
@@ -288,7 +277,7 @@ class MainActivity : SecureAppCompatActivity(), NetworkUpdateListener {
                     override fun run() {
                         try {
                             if (walletcount < WalletStorage.getInstance(this@MainActivity).fullOnly.size) {
-                                (fragments!![1] as FragmentWallets).update()
+                                (fragments[1] as FragmentWallets).update()
                                 return
                             }
                         } catch (e: Exception) {
@@ -303,8 +292,8 @@ class MainActivity : SecureAppCompatActivity(), NetworkUpdateListener {
             }
         } else if (requestCode == SendActivity.REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                if (fragments == null || fragments!![2] == null) return
-                (fragments!![2] as FragmentTransactionsAll).addUnconfirmedTransaction(data.getStringExtra("FROM_ADDRESS"), data.getStringExtra("TO_ADDRESS"), BigDecimal("-" + data.getStringExtra("AMOUNT")).multiply(BigDecimal("1000000000000000000")).toBigInteger())
+                if (fragments[2] == null) return
+                (fragments[2] as FragmentTransactionsAll).addUnconfirmedTransaction(data.getStringExtra("FROM_ADDRESS"), data.getStringExtra("TO_ADDRESS"), BigDecimal("-" + data.getStringExtra("AMOUNT")).multiply(BigDecimal("1000000000000000000")).toBigInteger())
                 if (tabLayout != null)
                     tabLayout!!.getTabAt(2)!!.select()
             }
@@ -314,12 +303,12 @@ class MainActivity : SecureAppCompatActivity(), NetworkUpdateListener {
             } else {
                 val editor = preferences!!.edit()
                 editor.putLong("APP_INSTALLED", System.currentTimeMillis())
-                editor.commit()
+                editor.apply()
             }
         } else if (requestCode == SettingsActivity.REQUEST_CODE) {
             if (preferences!!.getString("maincurrency", "USD") != ExchangeCalculator.instance.mainCurreny.name) {
                 try {
-                    ExchangeCalculator.instance.updateExchangeRates(preferences!!.getString("maincurrency", "USD"), this)
+                    ExchangeCalculator.instance.updateExchangeRates(this,preferences!!.getString("maincurrency", "USD"), this)
                 } catch (e: IOException) {
                     e.printStackTrace()
                 }
@@ -327,14 +316,14 @@ class MainActivity : SecureAppCompatActivity(), NetworkUpdateListener {
                 Handler().postDelayed(
                         {
                             if (fragments != null) {
-                                if (fragments!![0] != null)
-                                    (fragments!![0] as FragmentPrice).update(true)
-                                if (fragments!![1] != null) {
-                                    (fragments!![1] as FragmentWallets).updateBalanceText()
-                                    (fragments!![1] as FragmentWallets).notifyDataSetChanged()
+                                if (fragments[0] != null)
+                                    (fragments[0] as FragmentPrice).update(true)
+                                if (fragments[1] != null) {
+                                    (fragments[1] as FragmentWallets).updateBalanceText()
+                                    (fragments[1] as FragmentWallets).notifyDataSetChanged()
                                 }
-                                if (fragments!![2] != null)
-                                    (fragments!![2] as FragmentTransactionsAll).notifyDataSetChanged()
+                                if (fragments[2] != null)
+                                    (fragments[2] as FragmentTransactionsAll).notifyDataSetChanged()
                             }
                         }, 950)
             }
@@ -398,17 +387,17 @@ class MainActivity : SecureAppCompatActivity(), NetworkUpdateListener {
     }
 
     fun broadCastDataSetChanged() {
-        if (fragments != null && fragments!![1] != null && fragments!![2] != null) {
-            (fragments!![1] as FragmentWallets).notifyDataSetChanged()
-            (fragments!![2] as FragmentTransactionsAll).notifyDataSetChanged()
+        if (fragments[1] != null && fragments[2] != null) {
+            (fragments[1] as FragmentWallets).notifyDataSetChanged()
+            (fragments[2] as FragmentTransactionsAll).notifyDataSetChanged()
         }
     }
 
-    override fun onUpdate(s: Response) {
+    override fun onUpdate() {
         runOnUiThread(Runnable {
             broadCastDataSetChanged()
-            if (fragments != null && fragments!![0] != null) {
-                (fragments!![0] as FragmentPrice).update(true)
+            if (fragments[0] != null) {
+                (fragments[0] as FragmentPrice).update(true)
             }
         })
     }
@@ -416,11 +405,11 @@ class MainActivity : SecureAppCompatActivity(), NetworkUpdateListener {
     inner class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
         override fun getItem(position: Int): Fragment? {
-            return fragments!![position]
+            return fragments[position]
         }
 
         override fun getCount(): Int {
-            return fragments!!.size
+            return fragments.size
         }
 
         override fun getPageTitle(position: Int): CharSequence? {

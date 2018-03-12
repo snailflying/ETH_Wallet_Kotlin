@@ -21,15 +21,15 @@ import cn.mw.ethwallet.BuildConfig
 import cn.mw.ethwallet.R
 import cn.mw.ethwallet.activities.BaseApplication
 import cn.mw.ethwallet.activities.SendActivity
+import cn.mw.ethwallet.domain.response.Balance
+import cn.mw.ethwallet.domain.response.GasPrice
 import cn.mw.ethwallet.interfaces.PasswordDialogCallback
-import cn.mw.ethwallet.network.EtherscanAPI
-import cn.mw.ethwallet.network.ResponseParser
+import cn.mw.ethwallet.network.EtherscanAPI1
 import cn.mw.ethwallet.services.TransactionService
 import cn.mw.ethwallet.utils.*
+import io.reactivex.SingleObserver
+import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.fragment_send.*
-import okhttp3.Call
-import okhttp3.Callback
-import okhttp3.Response
 import java.io.IOException
 import java.math.BigDecimal
 import java.math.BigInteger
@@ -44,10 +44,11 @@ import java.util.*
  * @description
  */
 class FragmentSend : Fragment() {
+    val TAG = "FragmentSend"
 
     private val DEFAULT_GAS_PRICE = 12
 
-    private  var ac: SendActivity? = null
+    private var ac: SendActivity? = null
     //    private var send: Button? = null
 //    private var amount: EditText? = null
 //    private var toAddress: TextView? = null
@@ -243,7 +244,7 @@ class FragmentSend : Fragment() {
     }
 
     private fun updateAccountBalance() {
-        try {
+        /*try {
             EtherscanAPI.instance.getBalance(spinner!!.selectedItem.toString(), object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
                     ac!!.runOnUiThread(Runnable { ac!!.snackError("Cant fetch your account balance", Snackbar.LENGTH_LONG) })
@@ -265,8 +266,28 @@ class FragmentSend : Fragment() {
             })
         } catch (e: IOException) {
             e.printStackTrace()
-        }
+        }*/
+        EtherscanAPI1.instance.getBalance(ac!!, spinner!!.selectedItem.toString())
+                .subscribe({
+                    object : SingleObserver<Balance> {
+                        override fun onSuccess(t: Balance) {
+                            val balance = if (t.result == "0") "0" else BigDecimal(t.result).divide(BigDecimal(1000000000000000000.0), 6, BigDecimal.ROUND_UP).toPlainString()
+                            curAvailable = BigDecimal(balance)
+                            updateDisplays()
+                        }
 
+                        override fun onSubscribe(d: Disposable) {
+                        }
+
+                        override fun onError(e: Throwable) {
+                            ac!!.snackError("Cant fetch your account balance", Snackbar.LENGTH_LONG)
+                        }
+
+                    }
+
+                }, {
+                    Log.e(TAG, "Cant fetch your account balance")
+                })
         fromicon!!.setImageBitmap(Blockies.createIcon(spinner!!.selectedItem.toString().toLowerCase()))
         fromName!!.setText(AddressNameConverter.getInstance(ac!!).get(spinner!!.selectedItem.toString().toLowerCase()))
     }
@@ -343,7 +364,7 @@ class FragmentSend : Fragment() {
 
     private fun getEstimatedGasPriceLimit() {
         try {
-            EtherscanAPI.instance.getGasLimitEstimate(toAddress!!.text.toString(), object : Callback {
+            /*EtherscanAPI.instance.getGasLimitEstimate(toAddress!!.text.toString(), object : Callback {
                 override fun onFailure(call: Call, e: IOException) {}
 
                 @SuppressLint("SetTextI18n")
@@ -357,7 +378,24 @@ class FragmentSend : Fragment() {
                     }
 
                 }
-            })
+            })*/
+            EtherscanAPI1.instance.getGasLimitEstimate(ac!!, toAddress!!.text.toString())
+                    .subscribe({
+                        object : SingleObserver<GasPrice> {
+                            @SuppressLint("SetTextI18n")
+                            override fun onSuccess(t: GasPrice) {
+                                gaslimit = BigInteger(t.result.substring(2), 16)
+                                ac!!.runOnUiThread(Runnable { userGasLimit.setText(gaslimit.toString()) })
+                            }
+
+                            override fun onSubscribe(d: Disposable) {
+                            }
+
+                            override fun onError(e: Throwable) {
+                            }
+
+                        }
+                    }, {})
         } catch (e: IOException) {
             e.printStackTrace()
         }

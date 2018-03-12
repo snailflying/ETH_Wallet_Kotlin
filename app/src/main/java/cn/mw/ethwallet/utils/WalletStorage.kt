@@ -8,8 +8,8 @@ import android.os.Environment
 import android.preference.PreferenceManager
 import cn.mw.ethwallet.BuildConfig
 import cn.mw.ethwallet.activities.MainActivity
-import cn.mw.ethwallet.domain.request.FullWallet
-import cn.mw.ethwallet.domain.request.WatchWallet
+import cn.mw.ethwallet.domain.mod.FullWallet
+import cn.mw.ethwallet.domain.mod.WatchWallet
 import cn.mw.ethwallet.interfaces.StorableWallet
 import org.json.JSONException
 import org.web3j.crypto.CipherException

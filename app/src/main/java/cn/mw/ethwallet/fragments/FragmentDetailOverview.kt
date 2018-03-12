@@ -15,6 +15,7 @@ import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.InputType
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,23 +25,20 @@ import cn.mw.ethwallet.R
 import cn.mw.ethwallet.activities.AddressDetailActivity
 import cn.mw.ethwallet.activities.SendActivity
 import cn.mw.ethwallet.adapters.TokenAdapter
-import cn.mw.ethwallet.domain.request.TokenDisplay
-import cn.mw.ethwallet.domain.request.WatchWallet
+import cn.mw.ethwallet.domain.mod.WatchWallet
+import cn.mw.ethwallet.domain.response.Balance
+import cn.mw.ethwallet.domain.response.TokenDisplay
 import cn.mw.ethwallet.interfaces.AppBarStateChangeListener
 import cn.mw.ethwallet.interfaces.LastIconLoaded
-import cn.mw.ethwallet.network.EtherscanAPI
-import cn.mw.ethwallet.network.RequestCache
-import cn.mw.ethwallet.network.ResponseParser
+import cn.mw.ethwallet.network.EtherscanAPI1
 import cn.mw.ethwallet.utils.*
 import com.github.clans.fab.FloatingActionButton
 import com.github.clans.fab.FloatingActionMenu
-import okhttp3.Call
-import okhttp3.Callback
-import okhttp3.Response
-import org.json.JSONException
+import io.reactivex.SingleObserver
+import io.reactivex.disposables.Disposable
 import java.io.IOException
 import java.math.BigDecimal
-import java.util.ArrayList
+import java.util.*
 
 /**
  * @author Aaron
@@ -50,7 +48,9 @@ import java.util.ArrayList
  */
 class FragmentDetailOverview : Fragment(), View.OnClickListener, View.OnCreateContextMenuListener, LastIconLoaded {
 
-    private  var ac: AddressDetailActivity? = null
+    private val TAG = "FragmentDetailOverview"
+
+    private var ac: AddressDetailActivity? = null
     private lateinit var ethaddress: String
     private var type: Byte = 0
     private var balance: TextView? = null
@@ -182,7 +182,7 @@ class FragmentDetailOverview : Fragment(), View.OnClickListener, View.OnCreateCo
     fun update(force: Boolean) {
         token.clear()
         balanceDouble = BigDecimal("0")
-        EtherscanAPI.instance.getBalance(ethaddress!!, object : Callback {
+        /*EtherscanAPI.instance.getBalance(ethaddress!!, object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 ac!!.runOnUiThread(Runnable {
                     ac!!.snackError("Can't connect to network")
@@ -204,15 +204,45 @@ class FragmentDetailOverview : Fragment(), View.OnClickListener, View.OnCreateCo
 
                 val cur = ExchangeCalculator.instance.current
                 ac!!.runOnUiThread(Runnable {
-                    // balance.setText(ExchangeCalculator.instance.convertRateExact(balanceDouble, ExchangeCalculator.instance.get));
+                    // balance.setText(ExchangeCalculator.instance.convertRateExact(balanceDouble, ExchangeCalculator.instance.getInstance));
                     balance!!.setText(ExchangeCalculator.instance.convertRateExact(balanceDouble, cur.rate) + "")
                     currency!!.setText(cur.name)
                     walletAdapter!!.notifyDataSetChanged()
                 })
             }
-        })
+        })*/
+        EtherscanAPI1.instance.getBalance(ac!!,ethaddress)
+                .subscribe({
+                    object :SingleObserver<Balance>{
+                        override fun onSuccess(t: Balance) {
+                            val ethbal: BigDecimal
+                            val result  = if(t.result == "0") "0" else BigDecimal(t.result).divide(BigDecimal(1000000000000000000.0), 7, BigDecimal.ROUND_UP).toPlainString()
+                            ethbal = BigDecimal(result)
+                            token.add(0, TokenDisplay("Ether", "ETH", ethbal.multiply(BigDecimal(1000.0)), 3, 1.0, "", "", 0.0, 0))
+                            balanceDouble = balanceDouble.add(ethbal)
 
-        EtherscanAPI.instance.getTokenBalances(ethaddress!!, object : Callback {
+                            val cur = ExchangeCalculator.instance.current
+                            balance!!.setText(ExchangeCalculator.instance.convertRateExact(balanceDouble, cur.rate) + "")
+                            currency!!.setText(cur.name)
+                            walletAdapter!!.notifyDataSetChanged()
+                        }
+
+                        override fun onSubscribe(d: Disposable) {
+                        }
+
+                        override fun onError(e: Throwable) {
+                            ac!!.snackError("Can't connect to network")
+                            onItemsLoadComplete()
+                        }
+
+                    }
+
+                },{
+                    ac!!.snackError("Can't connect to network")
+                    onItemsLoadComplete()
+                })
+
+        /*EtherscanAPI.instance.getTokenBalances(ethaddress!!, object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 ac!!.runOnUiThread(Runnable {
                     ac!!.snackError("Can't connect to network")
@@ -243,7 +273,43 @@ class FragmentDetailOverview : Fragment(), View.OnClickListener, View.OnCreateCo
                 }
 
             }
-        }, force)
+        }, force)*/
+        EtherscanAPI1.instance.getTokenBalances(ac!!, ethaddress, force)
+
+                .subscribe({
+                    object : SingleObserver<List<TokenDisplay>> {
+                        override fun onSuccess(t: List<TokenDisplay>) {
+
+                            for(temp in t){
+                                EtherscanAPI1.instance.loadTokenIcon(ac!!,temp.name!!)
+                            }
+
+                            token.addAll(t)
+                            balanceDouble = balanceDouble.add(BigDecimal(ExchangeCalculator.instance.sumUpTokenEther(token)))
+                            val cur = ExchangeCalculator.instance.current
+                            balance!!.setText(ExchangeCalculator.instance.convertRateExact(balanceDouble, cur.rate) + "")
+                            currency!!.setText(cur.name)
+                            walletAdapter!!.notifyDataSetChanged()
+                            onItemsLoadComplete()
+                            Log.e(TAG, "cur.name:" + cur.name)
+                        }
+
+                        override fun onSubscribe(d: Disposable) {
+                        }
+
+                        override fun onError(e: Throwable) {
+                            Log.e(TAG, "error:" + it)
+                            onItemsLoadComplete()
+                        }
+
+
+                    }
+
+                }, {
+                    Log.e(TAG, "throw:" + it)
+                    onItemsLoadComplete()
+                })
+
     }
 
     fun setName() {

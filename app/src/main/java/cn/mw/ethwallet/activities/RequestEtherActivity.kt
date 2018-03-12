@@ -11,7 +11,7 @@ import android.view.View
 import android.widget.TextView
 import cn.mw.ethwallet.R
 import cn.mw.ethwallet.adapters.WalletAdapter
-import cn.mw.ethwallet.domain.request.WalletDisplay
+import cn.mw.ethwallet.domain.mod.WalletDisplay
 import cn.mw.ethwallet.interfaces.StorableWallet
 import cn.mw.ethwallet.utils.qr.AddressEncoder
 import cn.mw.ethwallet.utils.qr.Contents

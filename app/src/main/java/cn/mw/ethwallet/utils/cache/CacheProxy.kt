@@ -22,6 +22,7 @@ class CacheProxy private constructor(context: Context, cacheName: String, withDi
     init {
         if (withDisc) {
             discCache = DiscCacheImpl[context, cacheName]
+//            discCache = DiscCacheImpl.get(context, cacheName)
         } else {
             discCache = CacheEmpty()
         }

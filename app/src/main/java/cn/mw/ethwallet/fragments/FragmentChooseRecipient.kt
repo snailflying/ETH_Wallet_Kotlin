@@ -16,7 +16,7 @@ import cn.mw.ethwallet.activities.BaseApplication
 import cn.mw.ethwallet.activities.QRScanActivity
 import cn.mw.ethwallet.activities.SendActivity
 import cn.mw.ethwallet.adapters.WalletAdapter
-import cn.mw.ethwallet.domain.request.WalletDisplay
+import cn.mw.ethwallet.domain.mod.WalletDisplay
 import cn.mw.ethwallet.utils.AddressNameConverter
 
 /**

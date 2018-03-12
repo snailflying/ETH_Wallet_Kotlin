@@ -1,7 +1,7 @@
 package cn.mw.ethwallet.utils
 
 import android.content.Context
-import cn.mw.ethwallet.domain.request.WalletDisplay
+import cn.mw.ethwallet.domain.mod.WalletDisplay
 import java.io.*
 import java.util.*
 

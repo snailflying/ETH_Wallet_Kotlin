@@ -10,7 +10,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import cn.mw.ethwallet.R
-import cn.mw.ethwallet.domain.request.TransactionDisplay
+import cn.mw.ethwallet.domain.response.TransactionDisplay
 import cn.mw.ethwallet.utils.*
 import java.text.SimpleDateFormat
 import java.util.*

@@ -1,6 +1,5 @@
 package cn.mw.ethwallet.fragments
 
-import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
@@ -10,6 +9,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AlertDialog
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
@@ -26,7 +26,7 @@ import cn.mw.ethwallet.activities.BaseApplication
 import cn.mw.ethwallet.activities.RequestEtherActivity
 import cn.mw.ethwallet.activities.SendActivity
 import cn.mw.ethwallet.adapters.TransactionAdapter
-import cn.mw.ethwallet.domain.request.TransactionDisplay
+import cn.mw.ethwallet.domain.response.TransactionDisplay
 import cn.mw.ethwallet.utils.AddressNameConverter
 import cn.mw.ethwallet.utils.Dialogs
 import cn.mw.ethwallet.utils.WalletStorage
@@ -47,7 +47,7 @@ abstract class FragmentTransactionsAbstract : Fragment(), View.OnClickListener, 
 
     private var wallets: MutableList<TransactionDisplay> = ArrayList<TransactionDisplay>()
 
-    protected var ac: Activity? = null
+    protected var ac: AppCompatActivity? = null
     protected var address: String? = null
     protected var swipeLayout: SwipeRefreshLayout? = null
     @get:Synchronized
@@ -62,7 +62,7 @@ abstract class FragmentTransactionsAbstract : Fragment(), View.OnClickListener, 
                               savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_transaction, container, false)
 
-        ac = this.activity!!
+        ac = (this.activity as AppCompatActivity?)!!
         if (arguments != null) {
             address = arguments!!.getString("ADDRESS")
             (rootView.findViewById(R.id.infoText) as TextView).setText(R.string.trans_no_trans_found)

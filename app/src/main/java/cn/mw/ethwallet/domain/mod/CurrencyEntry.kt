@@ -1,4 +1,4 @@
-package cn.mw.ethwallet.domain.request
+package cn.mw.ethwallet.domain.mod
 
 /**
  * @author Aaron

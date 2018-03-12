@@ -9,5 +9,5 @@ import okhttp3.Response
  * @description
  */
 interface NetworkUpdateListener{
-    fun onUpdate(sg: Response)
+    fun onUpdate()
 }

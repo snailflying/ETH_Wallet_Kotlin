@@ -137,7 +137,7 @@ class EtherscanAPI private constructor() {
             tokenName = "0xtoken_28"
 
         val tokenNamef = tokenName
-        get("http://etherscan.io//token/images/$tokenNamef.PNG", object : Callback {
+        get("http://etherscan.io/token/images/$tokenNamef.PNG", object : Callback {
             override fun onFailure(call: Call, e: IOException) {}
 
             @Throws(IOException::class)
@@ -209,20 +209,9 @@ class EtherscanAPI private constructor() {
         client.newCall(request).enqueue(b)
     }
 
-//
-//    init {
-//        token = Key(APIKey.API_KEY).toString()
-//    }
-
     companion object {
 
         val instance: EtherscanAPI by lazy { EtherscanAPI() }
-//        fun getInstance(): EtherscanAPI {
-//            if (instance == null)
-//                instance = EtherscanAPI()
-//            return instance
-//        }
-//
     }
 
 }
