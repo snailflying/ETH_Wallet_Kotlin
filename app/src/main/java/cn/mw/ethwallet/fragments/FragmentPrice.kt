@@ -189,7 +189,6 @@ class FragmentPrice : Fragment() {
         EtherscanAPI1.instance.getPriceChart(System.currentTimeMillis() / 1000 - time, period, displayInUsd)
                 .compose(RxLifecycle.bind(this).toLifecycleTransformer())
                 .subscribe({
-                    Log.e("aaron", "success")
                     if (!it.isEmpty()) {
                         val yVals = ArrayList<Entry>()
 //                            val exchangeRate = ExchangeCalculator.instance.rateForChartDisplay
@@ -210,7 +209,6 @@ class FragmentPrice : Fragment() {
 
 
                 }, {
-                    Log.e("aaron", "throw:" + it.message)
                     if (ac != null) {
                         onItemsLoadComplete()
                         ac!!.snackError(getString(R.string.err_no_con), Snackbar.LENGTH_LONG)

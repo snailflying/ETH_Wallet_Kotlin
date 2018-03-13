@@ -90,47 +90,45 @@ class TransactionService : IntentService("Transaction Service") {
                 }
             })*/
             EtherscanAPI1.instance.getNonceForAddress(fromAddress)
-                    .subscribe({
-                        object : SingleObserver<NonceForAddress> {
-                            override fun onSuccess(t: NonceForAddress) {
-                                if (t.result.length < 2) return
+                    .subscribe(
+                            object : SingleObserver<NonceForAddress> {
+                                override fun onSuccess(t: NonceForAddress) {
+                                    if (t.result.length < 2) return
 
-                                val nonce = BigInteger(t.result.substring(2), 16)
+                                    val nonce = BigInteger(t.result.substring(2), 16)
 
-                                val tx = RawTransaction.createTransaction(
-                                        nonce,
-                                        BigInteger(gas_price),
-                                        BigInteger(gas_limit),
-                                        toAddress,
-                                        BigDecimal(amount).multiply(ExchangeCalculator.ONE_ETHER).toBigInteger(),
-                                        data
-                                )
+                                    val tx = RawTransaction.createTransaction(
+                                            nonce,
+                                            BigInteger(gas_price),
+                                            BigInteger(gas_limit),
+                                            toAddress,
+                                            BigDecimal(amount).multiply(ExchangeCalculator.ONE_ETHER).toBigInteger(),
+                                            data
+                                    )
 
-                                Log.d("txx",
-                                        "Nonce: " + tx.nonce + "\n" +
-                                                "gasPrice: " + tx.gasPrice + "\n" +
-                                                "gasLimit: " + tx.gasLimit + "\n" +
-                                                "To: " + tx.to + "\n" +
-                                                "Amount: " + tx.value + "\n" +
-                                                "Data: " + tx.data
-                                )
+                                    Log.d("txx",
+                                            "Nonce: " + tx.nonce + "\n" +
+                                                    "gasPrice: " + tx.gasPrice + "\n" +
+                                                    "gasLimit: " + tx.gasLimit + "\n" +
+                                                    "To: " + tx.to + "\n" +
+                                                    "Amount: " + tx.value + "\n" +
+                                                    "Data: " + tx.data
+                                    )
 
-                                val signed = TransactionEncoder.signMessage(tx, 1.toByte(), keys)
+                                    val signed = TransactionEncoder.signMessage(tx, 1.toByte(), keys)
 
-                                forwardTX(signed)
+                                    forwardTX(signed)
+                                }
+
+                                override fun onSubscribe(d: Disposable) {
+                                }
+
+                                override fun onError(e: Throwable) {
+                                    error("Can't connect to network, retry it later")
+                                }
+
                             }
-
-                            override fun onSubscribe(d: Disposable) {
-                            }
-
-                            override fun onError(e: Throwable) {
-                                error("Can't connect to network, retry it later")
-                            }
-
-                        }
-                    }, {
-                        error("Can't connect to network, retry it later")
-                    })
+                    )
 
         } catch (e: Exception) {
             error("Invalid Wallet Password!")
@@ -168,31 +166,29 @@ class TransactionService : IntentService("Transaction Service") {
         })*/
 
         EtherscanAPI1.instance.forwardTransaction("0x" + Hex.toHexString(signed))
-                .subscribe({
-                    object : SingleObserver<ForwardTX> {
-                        override fun onSuccess(t: ForwardTX) {
-                            if (!TextUtils.isEmpty(t.result)) {
-                                suc(t.result)
-                            } else {
-                                var errormsg = t.error.message
-                                if (errormsg.indexOf(".") > 0)
-                                    errormsg = errormsg.substring(0, errormsg.indexOf("."))
-                                error(errormsg) // f.E Insufficient funds
+                .subscribe(
+                        object : SingleObserver<ForwardTX> {
+                            override fun onSuccess(t: ForwardTX) {
+                                if (!TextUtils.isEmpty(t.result)) {
+                                    suc(t.result)
+                                } else {
+                                    var errormsg = t.error.message
+                                    if (errormsg.indexOf(".") > 0)
+                                        errormsg = errormsg.substring(0, errormsg.indexOf("."))
+                                    error(errormsg) // f.E Insufficient funds
+                                }
                             }
+
+                            override fun onSubscribe(d: Disposable) {
+                            }
+
+                            override fun onError(e: Throwable) {
+                                error("Can't connect to network, retry it later")
+                            }
+
+
                         }
-
-                        override fun onSubscribe(d: Disposable) {
-                        }
-
-                        override fun onError(e: Throwable) {
-                            error("Can't connect to network, retry it later")
-                        }
-
-
-                    }
-                }, {
-                    error("Can't connect to network, retry it later")
-                })
+                )
     }
 
     private fun suc(hash: String) {

@@ -86,34 +86,29 @@ class FragmentTransactionsAll : FragmentTransactionsAbstract() {
                         }
                     }, force)*/
                     EtherscanAPI1.instance.getNormalTransactions(ac!!, currentWallet.pubKey, force)
-                            .subscribe({
-                                object : SingleObserver<String> {
-                                    override fun onSuccess(t: String) {
-                                        if (t.length > 2)
-                                            RequestCache.instance.put(RequestCache.TYPE_TXS_NORMAL, currentWallet.pubKey, t)
-                                        val w = ArrayList<TransactionDisplay>(ResponseParser.parseTransactions(t, "Unnamed Address", currentWallet.pubKey, TransactionDisplay.NORMAL))
-                                        if (isAdded) {
-                                            ac!!.runOnUiThread(Runnable { onComplete(w, storedwallets) })
+                            .subscribe(
+                                    object : SingleObserver<String> {
+                                        override fun onSuccess(t: String) {
+                                            if (t.length > 2)
+                                                RequestCache.instance.put(RequestCache.TYPE_TXS_NORMAL, currentWallet.pubKey, t)
+                                            val w = ArrayList<TransactionDisplay>(ResponseParser.parseTransactions(t, "Unnamed Address", currentWallet.pubKey, TransactionDisplay.NORMAL))
+                                            if (isAdded) {
+                                                ac!!.runOnUiThread(Runnable { onComplete(w, storedwallets) })
+                                            }
+                                        }
+
+                                        override fun onSubscribe(d: Disposable) {
+                                        }
+
+                                        override fun onError(e: Throwable) {
+                                            if (isAdded) {
+                                                onItemsLoadComplete()
+                                                (ac as MainActivity).snackError("No internet connection")
+                                            }
                                         }
                                     }
 
-                                    override fun onSubscribe(d: Disposable) {
-                                    }
-
-                                    override fun onError(e: Throwable) {
-                                        if (isAdded) {
-                                            onItemsLoadComplete()
-                                            (ac as MainActivity).snackError("No internet connection")
-                                        }
-                                    }
-                                }
-
-                            }, {
-                                if (isAdded) {
-                                    onItemsLoadComplete()
-                                    (ac as MainActivity).snackError("No internet connection")
-                                }
-                            })
+                            )
                     /*EtherscanAPI.instance.getInternalTransactions(currentWallet.pubKey, object : Callback {
                         override fun onFailure(call: Call, e: IOException) {
                             if (isAdded) {
@@ -136,34 +131,29 @@ class FragmentTransactionsAll : FragmentTransactionsAbstract() {
                         }
                     }, force)*/
                     EtherscanAPI1.instance.getInternalTransactions(ac!!, currentWallet.pubKey, force)
-                            .subscribe({
-                                object : SingleObserver<String> {
-                                    override fun onSuccess(t: String) {
-                                        if (t.length > 2)
-                                            RequestCache.instance.put(RequestCache.TYPE_TXS_INTERNAL, currentWallet.pubKey, t)
-                                        val w = ArrayList<TransactionDisplay>(ResponseParser.parseTransactions(t, "Unnamed Address", currentWallet.pubKey, TransactionDisplay.CONTRACT))
-                                        if (isAdded) {
-                                            ac!!.runOnUiThread(Runnable { onComplete(w, storedwallets) })
+                            .subscribe(
+                                    object : SingleObserver<String> {
+                                        override fun onSuccess(t: String) {
+                                            if (t.length > 2)
+                                                RequestCache.instance.put(RequestCache.TYPE_TXS_INTERNAL, currentWallet.pubKey, t)
+                                            val w = ArrayList<TransactionDisplay>(ResponseParser.parseTransactions(t, "Unnamed Address", currentWallet.pubKey, TransactionDisplay.CONTRACT))
+                                            if (isAdded) {
+                                                ac!!.runOnUiThread(Runnable { onComplete(w, storedwallets) })
+                                            }
+                                        }
+
+                                        override fun onSubscribe(d: Disposable) {
+                                        }
+
+                                        override fun onError(e: Throwable) {
+                                            if (isAdded) {
+                                                onItemsLoadComplete()
+                                                (ac as MainActivity).snackError("No internet connection")
+                                            }
                                         }
                                     }
 
-                                    override fun onSubscribe(d: Disposable) {
-                                    }
-
-                                    override fun onError(e: Throwable) {
-                                        if (isAdded) {
-                                            onItemsLoadComplete()
-                                            (ac as MainActivity).snackError("No internet connection")
-                                        }
-                                    }
-                                }
-
-                            }, {
-                                if (isAdded) {
-                                    onItemsLoadComplete()
-                                    (ac as MainActivity).snackError("No internet connection")
-                                }
-                            })
+                            )
                 } catch (e: IOException) {
                     if (isAdded) {
                         if (ac != null)

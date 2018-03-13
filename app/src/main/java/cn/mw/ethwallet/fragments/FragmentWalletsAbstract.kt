@@ -21,8 +21,6 @@ import cn.mw.ethwallet.R
 import cn.mw.ethwallet.activities.*
 import cn.mw.ethwallet.adapters.WalletAdapter
 import cn.mw.ethwallet.domain.mod.WalletDisplay
-import cn.mw.ethwallet.domain.mod.WatchWallet
-import cn.mw.ethwallet.domain.response.Price
 import cn.mw.ethwallet.interfaces.AppBarStateChangeListener
 import cn.mw.ethwallet.interfaces.PasswordDialogCallback
 import cn.mw.ethwallet.interfaces.StorableWallet
@@ -34,7 +32,6 @@ import com.github.clans.fab.FloatingActionMenu
 import com.safframework.lifecycle.RxLifecycle
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
-import org.json.JSONObject
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView
 import uk.co.deanwild.materialshowcaseview.PrefsManager
 import uk.co.deanwild.materialshowcaseview.PrefsManager.SEQUENCE_NEVER_STARTED
@@ -217,50 +214,41 @@ abstract class FragmentWalletsAbstract : Fragment(), View.OnClickListener, View.
             })*/
             EtherscanAPI1.instance.getBalances(storedwallets)
                     .compose(RxLifecycle.bind(this).toLifecycleTransformer())
-                    .subscribe({
-                        object : SingleObserver<String> {
-                            override fun onSuccess(t: String) {
-                                val w: List<WalletDisplay>
-                                try {
-                                    w = ResponseParser.parseWallets(t, storedwallets, ac!!)
-                                } catch (e: Exception) {
-                                    e.printStackTrace()
-                                    return
+                    .subscribe(
+                            object : SingleObserver<String> {
+                                override fun onSuccess(t: String) {
+                                    val w: List<WalletDisplay>
+                                    try {
+                                        w = ResponseParser.parseWallets(t, storedwallets, ac!!)
+                                    } catch (e: Exception) {
+                                        e.printStackTrace()
+                                        return
+                                    }
+                                    wallets.addAll(w)
+                                    walletAdapter!!.notifyDataSetChanged()
+                                    for (i in wallets.indices) {
+                                        balance += wallets[i].balance
+                                    }
+                                    balanceView!!.setText(ExchangeCalculator.instance.displayBalanceNicely(ExchangeCalculator.instance.convertRate(balance, ExchangeCalculator.instance.current.rate)) + " " + ExchangeCalculator.instance.current.name)
+                                    onItemsLoadComplete()
                                 }
-                                wallets.addAll(w)
-                                walletAdapter!!.notifyDataSetChanged()
-                                for (i in wallets.indices) {
-                                    balance += wallets[i].balance
+
+                                override fun onSubscribe(d: Disposable) {
                                 }
-                                balanceView!!.setText(ExchangeCalculator.instance.displayBalanceNicely(ExchangeCalculator.instance.convertRate(balance, ExchangeCalculator.instance.current.rate)) + " " + ExchangeCalculator.instance.current.name)
-                                onItemsLoadComplete()
-                            }
 
-                            override fun onSubscribe(d: Disposable) {
-                            }
+                                override fun onError(e: Throwable) {
+                                    if (ac != null)
+                                        ac!!.snackError("Can't fetch account balances. Invalid response.")
+                                    val w = java.util.ArrayList<WalletDisplay>()
+                                    for (cur in storedwallets)
+                                        w.add(WalletDisplay(AddressNameConverter.getInstance(ac!!).get(cur.pubKey)!!, cur.pubKey, BigInteger("-1"), WalletDisplay.CONTACT))
+                                    wallets.addAll(w)
+                                    walletAdapter!!.notifyDataSetChanged()
+                                    onItemsLoadComplete()
+                                }
 
-                            override fun onError(e: Throwable) {
-                                if (ac != null)
-                                    ac!!.snackError("Can't fetch account balances. Invalid response.")
-                                val w = java.util.ArrayList<WalletDisplay>()
-                                for (cur in storedwallets)
-                                    w.add(WalletDisplay(AddressNameConverter.getInstance(ac!!).get(cur.pubKey)!!, cur.pubKey, BigInteger("-1"), WalletDisplay.CONTACT))
-                                wallets.addAll(w)
-                                walletAdapter!!.notifyDataSetChanged()
-                                onItemsLoadComplete()
                             }
-
-                        }
-                    }, {
-                        if (ac != null)
-                            ac!!.snackError("Can't fetch account balances. Invalid response.")
-                        val w = java.util.ArrayList<WalletDisplay>()
-                        for (cur in storedwallets)
-                            w.add(WalletDisplay(AddressNameConverter.getInstance(ac!!).get(cur.pubKey)!!, cur.pubKey, BigInteger("-1"), WalletDisplay.CONTACT))
-                        wallets.addAll(w)
-                        walletAdapter!!.notifyDataSetChanged()
-                        onItemsLoadComplete()
-                    })
+                    )
         }
     }
 

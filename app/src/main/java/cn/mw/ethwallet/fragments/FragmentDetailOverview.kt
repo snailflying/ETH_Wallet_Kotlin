@@ -211,36 +211,33 @@ class FragmentDetailOverview : Fragment(), View.OnClickListener, View.OnCreateCo
                 })
             }
         })*/
-        EtherscanAPI1.instance.getBalance(ac!!,ethaddress)
-                .subscribe({
-                    object :SingleObserver<Balance>{
-                        override fun onSuccess(t: Balance) {
-                            val ethbal: BigDecimal
-                            val result  = if(t.result == "0") "0" else BigDecimal(t.result).divide(BigDecimal(1000000000000000000.0), 7, BigDecimal.ROUND_UP).toPlainString()
-                            ethbal = BigDecimal(result)
-                            token.add(0, TokenDisplay("Ether", "ETH", ethbal.multiply(BigDecimal(1000.0)), 3, 1.0, "", "", 0.0, 0))
-                            balanceDouble = balanceDouble.add(ethbal)
+        EtherscanAPI1.instance.getBalance(ac!!, ethaddress)
+                .subscribe(
+                        object : SingleObserver<Balance> {
+                            override fun onSuccess(t: Balance) {
+                                val ethbal: BigDecimal
+                                val result = if (t.result == "0") "0" else BigDecimal(t.result).divide(BigDecimal(1000000000000000000.0), 7, BigDecimal.ROUND_UP).toPlainString()
+                                ethbal = BigDecimal(result)
+                                token.add(0, TokenDisplay("Ether", "ETH", ethbal.multiply(BigDecimal(1000.0)), 3, 1.0, "", "", 0.0, 0))
+                                balanceDouble = balanceDouble.add(ethbal)
 
-                            val cur = ExchangeCalculator.instance.current
-                            balance!!.setText(ExchangeCalculator.instance.convertRateExact(balanceDouble, cur.rate) + "")
-                            currency!!.setText(cur.name)
-                            walletAdapter!!.notifyDataSetChanged()
+                                val cur = ExchangeCalculator.instance.current
+                                balance!!.setText(ExchangeCalculator.instance.convertRateExact(balanceDouble, cur.rate) + "")
+                                currency!!.setText(cur.name)
+                                walletAdapter!!.notifyDataSetChanged()
+                            }
+
+                            override fun onSubscribe(d: Disposable) {
+                            }
+
+                            override fun onError(e: Throwable) {
+                                ac!!.snackError("Can't connect to network")
+                                onItemsLoadComplete()
+                            }
+
                         }
 
-                        override fun onSubscribe(d: Disposable) {
-                        }
-
-                        override fun onError(e: Throwable) {
-                            ac!!.snackError("Can't connect to network")
-                            onItemsLoadComplete()
-                        }
-
-                    }
-
-                },{
-                    ac!!.snackError("Can't connect to network")
-                    onItemsLoadComplete()
-                })
+                )
 
         /*EtherscanAPI.instance.getTokenBalances(ethaddress!!, object : Callback {
             override fun onFailure(call: Call, e: IOException) {
@@ -276,39 +273,35 @@ class FragmentDetailOverview : Fragment(), View.OnClickListener, View.OnCreateCo
         }, force)*/
         EtherscanAPI1.instance.getTokenBalances(ac!!, ethaddress, force)
 
-                .subscribe({
-                    object : SingleObserver<List<TokenDisplay>> {
-                        override fun onSuccess(t: List<TokenDisplay>) {
+                .subscribe(
+                        object : SingleObserver<List<TokenDisplay>> {
+                            override fun onSuccess(t: List<TokenDisplay>) {
 
-                            for(temp in t){
-                                EtherscanAPI1.instance.loadTokenIcon(ac!!,temp.name!!)
+                                for (temp in t) {
+                                    EtherscanAPI1.instance.loadTokenIcon(ac!!, temp.name!!)
+                                }
+
+                                token.addAll(t)
+                                balanceDouble = balanceDouble.add(BigDecimal(ExchangeCalculator.instance.sumUpTokenEther(token)))
+                                val cur = ExchangeCalculator.instance.current
+                                balance!!.setText(ExchangeCalculator.instance.convertRateExact(balanceDouble, cur.rate) + "")
+                                currency!!.setText(cur.name)
+                                walletAdapter!!.notifyDataSetChanged()
+                                onItemsLoadComplete()
+                                Log.e(TAG, "cur.name:" + cur.name)
                             }
 
-                            token.addAll(t)
-                            balanceDouble = balanceDouble.add(BigDecimal(ExchangeCalculator.instance.sumUpTokenEther(token)))
-                            val cur = ExchangeCalculator.instance.current
-                            balance!!.setText(ExchangeCalculator.instance.convertRateExact(balanceDouble, cur.rate) + "")
-                            currency!!.setText(cur.name)
-                            walletAdapter!!.notifyDataSetChanged()
-                            onItemsLoadComplete()
-                            Log.e(TAG, "cur.name:" + cur.name)
+                            override fun onSubscribe(d: Disposable) {
+                            }
+
+                            override fun onError(e: Throwable) {
+                                onItemsLoadComplete()
+                            }
+
+
                         }
 
-                        override fun onSubscribe(d: Disposable) {
-                        }
-
-                        override fun onError(e: Throwable) {
-                            Log.e(TAG, "error:" + it)
-                            onItemsLoadComplete()
-                        }
-
-
-                    }
-
-                }, {
-                    Log.e(TAG, "throw:" + it)
-                    onItemsLoadComplete()
-                })
+                )
 
     }
 

@@ -268,26 +268,24 @@ class FragmentSend : Fragment() {
             e.printStackTrace()
         }*/
         EtherscanAPI1.instance.getBalance(ac!!, spinner!!.selectedItem.toString())
-                .subscribe({
-                    object : SingleObserver<Balance> {
-                        override fun onSuccess(t: Balance) {
-                            val balance = if (t.result == "0") "0" else BigDecimal(t.result).divide(BigDecimal(1000000000000000000.0), 6, BigDecimal.ROUND_UP).toPlainString()
-                            curAvailable = BigDecimal(balance)
-                            updateDisplays()
+                .subscribe(
+                        object : SingleObserver<Balance> {
+                            override fun onSuccess(t: Balance) {
+                                val balance = if (t.result == "0") "0" else BigDecimal(t.result).divide(BigDecimal(1000000000000000000.0), 6, BigDecimal.ROUND_UP).toPlainString()
+                                curAvailable = BigDecimal(balance)
+                                updateDisplays()
+                            }
+
+                            override fun onSubscribe(d: Disposable) {
+                            }
+
+                            override fun onError(e: Throwable) {
+                                ac!!.snackError("Cant fetch your account balance", Snackbar.LENGTH_LONG)
+                            }
+
                         }
 
-                        override fun onSubscribe(d: Disposable) {
-                        }
-
-                        override fun onError(e: Throwable) {
-                            ac!!.snackError("Cant fetch your account balance", Snackbar.LENGTH_LONG)
-                        }
-
-                    }
-
-                }, {
-                    Log.e(TAG, "Cant fetch your account balance")
-                })
+                )
         fromicon!!.setImageBitmap(Blockies.createIcon(spinner!!.selectedItem.toString().toLowerCase()))
         fromName!!.setText(AddressNameConverter.getInstance(ac!!).get(spinner!!.selectedItem.toString().toLowerCase()))
     }
@@ -380,22 +378,21 @@ class FragmentSend : Fragment() {
                 }
             })*/
             EtherscanAPI1.instance.getGasLimitEstimate(ac!!, toAddress!!.text.toString())
-                    .subscribe({
-                        object : SingleObserver<GasPrice> {
-                            @SuppressLint("SetTextI18n")
-                            override fun onSuccess(t: GasPrice) {
-                                gaslimit = BigInteger(t.result.substring(2), 16)
-                                ac!!.runOnUiThread(Runnable { userGasLimit.setText(gaslimit.toString()) })
-                            }
+                    .subscribe(
+                            object : SingleObserver<GasPrice> {
+                                @SuppressLint("SetTextI18n")
+                                override fun onSuccess(t: GasPrice) {
+                                    gaslimit = BigInteger(t.result.substring(2), 16)
+                                    ac!!.runOnUiThread(Runnable { userGasLimit.setText(gaslimit.toString()) })
+                                }
 
-                            override fun onSubscribe(d: Disposable) {
-                            }
+                                override fun onSubscribe(d: Disposable) {
+                                }
 
-                            override fun onError(e: Throwable) {
-                            }
+                                override fun onError(e: Throwable) {
+                                }
 
-                        }
-                    }, {})
+                            })
         } catch (e: IOException) {
             e.printStackTrace()
         }

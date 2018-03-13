@@ -62,34 +62,29 @@ class FragmentTransactions : FragmentTransactionsAbstract() {
                 }
             }, force)*/
             EtherscanAPI1.instance.getNormalTransactions(ac!!, address!!, force)
-                    .subscribe({
-                        object : SingleObserver<String> {
-                            override fun onSuccess(t: String) {
-                                if (t.length > 2)
-                                    RequestCache.instance.put(RequestCache.TYPE_TXS_NORMAL, address!!, t)
-                                val w = ArrayList<TransactionDisplay>(ResponseParser.parseTransactions(t, "Unnamed Address", address!!, TransactionDisplay.NORMAL))
-                                if (isAdded()) {
-                                    ac!!.runOnUiThread(Runnable { onComplete(w) })
+                    .subscribe(
+                            object : SingleObserver<String> {
+                                override fun onSuccess(t: String) {
+                                    if (t.length > 2)
+                                        RequestCache.instance.put(RequestCache.TYPE_TXS_NORMAL, address!!, t)
+                                    val w = ArrayList<TransactionDisplay>(ResponseParser.parseTransactions(t, "Unnamed Address", address!!, TransactionDisplay.NORMAL))
+                                    if (isAdded()) {
+                                        ac!!.runOnUiThread(Runnable { onComplete(w) })
+                                    }
+                                }
+
+                                override fun onSubscribe(d: Disposable) {
+                                }
+
+                                override fun onError(e: Throwable) {
+                                    if (isAdded()) {
+                                        onItemsLoadComplete()
+                                        (ac as AddressDetailActivity).snackError(getString(R.string.err_no_con))
+                                    }
                                 }
                             }
 
-                            override fun onSubscribe(d: Disposable) {
-                            }
-
-                            override fun onError(e: Throwable) {
-                                if (isAdded()) {
-                                    onItemsLoadComplete()
-                                    (ac as AddressDetailActivity).snackError(getString(R.string.err_no_con))
-                                }
-                            }
-                        }
-
-                    }, {
-                        if (isAdded()) {
-                            onItemsLoadComplete()
-                            (ac as AddressDetailActivity).snackError(getString(R.string.err_no_con))
-                        }
-                    })
+                    )
             /*EtherscanAPI.instance.getInternalTransactions(address!!, object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
                     if (isAdded()) {
@@ -112,34 +107,29 @@ class FragmentTransactions : FragmentTransactionsAbstract() {
                 }
             }, force)*/
             EtherscanAPI1.instance.getInternalTransactions(ac!!, address!!, force)
-                    .subscribe({
-                        object : SingleObserver<String> {
-                            override fun onSuccess(t: String) {
-                                if (!t.isEmpty())
-                                    RequestCache.instance.put(RequestCache.TYPE_TXS_INTERNAL, address!!, t)
-                                val w = ArrayList<TransactionDisplay>(ResponseParser.parseTransactions(t, "Unnamed Address", address!!, TransactionDisplay.CONTRACT))
-                                if (isAdded()) {
-                                    ac!!.runOnUiThread(Runnable { onComplete(w) })
+                    .subscribe(
+                            object : SingleObserver<String> {
+                                override fun onSuccess(t: String) {
+                                    if (!t.isEmpty())
+                                        RequestCache.instance.put(RequestCache.TYPE_TXS_INTERNAL, address!!, t)
+                                    val w = ArrayList<TransactionDisplay>(ResponseParser.parseTransactions(t, "Unnamed Address", address!!, TransactionDisplay.CONTRACT))
+                                    if (isAdded()) {
+                                        ac!!.runOnUiThread(Runnable { onComplete(w) })
+                                    }
+                                }
+
+                                override fun onSubscribe(d: Disposable) {
+                                }
+
+                                override fun onError(e: Throwable) {
+                                    if (isAdded()) {
+                                        onItemsLoadComplete()
+                                        (ac as AddressDetailActivity).snackError(getString(R.string.err_no_con))
+                                    }
                                 }
                             }
 
-                            override fun onSubscribe(d: Disposable) {
-                            }
-
-                            override fun onError(e: Throwable) {
-                                if (isAdded()) {
-                                    onItemsLoadComplete()
-                                    (ac as AddressDetailActivity).snackError(getString(R.string.err_no_con))
-                                }
-                            }
-                        }
-
-                    }, {
-                        if (isAdded()) {
-                            onItemsLoadComplete()
-                            (ac as AddressDetailActivity).snackError(getString(R.string.err_no_con))
-                        }
-                    })
+                    )
         } catch (e: IOException) {
             if (ac != null)
                 (ac as AddressDetailActivity).snackError("Can't fetch account balances. No connection?")

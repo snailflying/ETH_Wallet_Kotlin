@@ -38,7 +38,7 @@ class EtherscanAPI1 private constructor() {
     fun getEtherPrice(activity: AppCompatActivity): Single<EtherPrice> {
         return RetrofitManager.retrofit().create(APIService::class.java).getEtherPrice()
                 .subscribeOn(Schedulers.io())
-//                .compose(RxLifecycle.bind(activity).toLifecycleTransformer())
+                .compose(RxLifecycle.bind(activity).toLifecycleTransformer())
                 .observeOn(AndroidSchedulers.mainThread())
     }
 

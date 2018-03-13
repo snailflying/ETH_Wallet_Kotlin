@@ -130,7 +130,7 @@ class ExchangeCalculator private constructor() {
     }
 
     @Throws(IOException::class)
-    fun updateExchangeRates(activity: AppCompatActivity,currency: String, update: NetworkUpdateListener) {
+    fun updateExchangeRates(activity: AppCompatActivity, currency: String, update: NetworkUpdateListener) {
         if (lastUpdateTimestamp + 40 * 60 * 1000 > System.currentTimeMillis() && currency == conversionNames[2].name) { // Dont refresh if not older than 40 min and currency hasnt changed
             return
         }
@@ -186,8 +186,8 @@ class ExchangeCalculator private constructor() {
                         convert(currency, update)
                     else
                         update.onUpdate()
-                },{
-                    Log.e(TAG,"throw:"+it)
+                }, {
+                    Log.e(TAG, "throw:" + it)
 
                 })
     }
@@ -208,10 +208,10 @@ class ExchangeCalculator private constructor() {
         EtherscanAPI1.instance.getPriceConversionRates(currency)
                 .subscribe({
                     rateForChartDisplay = it.rates
-                    conversionNames[2].rate =(Math.floor(conversionNames[2].rate * rateForChartDisplay * 100) / 100)
+                    conversionNames[2].rate = (Math.floor(conversionNames[2].rate * rateForChartDisplay * 100) / 100)
                     update.onUpdate()
-                },{
-                    Log.e(TAG,"throw:"+it)
+                }, {
+                    Log.e(TAG, "throw:" + it)
                 })
 
     }
@@ -220,7 +220,7 @@ class ExchangeCalculator private constructor() {
 
         val ONE_ETHER = BigDecimal("1000000000000000000")
 
-         val instance: ExchangeCalculator by lazy { ExchangeCalculator() }
+        val instance: ExchangeCalculator by lazy { ExchangeCalculator() }
 
     }
 
