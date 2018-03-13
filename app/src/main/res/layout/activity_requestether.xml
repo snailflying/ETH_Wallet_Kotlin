@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="false"
     android:background="#FFFFFF"
-    tools:context="rehanced.com.simpleetherwallet.activities.MainActivity">
+    tools:context="cn.mw.ethwallet.activities.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"

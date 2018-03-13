@@ -52,7 +52,7 @@
             android:title="@string/prefs_set_pw"
             android:summary="@string/prefs_set_pw_sum">
 
-            <intent android:action="rehanced.com.simpleetherwallet.activities.SetAppLockActivity" />
+            <intent android:action="cn.mw.ethwallet.activities.SetAppLockActivity" />
         </PreferenceScreen>
     </PreferenceCategory>
 

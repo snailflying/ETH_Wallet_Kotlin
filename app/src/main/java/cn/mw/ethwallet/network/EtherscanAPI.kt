@@ -30,10 +30,10 @@ class EtherscanAPI private constructor() {
 
 
     /**
-     * Retrieve all internal transactions from address like contract calls, for normal transactions @see rehanced.com.simpleetherwallet.network.EtherscanAPI#getNormalTransactions() )
+     * Retrieve all internal transactions from address like contract calls, for normal transactions @see cn.mw.ethwallet.network.EtherscanAPI#getNormalTransactions() )
      *
      * @param address Ether address
-     * @param b       Network callback to @see rehanced.com.simpleetherwallet.fragments.FragmentTransactions#update() or @see rehanced.com.simpleetherwallet.fragments.FragmentTransactionsAll#update()
+     * @param b       Network callback to @see cn.mw.ethwallet.fragments.FragmentTransactions#update() or @see cn.mw.ethwallet.fragments.FragmentTransactionsAll#update()
      * @param force   Whether to force (true) a network call or use cache (false). Only true if user uses swiperefreshlayout
      * @throws IOException Network exceptions
      */
@@ -54,10 +54,10 @@ class EtherscanAPI private constructor() {
 
 
     /**
-     * Retrieve all normal ether transactions from address (excluding contract calls etc, @see rehanced.com.simpleetherwallet.network.EtherscanAPI#getInternalTransactions() )
+     * Retrieve all normal ether transactions from address (excluding contract calls etc, @see cn.mw.ethwallet.network.EtherscanAPI#getInternalTransactions() )
      *
      * @param address Ether address
-     * @param b       Network callback to @see rehanced.com.simpleetherwallet.fragments.FragmentTransactions#update() or @see rehanced.com.simpleetherwallet.fragments.FragmentTransactionsAll#update()
+     * @param b       Network callback to @see cn.mw.ethwallet.fragments.FragmentTransactions#update() or @see cn.mw.ethwallet.fragments.FragmentTransactionsAll#update()
      * @param force   Whether to force (true) a network call or use cache (false). Only true if user uses swiperefreshlayout
      * @throws IOException Network exceptions
      */
@@ -94,7 +94,7 @@ class EtherscanAPI private constructor() {
      * Get token balances via ethplorer.io
      *
      * @param address Ether address
-     * @param b       Network callback to @see rehanced.com.simpleetherwallet.fragments.FragmentDetailOverview#update()
+     * @param b       Network callback to @see cn.mw.ethwallet.fragments.FragmentDetailOverview#update()
      * @param force   Whether to force (true) a network call or use cache (false). Only true if user uses swiperefreshlayout
      * @throws IOException Network exceptions
      */
@@ -121,7 +121,7 @@ class EtherscanAPI private constructor() {
      * @param c         Application context, used to load TokenIconCache if reinstanced
      * @param tokenName Name of token
      * @param lastToken Boolean defining whether this is the last icon to download or not. If so callback is called to refresh recyclerview (notifyDataSetChanged)
-     * @param callback  Callback to @see rehanced.com.simpleetherwallet.fragments.FragmentDetailOverview#onLastIconDownloaded()
+     * @param callback  Callback to @see cn.mw.ethwallet.fragments.FragmentDetailOverview#onLastIconDownloaded()
      * @throws IOException Network exceptions
      */
     @Throws(IOException::class)
