@@ -8,6 +8,7 @@ import cn.mw.ethwallet.domain.response.*
 import cn.mw.ethwallet.interfaces.StorableWallet
 import cn.mw.ethwallet.utils.cache.Cache
 import com.safframework.lifecycle.RxLifecycle
+import io.reactivex.Observer
 import io.reactivex.Single
 import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -37,7 +38,7 @@ class EtherscanAPI1 private constructor() {
     fun getEtherPrice(activity: AppCompatActivity): Single<EtherPrice> {
         return RetrofitManager.retrofit().create(APIService::class.java).getEtherPrice()
                 .subscribeOn(Schedulers.io())
-                .compose(RxLifecycle.bind(activity).toLifecycleTransformer())
+//                .compose(RxLifecycle.bind(activity).toLifecycleTransformer())
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
@@ -149,7 +150,7 @@ class EtherscanAPI1 private constructor() {
     }
 
 
-    fun getPriceChart(activity: AppCompatActivity, startTime: Long, period: Int, usd: Boolean): Single<List<PriceChart>> {
+    fun getPriceChart(startTime: Long, period: Int, usd: Boolean): Single<List<PriceChart>> {
 
         val param = hashMapOf<String, String>("start" to startTime.toString(),
                 "end" to "9999999999",
@@ -157,7 +158,6 @@ class EtherscanAPI1 private constructor() {
                 "currencyPair" to (if (usd) "USDT_ETH" else "BTC_ETH"))
         return RetrofitManager.retrofit().create(APIService::class.java).getPriceChart(param)
                 .subscribeOn(Schedulers.io())
-                .compose(RxLifecycle.bind(activity).toLifecycleTransformer())
                 .observeOn(AndroidSchedulers.mainThread())
     }
 

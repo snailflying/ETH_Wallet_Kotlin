@@ -20,7 +20,6 @@ import android.widget.TextView
 import cn.mw.ethwallet.R
 import cn.mw.ethwallet.activities.BaseApplication
 import cn.mw.ethwallet.activities.MainActivity
-import cn.mw.ethwallet.domain.response.PriceChart
 import cn.mw.ethwallet.network.EtherscanAPI1
 import cn.mw.ethwallet.utils.ExchangeCalculator
 import cn.mw.ethwallet.views.DontShowNegativeFormatter
@@ -34,8 +33,7 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IFillFormatter
-import io.reactivex.SingleObserver
-import io.reactivex.disposables.Disposable
+import com.safframework.lifecycle.RxLifecycle
 import java.io.IOException
 import java.util.*
 
@@ -187,52 +185,35 @@ class FragmentPrice : Fragment() {
             }
         }
 
-
         )*/
-        EtherscanAPI1.instance.getPriceChart(ac!!, System.currentTimeMillis() / 1000 - time, period, displayInUsd)
+        EtherscanAPI1.instance.getPriceChart(System.currentTimeMillis() / 1000 - time, period, displayInUsd)
+                .compose(RxLifecycle.bind(this).toLifecycleTransformer())
                 .subscribe({
-                    object : SingleObserver<List<PriceChart>> {
-
-                        override fun onSubscribe(d: Disposable) {
-                        }
-
-                        override fun onSuccess(value: List<PriceChart>) {
-                            Log.e("aaron", "success")
-                            if (value.isEmpty()) {
-                                return
-                            }
-                            val yVals = ArrayList<Entry>()
-                            val exchangeRate = ExchangeCalculator.instance.rateForChartDisplay
-                            val commas = (if (displayInUsd) 100 else 10000).toFloat()
-                            for (price in value) {
-                                Log.e("aaron", "success:" + price.date)
-                                yVals.add(Entry(price.date.toFloat(),
-                                        Math.floor(price.high * exchangeRate * commas.toDouble()).toFloat() / commas))
-
-                            }
-                            priceChart!!.visibility = View.VISIBLE
-                            onItemsLoadComplete()
-                            if (isAdded) {
-                                setupChart(priceChart, getData(yVals), resources.getColor(R.color.colorPrimaryLittleDarker))
-                                update(false)
-                            }
+                    Log.e("aaron", "success")
+                    if (!it.isEmpty()) {
+                        val yVals = ArrayList<Entry>()
+//                            val exchangeRate = ExchangeCalculator.instance.rateForChartDisplay
+                        val exchangeRate = 5
+                        val commas = (if (displayInUsd) 100 else 10000).toFloat()
+                        for (price in it) {
+                            yVals.add(Entry(price.date.toFloat(),
+                                    Math.floor(price.high * exchangeRate * commas.toDouble()).toFloat() / commas))
 
                         }
-
-                        override fun onError(error: Throwable) {
-                            onItemsLoadComplete()
-                            ac!!.snackError(getString(R.string.err_no_con), Snackbar.LENGTH_LONG)
-                            Log.e("aaron", "error:" + error)
-
+                        priceChart!!.visibility = View.VISIBLE
+                        onItemsLoadComplete()
+                        if (isAdded) {
+                            setupChart(priceChart, getData(yVals), resources.getColor(R.color.colorPrimaryLittleDarker))
+                            update(false)
                         }
-
                     }
+
+
                 }, {
-                    onItemsLoadComplete()
+                    Log.e("aaron", "throw:" + it.message)
                     if (ac != null) {
                         onItemsLoadComplete()
                         ac!!.snackError(getString(R.string.err_no_con), Snackbar.LENGTH_LONG)
-                        Log.e("aaron", "throw:" + it)
                     }
 
                 })

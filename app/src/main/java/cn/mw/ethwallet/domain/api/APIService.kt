@@ -58,7 +58,7 @@ interface APIService {
     fun forwardTransaction(@Query("hex") raw: String, @Query("apikey") queryValue: String = token): Single<ForwardTX>
 
 
-    @GET("http://poloniex.com/public?command=returnChartData")
+    @GET("https://poloniex.com/public?command=returnChartData")
     fun getPriceChart(@QueryMap queryMap: Map<String, String>): Single<List<PriceChart>>
 
     @GET("https://api.fixer.io/latest?base=USD")

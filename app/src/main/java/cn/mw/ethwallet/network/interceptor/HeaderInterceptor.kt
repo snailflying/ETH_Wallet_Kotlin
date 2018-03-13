@@ -40,6 +40,7 @@ class HeaderInterceptor : Interceptor {
         // 对request的body进d5加密
 //        requestBuilder.addHeader("md5", Util.md5(bodyToString(request)))
         requestBuilder.addHeader("os_type", "ANDROID")
+        requestBuilder.addHeader("Content-Type","application/json")
 //        requestBuilder.addHeader("device_id", "99000549029255")
 
         return chain.proceed(requestBuilder.build())
