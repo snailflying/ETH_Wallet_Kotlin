@@ -98,17 +98,9 @@
     <string name="error_invalid_password">密码太短 (至少9位)</string>
     <string name="error_incorrect_password">密码不匹配</string>
 
-    <string name="generate_text">您即将在此设备上生成新的加密离线钱包。
-         我们建议您选择一个强有力的密码，以确保您的资金安全性。
-         请注意，生成强大而安全的钱包是一项高度计算密集型任务，可能需要几分钟的时间！
-         该过程将在后台执行，因此您仍然可以像往常一样使用手机。
-         进度会显示在您设备的通知栏中，只要我们完成了钱包的生成，我们会通知您。</string>
+    <string name="generate_text">您即将在此设备上生成新的加密离线钱包。我们建议您选择一个强有力的密码，以确保您的资金安全性。请注意，生成强大而安全的钱包是一项高度计算密集型任务，可能需要几分钟的时间！该过程将在后台执行，因此您仍然可以像往常一样使用手机。进度会显示在您设备的通知栏中，只要我们完成了钱包的生成，我们会通知您。</string>
 
-    <string name="import_text">您即将导入未加密的私钥。
-         我们建议您选择一个强有力的密码，以确保您的资金安全性。
-         请注意，导入强大而安全的钱包是一项高度计算密集型任务，可能需要几分钟的时间！
-         该过程将在后台执行，因此您仍然可以像往常一样使用手机。
-         进度会显示在您设备的通知栏中，只要我们完成了钱包的生成，我们会通知您。</string>
+    <string name="import_text">您即将导入未加密的私钥。我们建议您选择一个强有力的密码，以确保您的资金安全性。请注意，导入强大而安全的钱包是一项高度计算密集型任务，可能需要几分钟的时间！该过程将在后台执行，因此您仍然可以像往常一样使用手机。进度会显示在您设备的通知栏中，只要我们完成了钱包的生成，我们会通知您。</string>
 
     <string name="wallet_gen_service_title">正在生成钱包</string>
     <string name="wallet_gen_service_title_import">正在导入钱包</string>
@@ -192,8 +184,7 @@
     <string name="dialog_ex_nofull_title">没有完整的钱包</string>
     <string name="dialog_ex_nofull_text">只读钱包不能导出</string>
     <string name="dialog_exporting_title">正在导出您的钱包</string>
-    <string name="dialog_exporting_text">您的以太钱包副本将放置在Android手机根目录中的\mercury\文件夹内。
-         请注意，在您的设备上运行的其他应用程序可以在技术上访问您导出的任何钱包。因此我们强烈建议您在完成备份后从mercury文件夹中删除所有导出的钱包。</string>
+    <string name="dialog_exporting_text">您的以太钱包副本将放置在Android手机根目录中的\mercury\文件夹内。请注意，在您的设备上运行的其他应用程序可以在技术上访问您导出的任何钱包。因此我们强烈建议您在完成备份后从mercury文件夹中删除所有导出的钱包。</string>
     <string name="dialog_nofullwallet">没有完整的钱包</string>
     <string name="dialog_nofullwallet_text">为了发送资金，您需要一个带有私钥的完整钱包。 请先生成或导入一个。</string>
     <string name="dialog_no_wallets">没有钱包</string>
@@ -250,16 +241,12 @@
     <string name="password_in_clear_text">明文显示密码</string>
 
     <string name="dialog_write_down_pw_title">重要！</string>
-    <string name="dialog_write_down_pw_text">Mercury会使用您提供的密码加密您的电子钱包，以确保您的乙太网安全。
-         你的密码是解锁钱包的唯一方法，所以请确保你不要忘记它！建议你把它写在一张纸上。</string>
+    <string name="dialog_write_down_pw_text">Mercury会使用您提供的密码加密您的电子钱包，以确保您的乙太网安全。你的密码是解锁钱包的唯一方法，所以请确保你不要忘记它！建议你把它写在一张纸上。</string>
     <string name="dialog_back_button">取消</string>
     <string name="setting_show_ad">显示广告</string>
 
     <string name="dialog_disable_ad_title">:(</string>
-    <string name="dialog_disable_ad_text">我们在很大程度上依靠捐款和广告收入来积极工作和改进Mercury。
-         如果广告真的让您感到困扰，那么我们明白，我们会让您停用它。
-         这个小小的广告横幅确实对我们有帮助，您的每一笔捐款亦是如此。 请保持横幅启用或考虑一小笔捐款。
-         您需要重新启动应用才能使新设置生效。继续？</string>
+    <string name="dialog_disable_ad_text">我们在很大程度上依靠捐款和广告收入来积极工作和改进Mercury。如果广告真的让您感到困扰，那么我们明白，我们会让您停用它。这个小小的广告横幅确实对我们有帮助，您的每一笔捐款亦是如此。 请保持横幅启用或考虑一小笔捐款。您需要重新启动应用才能使新设置生效。继续？</string>
 
     <string name="showcase_got_it">了解</string>
     <string name="show_case_wallet_gen_text">要生成新钱包，只需按+并选择“生成新钱包”</string>
