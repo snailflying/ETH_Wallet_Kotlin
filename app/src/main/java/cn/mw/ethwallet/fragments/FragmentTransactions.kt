@@ -26,9 +26,9 @@ class FragmentTransactions : FragmentTransactionsAbstract() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val rootView = super.onCreateView(inflater, container, savedInstanceState)
-        send.setVisibility(GONE)
-        requestTx!!.setVisibility(GONE)
-        fabmenu.setVisibility(View.GONE)
+        send.visibility = GONE
+        requestTx!!.visibility = GONE
+        fabmenu.visibility = View.GONE
         return rootView
     }
 
@@ -37,7 +37,7 @@ class FragmentTransactions : FragmentTransactionsAbstract() {
         resetRequestCount()
         getWallets().clear()
         if (swipeLayout != null)
-            swipeLayout!!.setRefreshing(true)
+            swipeLayout!!.isRefreshing = true
 
         try {
             /*EtherscanAPI.instance.getNormalTransactions(this.address!!, object : Callback {
@@ -68,7 +68,7 @@ class FragmentTransactions : FragmentTransactionsAbstract() {
                                     if (t.length > 2)
                                         RequestCache.instance.put(RequestCache.TYPE_TXS_NORMAL, address!!, t)
                                     val w = ArrayList<TransactionDisplay>(ResponseParser.parseTransactions(t, "Unnamed Address", address!!, TransactionDisplay.NORMAL))
-                                    if (isAdded()) {
+                                    if (isAdded) {
                                         ac!!.runOnUiThread(Runnable { onComplete(w) })
                                     }
                                 }
@@ -77,7 +77,7 @@ class FragmentTransactions : FragmentTransactionsAbstract() {
                                 }
 
                                 override fun onError(e: Throwable) {
-                                    if (isAdded()) {
+                                    if (isAdded) {
                                         onItemsLoadComplete()
                                         (ac as AddressDetailActivity).snackError(getString(R.string.err_no_con))
                                     }
@@ -113,7 +113,7 @@ class FragmentTransactions : FragmentTransactionsAbstract() {
                                     if (!t.isEmpty())
                                         RequestCache.instance.put(RequestCache.TYPE_TXS_INTERNAL, address!!, t)
                                     val w = ArrayList<TransactionDisplay>(ResponseParser.parseTransactions(t, "Unnamed Address", address!!, TransactionDisplay.CONTRACT))
-                                    if (isAdded()) {
+                                    if (isAdded) {
                                         ac!!.runOnUiThread(Runnable { onComplete(w) })
                                     }
                                 }
@@ -122,7 +122,7 @@ class FragmentTransactions : FragmentTransactionsAbstract() {
                                 }
 
                                 override fun onError(e: Throwable) {
-                                    if (isAdded()) {
+                                    if (isAdded) {
                                         onItemsLoadComplete()
                                         (ac as AddressDetailActivity).snackError(getString(R.string.err_no_con))
                                     }
@@ -144,7 +144,7 @@ class FragmentTransactions : FragmentTransactionsAbstract() {
         addRequestCount()
         if (getRequestCount() >= 2) {
             onItemsLoadComplete()
-            nothingToShow.setVisibility(if (getWallets().size === 0) View.VISIBLE else View.GONE)
+            nothingToShow.visibility = if (getWallets().size === 0) View.VISIBLE else View.GONE
             walletAdapter!!.notifyDataSetChanged()
         }
     }

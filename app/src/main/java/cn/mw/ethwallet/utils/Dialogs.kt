@@ -87,13 +87,13 @@ object Dialogs {
         }
         builder.setPositiveButton("OK") { dialog, which ->
             val inputMgr = input.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            inputMgr!!.hideSoftInputFromWindow(input.windowToken, 0)
+            inputMgr.hideSoftInputFromWindow(input.windowToken, 0)
             callback.success(input.text.toString())
             dialog.dismiss()
         }
         builder.setNegativeButton("Cancel") { dialog, which ->
             val inputMgr = input.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            inputMgr!!.hideSoftInputFromWindow(input.windowToken, 0)
+            inputMgr.hideSoftInputFromWindow(input.windowToken, 0)
             callback.canceled()
             dialog.cancel()
         }
@@ -106,20 +106,20 @@ object Dialogs {
         val dialog = MaterialDialog.Builder(c)
                 .customView(R.layout.dialog_token_detail, true)
                 .show()
-        val view = dialog.getCustomView()
+        val view = dialog.customView
         val contractIcon = view!!.findViewById(R.id.my_addressicon) as ImageView
-        val tokenname = view!!.findViewById(R.id.walletname) as TextView
-        val contractAddr = view!!.findViewById(R.id.walletaddr) as AutofitTextView
+        val tokenname = view.findViewById(R.id.walletname) as TextView
+        val contractAddr = view.findViewById(R.id.walletaddr) as AutofitTextView
 
-        val supply = view!!.findViewById(R.id.supply) as TextView
-        val priceUSD = view!!.findViewById(R.id.price) as TextView
-        val priceETH = view!!.findViewById(R.id.price2) as TextView
-        val capUSD = view!!.findViewById(R.id.cap) as TextView
-        val capETH = view!!.findViewById(R.id.cap2) as TextView
-        val holders = view!!.findViewById(R.id.holders) as TextView
-        val digits = view!!.findViewById(R.id.digits) as TextView
+        val supply = view.findViewById(R.id.supply) as TextView
+        val priceUSD = view.findViewById(R.id.price) as TextView
+        val priceETH = view.findViewById(R.id.price2) as TextView
+        val capUSD = view.findViewById(R.id.cap) as TextView
+        val capETH = view.findViewById(R.id.cap2) as TextView
+        val holders = view.findViewById(R.id.holders) as TextView
+        val digits = view.findViewById(R.id.digits) as TextView
 
-        val from = view!!.findViewById(R.id.from) as LinearLayout
+        val from = view.findViewById(R.id.from) as LinearLayout
 
         from.setOnClickListener {
             val i = Intent(c, AddressDetailActivity::class.java)
@@ -129,47 +129,47 @@ object Dialogs {
 
         val ex = ExchangeCalculator.instance
         contractIcon.setImageBitmap(Blockies.createIcon(tok.contractAddr!!.toLowerCase()))
-        tokenname.setText(tok.name)
-        contractAddr.setText(tok.contractAddr!!.toLowerCase())
-        supply.setText(ex.displayUsdNicely(tok.totalSupplyLong) + " " + tok.shorty)
-        priceUSD.setText(tok.usdprice.toString() + " $")
+        tokenname.text = tok.name
+        contractAddr.text = tok.contractAddr!!.toLowerCase()
+        supply.text = ex.displayUsdNicely(tok.totalSupplyLong) + " " + tok.shorty
+        priceUSD.text = tok.usdprice.toString() + " $"
 
-        priceETH.setText(ex.displayEthNicelyExact(
+        priceETH.text = ex.displayEthNicelyExact(
                 ex.convertTokenToEther(1.0, tok.usdprice)
-        ) + " " + ex.etherCurrency.shorty)
-        capETH.setText(ex.displayUsdNicely(
+        ) + " " + ex.etherCurrency.shorty
+        capETH.text = ex.displayUsdNicely(
                 ex.convertTokenToEther(tok.totalSupplyLong, tok.usdprice)
-        ) + " " + ex.etherCurrency.shorty)
-        capUSD.setText(ex.displayUsdNicely(tok.usdprice * tok.totalSupplyLong) + " $")
-        holders.setText(ex.displayUsdNicely(tok.holderCount) + "")
-        digits.setText(tok.digits.toString() + "")
+        ) + " " + ex.etherCurrency.shorty
+        capUSD.text = ex.displayUsdNicely(tok.usdprice * tok.totalSupplyLong) + " $"
+        holders.text = ex.displayUsdNicely(tok.holderCount) + ""
+        digits.text = tok.digits.toString() + ""
     }
 
     fun showTXDetails(c: Activity, tx: TransactionDisplay) {
         val dialog = MaterialDialog.Builder(c)
                 .customView(R.layout.dialog_tx_detail, true)
                 .show()
-        val view = dialog.getCustomView()
+        val view = dialog.customView
         val myicon = view!!.findViewById(R.id.my_addressicon) as ImageView
-        val othericon = view!!.findViewById(R.id.other_addressicon) as ImageView
-        val myAddressname = view!!.findViewById(R.id.walletname) as TextView
-        val otherAddressname = view!!.findViewById(R.id.other_address) as TextView
-        val myAddressaddr = view!!.findViewById(R.id.walletaddr) as AutofitTextView
-        val otherAddressaddr = view!!.findViewById(R.id.other_addressaddr) as AutofitTextView
-        val amount = view!!.findViewById(R.id.amount) as TextView
+        val othericon = view.findViewById(R.id.other_addressicon) as ImageView
+        val myAddressname = view.findViewById(R.id.walletname) as TextView
+        val otherAddressname = view.findViewById(R.id.other_address) as TextView
+        val myAddressaddr = view.findViewById(R.id.walletaddr) as AutofitTextView
+        val otherAddressaddr = view.findViewById(R.id.other_addressaddr) as AutofitTextView
+        val amount = view.findViewById(R.id.amount) as TextView
 
-        val month = view!!.findViewById(R.id.month) as TextView
-        val gasUsed = view!!.findViewById(R.id.gasused) as TextView
-        val blocknr = view!!.findViewById(R.id.blocknr) as TextView
-        val gasPrice = view!!.findViewById(R.id.gasPrice) as TextView
-        val nonce = view!!.findViewById(R.id.nonce) as TextView
-        val txcost = view!!.findViewById(R.id.txcost) as TextView
-        val txcost2 = view!!.findViewById(R.id.txcost2) as TextView
-        val openInBrowser = view!!.findViewById(R.id.openinbrowser) as Button
-        val from = view!!.findViewById(R.id.from) as LinearLayout
-        val to = view!!.findViewById(R.id.to) as LinearLayout
-        val amountfiat = view!!.findViewById(R.id.amountfiat) as TextView
-        val errormsg = view!!.findViewById(R.id.errormsg) as TextView
+        val month = view.findViewById(R.id.month) as TextView
+        val gasUsed = view.findViewById(R.id.gasused) as TextView
+        val blocknr = view.findViewById(R.id.blocknr) as TextView
+        val gasPrice = view.findViewById(R.id.gasPrice) as TextView
+        val nonce = view.findViewById(R.id.nonce) as TextView
+        val txcost = view.findViewById(R.id.txcost) as TextView
+        val txcost2 = view.findViewById(R.id.txcost2) as TextView
+        val openInBrowser = view.findViewById(R.id.openinbrowser) as Button
+        val from = view.findViewById(R.id.from) as LinearLayout
+        val to = view.findViewById(R.id.to) as LinearLayout
+        val amountfiat = view.findViewById(R.id.amountfiat) as TextView
+        val errormsg = view.findViewById(R.id.errormsg) as TextView
 
         from.setOnClickListener {
             val i = Intent(c, AddressDetailActivity::class.java)
@@ -201,28 +201,24 @@ object Dialogs {
         otherAddressname.text = otherName
 
         errormsg.visibility = if (tx.isError) View.VISIBLE else View.GONE
-        myAddressaddr.setText(tx.getFromAddress())
-        otherAddressaddr.setText(tx.getToAddress())
+        myAddressaddr.text = tx.getFromAddress()
+        otherAddressaddr.text = tx.getToAddress()
         val dateformat = SimpleDateFormat("dd. MMMM yyyy, HH:mm:ss", Locale.getDefault())
         month.text = dateformat.format(tx.date) + ""
-        blocknr.setText(tx.block.toString() + "")
-        gasUsed.setText(tx.gasUsed.toString() + "")
-        gasPrice.setText((tx.gasprice / 1000000000).toString() + " Gwei")
-        nonce.setText(tx.nounce + "")
-        txcost.setText(
-                ExchangeCalculator.instance.displayEthNicelyExact(
-                        ExchangeCalculator.instance.weiToEther(tx.gasUsed * tx.gasprice)
-                ) + " Ξ"
-        )
-        txcost2.setText(
-                (ExchangeCalculator.instance.convertToUsd(ExchangeCalculator.instance.weiToEther(tx.gasUsed * tx.gasprice)).toString()
-                        + " " + ExchangeCalculator.instance.mainCurreny.shorty)
-        )
+        blocknr.text = tx.block.toString() + ""
+        gasUsed.text = tx.gasUsed.toString() + ""
+        gasPrice.text = (tx.gasprice / 1000000000).toString() + " Gwei"
+        nonce.text = tx.nounce + ""
+        txcost.text = ExchangeCalculator.instance.displayEthNicelyExact(
+                ExchangeCalculator.instance.weiToEther(tx.gasUsed * tx.gasprice)
+        ) + " Ξ"
+        txcost2.text = (ExchangeCalculator.instance.convertToUsd(ExchangeCalculator.instance.weiToEther(tx.gasUsed * tx.gasprice)).toString()
+                + " " + ExchangeCalculator.instance.mainCurreny.shorty)
         amount.text = (if (tx.amount > 0) "+ " else "- ") + Math.abs(tx.amount) + " Ξ"
         amount.setTextColor(c.resources.getColor(if (tx.amount > 0) R.color.etherReceived else R.color.etherSpent))
-        amountfiat.setText((ExchangeCalculator.instance.displayUsdNicely(
+        amountfiat.text = (ExchangeCalculator.instance.displayUsdNicely(
                 ExchangeCalculator.instance.convertToUsd(tx.amount))
-                + " " + ExchangeCalculator.instance.mainCurreny.shorty))
+                + " " + ExchangeCalculator.instance.mainCurreny.shorty)
     }
 
     private fun shortName(addr: String): String {
@@ -242,10 +238,10 @@ object Dialogs {
         input.setSingleLine()
         val container = FrameLayout(c)
         val params = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-        params.leftMargin = c.getResources().getDimensionPixelSize(R.dimen.dialog_margin)
-        params.topMargin = c.getResources().getDimensionPixelSize(R.dimen.dialog_margin)
-        params.bottomMargin = c.getResources().getDimensionPixelSize(R.dimen.dialog_margin)
-        params.rightMargin = c.getResources().getDimensionPixelSize(R.dimen.dialog_margin)
+        params.leftMargin = c.resources.getDimensionPixelSize(R.dimen.dialog_margin)
+        params.topMargin = c.resources.getDimensionPixelSize(R.dimen.dialog_margin)
+        params.bottomMargin = c.resources.getDimensionPixelSize(R.dimen.dialog_margin)
+        params.rightMargin = c.resources.getDimensionPixelSize(R.dimen.dialog_margin)
         input.layoutParams = params
 
         input.inputType = InputType.TYPE_CLASS_TEXT
@@ -261,20 +257,20 @@ object Dialogs {
         }
         builder.setNegativeButton(R.string.add, DialogInterface.OnClickListener { dialog, which ->
             val inputMgr = input.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            inputMgr!!.hideSoftInputFromWindow(input.windowToken, 0)
+            inputMgr.hideSoftInputFromWindow(input.windowToken, 0)
             if (input.text.toString().length == 42 && input.text.toString().startsWith("0x")) {
                 val suc = WalletStorage.getInstance(c).add(WatchWallet(input.text.toString()), c)
                 Handler().postDelayed(
                         {
-                            if (c.fragments != null && c.fragments!![1] != null) {
+                            if (c.fragments != null && c.fragments[1] != null) {
                                 try {
-                                    (c.fragments!![1] as FragmentWallets).update()
+                                    (c.fragments[1] as FragmentWallets).update()
                                 } catch (e: IOException) {
                                     e.printStackTrace()
                                 }
 
                             }
-                            c.snackError(c.getResources().getString(if (suc) R.string.main_ac_wallet_added_suc else R.string.main_ac_wallet_added_er))
+                            c.snackError(c.resources.getString(if (suc) R.string.main_ac_wallet_added_suc else R.string.main_ac_wallet_added_er))
                             if (suc)
                                 AddressNameConverter.getInstance(c).put(input.text.toString(), "Watch " + input.text.toString().substring(0, 6), c)
                         }, 100)
@@ -285,7 +281,7 @@ object Dialogs {
         })
         builder.setPositiveButton(R.string.show, DialogInterface.OnClickListener { dialog, which ->
             val inputMgr = input.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            inputMgr!!.hideSoftInputFromWindow(input.windowToken, 0)
+            inputMgr.hideSoftInputFromWindow(input.windowToken, 0)
             if (input.text.toString().length == 42 && input.text.toString().startsWith("0x")) {
                 val detail = Intent(c, AddressDetailActivity::class.java)
                 detail.putExtra("ADDRESS", input.text.toString().toLowerCase())
@@ -297,7 +293,7 @@ object Dialogs {
         })
         builder.setNeutralButton(R.string.button_cancel, DialogInterface.OnClickListener { dialog, which ->
             val inputMgr = input.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            inputMgr!!.hideSoftInputFromWindow(input.windowToken, 0)
+            inputMgr.hideSoftInputFromWindow(input.windowToken, 0)
             dialog.cancel()
         })
 
@@ -342,8 +338,8 @@ object Dialogs {
             try {
                 WalletStorage.getInstance(c).importWallets(c, files)
                 c.snackError("Wallet" + (if (files.size > 1) "s" else "") + " successfully imported!")
-                if (c.fragments != null && c.fragments!![1] != null)
-                    (c.fragments!![1] as FragmentWallets).update()
+                if (c.fragments != null && c.fragments[1] != null)
+                    (c.fragments[1] as FragmentWallets).update()
             } catch (e: Exception) {
                 c.snackError("Error while importing wallets")
                 e.printStackTrace()

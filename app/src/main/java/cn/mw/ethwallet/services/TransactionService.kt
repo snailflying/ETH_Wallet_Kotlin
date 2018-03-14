@@ -41,12 +41,12 @@ class TransactionService : IntentService("Transaction Service") {
         sendNotification()
         try {
             val fromAddress = intent!!.getStringExtra("FROM_ADDRESS")
-            val toAddress = intent!!.getStringExtra("TO_ADDRESS")
-            val amount = intent!!.getStringExtra("AMOUNT")
-            val gas_price = intent!!.getStringExtra("GAS_PRICE")
-            val gas_limit = intent!!.getStringExtra("GAS_LIMIT")
-            val data = intent!!.getStringExtra("DATA")
-            val password = intent!!.getStringExtra("PASSWORD")
+            val toAddress = intent.getStringExtra("TO_ADDRESS")
+            val amount = intent.getStringExtra("AMOUNT")
+            val gas_price = intent.getStringExtra("GAS_PRICE")
+            val gas_limit = intent.getStringExtra("GAS_LIMIT")
+            val data = intent.getStringExtra("DATA")
+            val password = intent.getStringExtra("PASSWORD")
 
             val keys = WalletStorage.getInstance(applicationContext).getFullWallet(applicationContext, password, fromAddress)
 
@@ -209,7 +209,7 @@ class TransactionService : IntentService("Transaction Service") {
 
         val mNotifyMgr = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        mNotifyMgr!!.notify(mNotificationId, builder!!.build())
+        mNotifyMgr.notify(mNotificationId, builder!!.build())
     }
 
     private fun error(err: String) {
@@ -229,7 +229,7 @@ class TransactionService : IntentService("Transaction Service") {
 
         val mNotifyMgr = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        mNotifyMgr!!.notify(mNotificationId, builder!!.build())
+        mNotifyMgr.notify(mNotificationId, builder!!.build())
     }
 
     private fun sendNotification() {
@@ -243,7 +243,7 @@ class TransactionService : IntentService("Transaction Service") {
                 .setProgress(0, 0, true)
         val mNotifyMgr = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        mNotifyMgr!!.notify(mNotificationId, builder!!.build())
+        mNotifyMgr.notify(mNotificationId, builder!!.build())
     }
 
 

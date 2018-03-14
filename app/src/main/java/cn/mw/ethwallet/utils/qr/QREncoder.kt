@@ -16,7 +16,7 @@ import java.util.*
  * @date 08/03/2018 17:53
  * @description
  */
-public final class QREncoder(data: String?, bundle: Bundle?, type: String, format: String, dimension: Int) {
+class QREncoder(data: String?, bundle: Bundle?, type: String, format: String, dimension: Int) {
     private val WHITE = -0x1
     private val BLACK = -0x1000000
 

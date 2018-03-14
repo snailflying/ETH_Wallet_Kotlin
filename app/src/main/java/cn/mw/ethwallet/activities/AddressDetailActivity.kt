@@ -34,7 +34,7 @@ import cn.mw.ethwallet.utils.AddressNameConverter
     var appBar: AppBarLayout? = null
         private set
 
-    override protected fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -60,9 +60,9 @@ import cn.mw.ethwallet.utils.AddressNameConverter
         bundle.putString("ADDRESS", address)
         bundle.putDouble("BALANCE", intent.getDoubleExtra("BALANCE", 0.0))
         bundle.putByte("TYPE", type)
-        fragments!![0]!!.arguments = bundle
-        fragments!![1]!!.arguments = bundle
-        fragments!![2]!!.arguments = bundle
+        fragments[0]!!.arguments = bundle
+        fragments[1]!!.arguments = bundle
+        fragments[2]!!.arguments = bundle
 
         mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
 
@@ -102,8 +102,8 @@ import cn.mw.ethwallet.utils.AddressNameConverter
     }
 
     fun broadCastDataSetChanged() {
-        if (fragments != null && fragments!![2] != null) {
-            (fragments!![2] as FragmentTransactions).notifyDataSetChanged()
+        if (fragments != null && fragments[2] != null) {
+            (fragments[2] as FragmentTransactions).notifyDataSetChanged()
         }
     }
 
@@ -114,7 +114,7 @@ import cn.mw.ethwallet.utils.AddressNameConverter
         }
 
         override fun getCount(): Int {
-            return fragments!!.size
+            return fragments.size
         }
 
         override fun getPageTitle(position: Int): CharSequence? {

@@ -82,12 +82,12 @@ class FragmentDetailOverview : Fragment(), View.OnClickListener, View.OnCreateCo
 
         val cur = ExchangeCalculator.instance.current
         balanceDouble = BigDecimal(arguments!!.getDouble("BALANCE"))
-        balance!!.setText(ExchangeCalculator.instance.convertRateExact(balanceDouble, cur.rate) + "")
-        currency!!.setText(cur.name)
+        balance!!.text = ExchangeCalculator.instance.convertRateExact(balanceDouble, cur.rate) + ""
+        currency!!.text = cur.name
 
         recyclerView = rootView.findViewById(R.id.recycler_view) as RecyclerView?
         walletAdapter = TokenAdapter(token, ac!!, this, this)
-        val mgr = LinearLayoutManager(ac!!.getApplicationContext())
+        val mgr = LinearLayoutManager(ac!!.applicationContext)
         recyclerView!!.layoutManager = mgr
         recyclerView!!.itemAnimator = DefaultItemAnimator()
         recyclerView!!.adapter = walletAdapter
@@ -95,7 +95,7 @@ class FragmentDetailOverview : Fragment(), View.OnClickListener, View.OnCreateCo
         recyclerView!!.addItemDecoration(dividerItemDecoration)
 
         swipeLayout = rootView.findViewById(R.id.swipeRefreshLayout2) as SwipeRefreshLayout?
-        swipeLayout!!.setColorSchemeColors(ac!!.getResources().getColor(R.color.colorPrimary))
+        swipeLayout!!.setColorSchemeColors(ac!!.resources.getColor(R.color.colorPrimary))
         swipeLayout!!.setOnRefreshListener {
             try {
                 update(true)
@@ -108,8 +108,8 @@ class FragmentDetailOverview : Fragment(), View.OnClickListener, View.OnCreateCo
 
         header!!.setOnClickListener {
             val cur = ExchangeCalculator.instance.next()
-            balance!!.setText(ExchangeCalculator.instance.convertRateExact(balanceDouble, cur.rate) + "")
-            currency!!.setText(cur.name)
+            balance!!.text = ExchangeCalculator.instance.convertRateExact(balanceDouble, cur.rate) + ""
+            currency!!.text = cur.name
             walletAdapter!!.notifyDataSetChanged()
             if (ac != null)
                 ac!!.broadCastDataSetChanged()
@@ -145,15 +145,15 @@ class FragmentDetailOverview : Fragment(), View.OnClickListener, View.OnCreateCo
 
         val fab_add = rootView.findViewById(R.id.add_as_watch) as FloatingActionButton
         fab_add.setOnClickListener {
-            val suc = WalletStorage.getInstance(ac!!).add(WatchWallet(ethaddress!!), ac!!)
+            val suc = WalletStorage.getInstance(ac!!).add(WatchWallet(ethaddress), ac!!)
             Handler().postDelayed(
-                    { ac!!.snackError(ac!!.getResources().getString(if (suc) R.string.main_ac_wallet_added_suc else R.string.main_ac_wallet_added_er)) }, 100)
+                    { ac!!.snackError(ac!!.resources.getString(if (suc) R.string.main_ac_wallet_added_suc else R.string.main_ac_wallet_added_er)) }, 100)
         }
 
         if (type == AddressDetailActivity.OWN_WALLET) {
             fab_add.visibility = View.GONE
         }
-        if (!WalletStorage.getInstance(ac!!).isFullWallet(ethaddress!!)) {
+        if (!WalletStorage.getInstance(ac!!).isFullWallet(ethaddress)) {
             send_ether_from.visibility = View.GONE
         }
 
@@ -222,8 +222,8 @@ class FragmentDetailOverview : Fragment(), View.OnClickListener, View.OnCreateCo
                                 balanceDouble = balanceDouble.add(ethbal)
 
                                 val cur = ExchangeCalculator.instance.current
-                                balance!!.setText(ExchangeCalculator.instance.convertRateExact(balanceDouble, cur.rate) + "")
-                                currency!!.setText(cur.name)
+                                balance!!.text = ExchangeCalculator.instance.convertRateExact(balanceDouble, cur.rate) + ""
+                                currency!!.text = cur.name
                                 walletAdapter!!.notifyDataSetChanged()
                             }
 
@@ -284,8 +284,8 @@ class FragmentDetailOverview : Fragment(), View.OnClickListener, View.OnCreateCo
                                 token.addAll(t)
                                 balanceDouble = balanceDouble.add(BigDecimal(ExchangeCalculator.instance.sumUpTokenEther(token)))
                                 val cur = ExchangeCalculator.instance.current
-                                balance!!.setText(ExchangeCalculator.instance.convertRateExact(balanceDouble, cur.rate) + "")
-                                currency!!.setText(cur.name)
+                                balance!!.text = ExchangeCalculator.instance.convertRateExact(balanceDouble, cur.rate) + ""
+                                currency!!.text = cur.name
                                 walletAdapter!!.notifyDataSetChanged()
                                 onItemsLoadComplete()
                                 Log.e(TAG, "cur.name:" + cur.name)
@@ -318,7 +318,7 @@ class FragmentDetailOverview : Fragment(), View.OnClickListener, View.OnCreateCo
             builder.setTitle(R.string.name_this_address)
 
         val input = EditText(ac)
-        input.setText(AddressNameConverter.getInstance(ac!!).get(ethaddress!!))
+        input.setText(AddressNameConverter.getInstance(ac!!).get(ethaddress))
         input.inputType = InputType.TYPE_CLASS_TEXT
         input.setSingleLine()
         val container = FrameLayout(ac!!)

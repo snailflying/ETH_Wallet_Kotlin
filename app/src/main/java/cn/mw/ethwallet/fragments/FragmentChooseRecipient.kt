@@ -48,7 +48,7 @@ class FragmentChooseRecipient : Fragment(), View.OnClickListener, View.OnCreateC
 
         recyclerView = rootView.findViewById(R.id.recycler_view) as RecyclerView?
         walletAdapter = WalletAdapter(wallets, ac!!, this, this)
-        val mgr = LinearLayoutManager(ac!!.getApplicationContext())
+        val mgr = LinearLayoutManager(ac!!.applicationContext)
         recyclerView!!.layoutManager = mgr
         recyclerView!!.itemAnimator = DefaultItemAnimator()
         recyclerView!!.adapter = walletAdapter
@@ -73,8 +73,8 @@ class FragmentChooseRecipient : Fragment(), View.OnClickListener, View.OnCreateC
 
         update()
 
-        if ((ac!!.getApplication() as BaseApplication).isGooglePlayBuild) {
-            (ac!!.getApplication() as BaseApplication).track("Recipient Fragment")
+        if ((ac!!.application as BaseApplication).isGooglePlayBuild) {
+            (ac!!.application as BaseApplication).track("Recipient Fragment")
         }
 
         return rootView

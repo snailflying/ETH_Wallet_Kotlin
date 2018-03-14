@@ -97,14 +97,14 @@ class FragmentPrice : Fragment() {
         colorPadding = rootView.findViewById(R.id.colorPadding) as LinearLayout?
 
         swipeLayout = rootView.findViewById(R.id.swipeRefreshLayout2) as SwipeRefreshLayout?
-        swipeLayout!!.setColorSchemeColors(ac!!.getResources().getColor(R.color.colorPrimary))
+        swipeLayout!!.setColorSchemeColors(ac!!.resources.getColor(R.color.colorPrimary))
         swipeLayout!!.setOnRefreshListener {
             updateExchangeRates()
             update(false)
         }
 
-        if ((ac!!.getApplication() as BaseApplication).isGooglePlayBuild) {
-            (ac!!.getApplication() as BaseApplication).track("Price Fragment")
+        if ((ac!!.application as BaseApplication).isGooglePlayBuild) {
+            (ac!!.application as BaseApplication).track("Price Fragment")
         }
 
         swipeLayout!!.isRefreshing = true

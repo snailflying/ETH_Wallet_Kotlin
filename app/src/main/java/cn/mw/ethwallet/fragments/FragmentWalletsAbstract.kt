@@ -77,7 +77,7 @@ abstract class FragmentWalletsAbstract : Fragment(), View.OnClickListener, View.
         val rightPress = rootView.findViewById(R.id.wright) as ImageView
         balanceView = rootView.findViewById(R.id.balance) as TextView?
         swipeLayout = rootView.findViewById(R.id.swipeRefreshLayout) as SwipeRefreshLayout?
-        swipeLayout!!.setColorSchemeColors(ac!!.getResources().getColor(R.color.colorPrimary))
+        swipeLayout!!.setColorSchemeColors(ac!!.resources.getColor(R.color.colorPrimary))
         swipeLayout!!.setOnRefreshListener {
             balance = 0.0
             try {
@@ -93,7 +93,7 @@ abstract class FragmentWalletsAbstract : Fragment(), View.OnClickListener, View.
 
         leftPress.setOnClickListener {
             val cur = ExchangeCalculator.instance.previous()
-            balanceView!!.setText(ExchangeCalculator.instance.displayBalanceNicely(ExchangeCalculator.instance.convertRate(balance, cur.rate)) + " " + cur.name)
+            balanceView!!.text = ExchangeCalculator.instance.displayBalanceNicely(ExchangeCalculator.instance.convertRate(balance, cur.rate)) + " " + cur.name
             ac!!.broadCastDataSetChanged()
             walletAdapter!!.notifyDataSetChanged()
             val editor = ac!!.getPreferences(Context.MODE_PRIVATE).edit()
@@ -103,7 +103,7 @@ abstract class FragmentWalletsAbstract : Fragment(), View.OnClickListener, View.
 
         rightPress.setOnClickListener {
             val cur = ExchangeCalculator.instance.next()
-            balanceView!!.setText(ExchangeCalculator.instance.displayBalanceNicely(ExchangeCalculator.instance.convertRate(balance, cur.rate)) + " " + cur.name)
+            balanceView!!.text = ExchangeCalculator.instance.displayBalanceNicely(ExchangeCalculator.instance.convertRate(balance, cur.rate)) + " " + cur.name
             ac!!.broadCastDataSetChanged()
             walletAdapter!!.notifyDataSetChanged()
             val editor = ac!!.getPreferences(Context.MODE_PRIVATE).edit()
@@ -114,7 +114,7 @@ abstract class FragmentWalletsAbstract : Fragment(), View.OnClickListener, View.
 
         recyclerView = rootView.findViewById(R.id.recycler_view) as RecyclerView?
         walletAdapter = WalletAdapter(wallets, ac!!, this, this)
-        val mgr = LinearLayoutManager(ac!!.getApplicationContext())
+        val mgr = LinearLayoutManager(ac!!.applicationContext)
         recyclerView!!.layoutManager = mgr
         recyclerView!!.itemAnimator = DefaultItemAnimator()
         recyclerView!!.adapter = walletAdapter
@@ -157,8 +157,8 @@ abstract class FragmentWalletsAbstract : Fragment(), View.OnClickListener, View.
                 ac!!.snackError("Can't fetch account balances. No connection?")
         }
 
-        if ((ac!!.getApplication() as BaseApplication).isGooglePlayBuild) {
-            (ac!!.getApplication() as BaseApplication).track("Wallet Fragment")
+        if ((ac!!.application as BaseApplication).isGooglePlayBuild) {
+            (ac!!.application as BaseApplication).track("Wallet Fragment")
         }
 
         return rootView
@@ -229,7 +229,7 @@ abstract class FragmentWalletsAbstract : Fragment(), View.OnClickListener, View.
                                     for (i in wallets.indices) {
                                         balance += wallets[i].balance
                                     }
-                                    balanceView!!.setText(ExchangeCalculator.instance.displayBalanceNicely(ExchangeCalculator.instance.convertRate(balance, ExchangeCalculator.instance.current.rate)) + " " + ExchangeCalculator.instance.current.name)
+                                    balanceView!!.text = ExchangeCalculator.instance.displayBalanceNicely(ExchangeCalculator.instance.convertRate(balance, ExchangeCalculator.instance.current.rate)) + " " + ExchangeCalculator.instance.current.name
                                     onItemsLoadComplete()
                                 }
 
@@ -476,7 +476,7 @@ abstract class FragmentWalletsAbstract : Fragment(), View.OnClickListener, View.
 
     fun updateBalanceText() {
         if (balanceView != null)
-            balanceView!!.setText(ExchangeCalculator.instance.displayBalanceNicely(ExchangeCalculator.instance.convertRate(balance, ExchangeCalculator.instance.current.rate)) + " " + ExchangeCalculator.instance.current.name)
+            balanceView!!.text = ExchangeCalculator.instance.displayBalanceNicely(ExchangeCalculator.instance.convertRate(balance, ExchangeCalculator.instance.current.rate)) + " " + ExchangeCalculator.instance.current.name
     }
 
     override fun onClick(view: View) {

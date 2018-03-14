@@ -65,11 +65,11 @@ class WalletAdapter(private val boxlist: List<WalletDisplay>, private val contex
             this.position = position
             false
         }
-        holder.walletaddress.setText(box.publicKey)
+        holder.walletaddress.text = box.publicKey
         val walletname = AddressNameConverter.getInstance(context).get(box.publicKey!!)
         holder.walletname.text = walletname ?: "New Wallet"
         if (box.type !== WalletDisplay.CONTACT)
-            holder.walletbalance.setText(ExchangeCalculator.instance.displayBalanceNicely(ExchangeCalculator.instance.convertRate(box.balance, ExchangeCalculator.instance.current.rate)) + " " + ExchangeCalculator.instance.currencyShort)
+            holder.walletbalance.text = ExchangeCalculator.instance.displayBalanceNicely(ExchangeCalculator.instance.convertRate(box.balance, ExchangeCalculator.instance.current.rate)) + " " + ExchangeCalculator.instance.currencyShort
         holder.addressimage.setImageBitmap(Blockies.createIcon(box.publicKey!!))
 
         holder.type.visibility = if (box.type === TransactionDisplay.NORMAL || box.type === WalletDisplay.CONTACT) View.INVISIBLE else View.VISIBLE

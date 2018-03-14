@@ -26,7 +26,7 @@ class PrivateKeyActivity : SecureAppCompatActivity() {
     private var privateKey: TextView? = null
     private var progress: ProgressBar? = null
 
-    override protected fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_privatekey)
 
@@ -51,7 +51,7 @@ class PrivateKeyActivity : SecureAppCompatActivity() {
             override fun doInBackground(vararg params: String): String? {
                 try {
                     val keys = WalletStorage.getInstance(applicationContext).getFullWallet(applicationContext, params[0], params[1])
-                    return keys.getEcKeyPair().getPrivateKey().toString(16)
+                    return keys.ecKeyPair.privateKey.toString(16)
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }

@@ -52,7 +52,7 @@ class AppLockActivity : BasePatternActivity(), PatternView.OnPatternListener, Fi
         unlockedFirst = false
     }
 
-    protected override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         pl_message_text.setText(R.string.pl_draw_pattern_to_unlock)
@@ -145,7 +145,7 @@ class AppLockActivity : BasePatternActivity(), PatternView.OnPatternListener, Fi
 
     }
 
-    protected override fun onSaveInstanceState(outState: Bundle) {
+    override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putInt("num_failed_attempts", mNumFailedAttempts)
     }
@@ -153,7 +153,7 @@ class AppLockActivity : BasePatternActivity(), PatternView.OnPatternListener, Fi
 
     override fun onPatternDetected(pattern: List<PatternView.Cell>) {
         if (sharedPreferences!!.getLong("WRONG_PATTERN_LOCK", 0) != 0L && sharedPreferences!!.getLong("WRONG_PATTERN_LOCK", 0) > System.currentTimeMillis() - 60 * 1000) {
-            pl_message_text.setText("Locked for 1 minute!")
+            pl_message_text.text = "Locked for 1 minute!"
             postClearPatternRunnable()
             return
         }
@@ -163,7 +163,7 @@ class AppLockActivity : BasePatternActivity(), PatternView.OnPatternListener, Fi
             onConfirmed()
         } else {
             pl_message_text.setText(R.string.pl_wrong_pattern)
-            pl_pattern.setDisplayMode(PatternView.DisplayMode.Wrong)
+            pl_pattern.displayMode = PatternView.DisplayMode.Wrong
             postClearPatternRunnable()
             onWrongPattern()
         }
@@ -173,7 +173,7 @@ class AppLockActivity : BasePatternActivity(), PatternView.OnPatternListener, Fi
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && hasFingerprintSupport
     }
 
-    protected override fun onPause() {
+    override fun onPause() {
         super.onPause()
 
         if (fingerprintHelper != null && hasFingerprintSupport())
@@ -204,14 +204,14 @@ class AppLockActivity : BasePatternActivity(), PatternView.OnPatternListener, Fi
             val editor = sharedPreferences!!.edit()
             editor.putLong("WRONG_PATTERN_LOCK", System.currentTimeMillis())
             editor.commit()
-            pl_message_text.setText("Locked for 1 minute!")
+            pl_message_text.text = "Locked for 1 minute!"
             mNumFailedAttempts = 0
         }
     }
 
     override fun onPatternStart() {
         removeClearPatternRunnable()
-        pl_pattern.setDisplayMode(PatternView.DisplayMode.Correct)
+        pl_pattern.displayMode = PatternView.DisplayMode.Correct
     }
 
     override fun onPatternCleared() {

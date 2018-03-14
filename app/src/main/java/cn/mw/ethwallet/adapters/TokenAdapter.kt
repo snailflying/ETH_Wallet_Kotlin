@@ -63,15 +63,14 @@ class TokenAdapter(private val boxlist: List<TokenDisplay>, private val context:
             false
         }
 
-        holder.name.setText(box.name)
+        holder.name.text = box.name
         val tbalance = box.balanceDouble
-        holder.nativebalance.setText(ExchangeCalculator.instance.displayEthNicely(tbalance) + " " + box.shorty)
-        holder.etherbalance.setText(
-                ExchangeCalculator.instance.displayEthNicely(
-                        ExchangeCalculator.instance.convertRate(
-                                ExchangeCalculator.instance.convertTokenToEther(tbalance, box.usdprice),
-                                ExchangeCalculator.instance.current.rate
-                        )) + " " + ExchangeCalculator.instance.current.shorty)
+        holder.nativebalance.text = ExchangeCalculator.instance.displayEthNicely(tbalance) + " " + box.shorty
+        holder.etherbalance.text = ExchangeCalculator.instance.displayEthNicely(
+                ExchangeCalculator.instance.convertRate(
+                        ExchangeCalculator.instance.convertTokenToEther(tbalance, box.usdprice),
+                        ExchangeCalculator.instance.current.rate
+                )) + " " + ExchangeCalculator.instance.current.shorty
         if (box.contractAddr != null && box.contractAddr!!.length > 3) {
             holder.image.text = ""
             var iconName = box.name
@@ -83,10 +82,9 @@ class TokenAdapter(private val boxlist: List<TokenDisplay>, private val context:
         } else {
             holder.image.text = "Ξ"
             holder.image.setBackgroundResource(0)
-            holder.etherbalance.setText(
-                    (ExchangeCalculator.instance.displayEthNicely(
-                            ExchangeCalculator.instance.convertRate(tbalance, ExchangeCalculator.instance.current.rate)) + " " +
-                            ExchangeCalculator.instance.current.shorty))
+            holder.etherbalance.text = (ExchangeCalculator.instance.displayEthNicely(
+                    ExchangeCalculator.instance.convertRate(tbalance, ExchangeCalculator.instance.current.rate)) + " " +
+                    ExchangeCalculator.instance.current.shorty)
         }
 
         setAnimation(holder.container, position)

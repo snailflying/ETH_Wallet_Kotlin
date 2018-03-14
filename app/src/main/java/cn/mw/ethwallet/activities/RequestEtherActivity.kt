@@ -41,7 +41,7 @@ class RequestEtherActivity : SecureAppCompatActivity(), View.OnClickListener {
     private var amount: TextView? = null
     private var usdPrice: TextView? = null
 
-    override protected fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_requestether)
 
@@ -74,7 +74,7 @@ class RequestEtherActivity : SecureAppCompatActivity(), View.OnClickListener {
                 if (s.length != 0) {
                     try {
                         val amountd = java.lang.Double.parseDouble(amount!!.text.toString())
-                        usdPrice!!.setText(ExchangeCalculator.instance.displayUsdNicely(ExchangeCalculator.instance.convertToUsd(amountd)) + " " + ExchangeCalculator.instance.mainCurreny.name)
+                        usdPrice!!.text = ExchangeCalculator.instance.displayUsdNicely(ExchangeCalculator.instance.convertToUsd(amountd)) + " " + ExchangeCalculator.instance.mainCurreny.name
                         updateQR()
                     } catch (e: Exception) {
                         e.printStackTrace()

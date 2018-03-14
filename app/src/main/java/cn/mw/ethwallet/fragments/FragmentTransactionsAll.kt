@@ -33,8 +33,8 @@ class FragmentTransactionsAll : FragmentTransactionsAbstract() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = super.onCreateView(inflater, container, savedInstanceState)
         val ac = this.ac as MainActivity
-        if (ac != null && ac!!.appBar != null) {
-            ac!!.appBar!!.addOnOffsetChangedListener(object : AppBarStateChangeListener() {
+        if (ac != null && ac.appBar != null) {
+            ac.appBar!!.addOnOffsetChangedListener(object : AppBarStateChangeListener() {
                 override fun onStateChanged(appBarLayout: AppBarLayout, state: State) {
                     if (state === State.COLLAPSED) {
                         fabmenu.hideMenu(true)
@@ -52,14 +52,14 @@ class FragmentTransactionsAll : FragmentTransactionsAbstract() {
         if (ac == null) return
         getWallets().clear()
         if (swipeLayout != null)
-            swipeLayout!!.setRefreshing(true)
+            swipeLayout!!.isRefreshing = true
         resetRequestCount()
         val storedwallets = ArrayList<StorableWallet>(WalletStorage.getInstance(ac!!).get())
         if (storedwallets.size == 0) {
-            nothingToShow.setVisibility(View.VISIBLE)
+            nothingToShow.visibility = View.VISIBLE
             onItemsLoadComplete()
         } else {
-            nothingToShow.setVisibility(GONE)
+            nothingToShow.visibility = GONE
             for (i in storedwallets.indices) {
                 try {
                     val currentWallet = storedwallets.get(i)
@@ -189,7 +189,7 @@ class FragmentTransactionsAll : FragmentTransactionsAbstract() {
                 }
             }
 
-            nothingToShow.setVisibility(if (getWallets().size === 0) View.VISIBLE else GONE)
+            nothingToShow.visibility = if (getWallets().size === 0) View.VISIBLE else GONE
             walletAdapter!!.notifyDataSetChanged()
         }
     }

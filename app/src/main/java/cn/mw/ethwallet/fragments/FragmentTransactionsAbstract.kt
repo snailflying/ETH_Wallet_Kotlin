@@ -52,7 +52,6 @@ abstract class FragmentTransactionsAbstract : Fragment(), View.OnClickListener, 
     protected var swipeLayout: SwipeRefreshLayout? = null
     @get:Synchronized
     private var requestCount = 0
-        private set  // used to count to two (since internal and normal transactions are each one request). Gets icnreased once one request is finished. If it is two, notifyDataChange is called (display transactions)
     protected var requestTx: FloatingActionButton? = null
     protected lateinit var send: FloatingActionButton
     protected lateinit var nothingToShow: FrameLayout
@@ -110,7 +109,7 @@ abstract class FragmentTransactionsAbstract : Fragment(), View.OnClickListener, 
     }
 
     private fun openSendActivity() {
-        if (WalletStorage.getInstance(this!!.ac!!).fullOnly.size === 0) {
+        if (WalletStorage.getInstance(this.ac!!).fullOnly.size === 0) {
             Dialogs.noFullWallet(ac!!)
         } else {
             val newTrans = Intent(ac, SendActivity::class.java)

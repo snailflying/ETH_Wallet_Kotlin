@@ -22,17 +22,13 @@ object ExternalStorageHandler {
     val isExternalStorageReadOnly: Boolean
         get() {
             val extStorageState = Environment.getExternalStorageState()
-            return if (Environment.MEDIA_MOUNTED_READ_ONLY == extStorageState) {
-                true
-            } else false
+            return Environment.MEDIA_MOUNTED_READ_ONLY == extStorageState
         }
 
     val isExternalStorageAvailable: Boolean
         get() {
             val extStorageState = Environment.getExternalStorageState()
-            return if (Environment.MEDIA_MOUNTED == extStorageState) {
-                true
-            } else false
+            return Environment.MEDIA_MOUNTED == extStorageState
         }
 
     fun askForPermission(c: Activity) {

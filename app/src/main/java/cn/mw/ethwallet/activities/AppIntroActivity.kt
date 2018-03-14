@@ -31,10 +31,6 @@ class AppIntroActivity : AppIntro2() {
         isProgressButtonEnabled = true
     }
 
-    override fun onSkipPressed(currentFragment: Fragment?) {
-        super.onSkipPressed(currentFragment)
-    }
-
     override fun onDonePressed(currentFragment: Fragment?) {
         super.onDonePressed(currentFragment)
         if (tosFragment!!.isToSChecked) {
@@ -44,10 +40,6 @@ class AppIntroActivity : AppIntro2() {
             finish()
         } else
             Toast.makeText(this, R.string.app_intro_please_agree, Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onSlideChanged(oldFragment: Fragment?, newFragment: Fragment?) {
-        super.onSlideChanged(oldFragment, newFragment)
     }
 
     companion object {
