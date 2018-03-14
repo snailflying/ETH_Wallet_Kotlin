@@ -32,9 +32,9 @@ class WalletStorage private constructor(context: Context) {
     val fullOnly: ArrayList<String>
         @Synchronized get() {
             val erg = ArrayList<String>()
-            if (mapdb!!.size == 0) return erg
-            for (i in mapdb!!.indices) {
-                val cur = mapdb!![i]
+            if (mapdb.size == 0) return erg
+            for (i in mapdb.indices) {
+                val cur = mapdb[i]
                 if (cur is FullWallet)
                     erg.add(cur.pubKey)
             }
@@ -49,16 +49,16 @@ class WalletStorage private constructor(context: Context) {
             mapdb = ArrayList<StorableWallet>()
         }
 
-        if (mapdb!!.size == 0)
+        if (mapdb.size == 0)
         // Try to find local wallets
             checkForWallets(context)
     }
 
     @Synchronized
     fun add(addresse: StorableWallet, context: Context): Boolean {
-        for (i in mapdb!!.indices)
-            if (mapdb!![i].pubKey.equals(addresse.pubKey, true)) return false
-        mapdb!!.add(addresse)
+        for (i in mapdb.indices)
+            if (mapdb[i].pubKey.equals(addresse.pubKey, true)) return false
+        mapdb.add(addresse)
         save(context)
         return true
     }
@@ -70,9 +70,9 @@ class WalletStorage private constructor(context: Context) {
 
     @Synchronized
     fun isFullWallet(addr: String): Boolean {
-        if (mapdb!!.size == 0) return false
-        for (i in mapdb!!.indices) {
-            val cur = mapdb!![i]
+        if (mapdb.size == 0) return false
+        for (i in mapdb.indices) {
+            val cur = mapdb[i]
             if (cur is FullWallet && cur.pubKey.equals(addr, true))
                 return true
         }
@@ -81,17 +81,17 @@ class WalletStorage private constructor(context: Context) {
 
     fun removeWallet(address: String, context: Context) {
         var position = -1
-        for (i in mapdb!!.indices) {
-            if (mapdb!![i].pubKey.equals(address, true)) {
+        for (i in mapdb.indices) {
+            if (mapdb[i].pubKey.equals(address, true)) {
                 position = i
                 break
             }
         }
         if (position >= 0) {
-            if (mapdb!![position] is FullWallet)
+            if (mapdb[position] is FullWallet)
             // IF full wallet delete private key too
                 File(context.filesDir, address.substring(2, address.length)).delete()
-            mapdb!!.removeAt(position)
+            mapdb.removeAt(position)
         }
         val preferences = PreferenceManager.getDefaultSharedPreferences(context)
         val editor = preferences.edit()
@@ -117,10 +117,10 @@ class WalletStorage private constructor(context: Context) {
         for ((key) in allEntries) {
 
             //todo: mapdb-> mapdb.toString
-            if (key.length == 42 && !mapdb!!.toString().contains(key))
+            if (key.length == 42 && !mapdb.toString().contains(key))
                 add(WatchWallet(key), c)
         }
-        if (mapdb!!.size > 0)
+        if (mapdb.size > 0)
             save(c)
     }
 
@@ -143,7 +143,7 @@ class WalletStorage private constructor(context: Context) {
                     val position = wallets[i].name.indexOf(".json")
                     if (position < 0) continue
                     val addr = wallets[i].name.substring(0, position)
-                    if (addr.length == 40 && !mapdb!!.toString().contains("0x" + wallets[i].name)) {
+                    if (addr.length == 40 && !mapdb.toString().contains("0x" + wallets[i].name)) {
                         foundImports.add(wallets[i]) // Exported with Mercury
                     }
                 }

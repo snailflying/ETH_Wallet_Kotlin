@@ -11,7 +11,7 @@ import android.support.v7.app.AppCompatActivity
  */
 open class SecureAppCompatActivity : AppCompatActivity() {
 
-    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == AppLockActivity.REQUEST_CODE) {
             AppLockActivity.handleLockResponse(this, resultCode)
         }

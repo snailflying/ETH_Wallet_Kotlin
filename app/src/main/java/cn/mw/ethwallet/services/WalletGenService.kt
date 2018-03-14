@@ -49,7 +49,7 @@ class WalletGenService : IntentService("WalletGen Service") {
             val walletAddress: String
             if (normalMode) { // Create new key
                 walletAddress = OwnWalletUtils.generateNewWalletFile(password, File(this.filesDir, ""), true)
-            } else { // Privatekey passed
+            } else { // Private key passed
                 val keys = ECKeyPair.create(Hex.decode(privatekey))
                 walletAddress = OwnWalletUtils.generateWalletFile(password, keys, File(this.filesDir, ""), true)
             }

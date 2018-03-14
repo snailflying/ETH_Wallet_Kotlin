@@ -29,7 +29,7 @@ class SendActivity : SecureAppCompatActivity() {
     private var coord: CoordinatorLayout? = null
     internal lateinit var adapter: FragmentAdapter
 
-    override protected fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chooserecepient)
 
@@ -53,25 +53,25 @@ class SendActivity : SecureAppCompatActivity() {
         if (intent.hasExtra("FROM_ADDRESS"))
             bundle.putString("FROM_ADDRESS", intent.getStringExtra("FROM_ADDRESS"))
 
-        fragments!![1]!!.arguments = bundle
+        fragments[1]!!.arguments = bundle
 
         adapter = FragmentAdapter(supportFragmentManager)
 
         mViewPager = findViewById(R.id.container) as NonSwipeViewPager
         mViewPager!!.setPagingEnabled(false)
-        mViewPager!!.setAdapter(adapter)
+        mViewPager!!.adapter = adapter
 
         if (intent.hasExtra("TO_ADDRESS"))
-            mViewPager!!.setCurrentItem(1)
+            mViewPager!!.currentItem = 1
     }
 
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == QRScanActivity.REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                if (fragments == null || fragments!![0] == null) return
-                (fragments!![0] as FragmentChooseRecipient).setRecipientAddress(data.getStringExtra("ADDRESS"))
+                if (fragments[0] == null) return
+                (fragments[0] as FragmentChooseRecipient).setRecipientAddress(data!!.getStringExtra("ADDRESS"))
             } else {
                 val mySnackbar = Snackbar.make(this.coord!!,
                         this.resources.getString(R.string.main_ac_wallet_added_fatal), Snackbar.LENGTH_SHORT)
@@ -81,17 +81,17 @@ class SendActivity : SecureAppCompatActivity() {
     }
 
     fun nextStage(toAddress: String) {
-        mViewPager!!.setCurrentItem(1)
+        mViewPager!!.currentItem = 1
 
-        if (fragments == null || fragments!![1] == null) return
-        (fragments!![1] as FragmentSend).setToAddress(toAddress, this)
+        if (fragments[1] == null) return
+        (fragments[1] as FragmentSend).setToAddress(toAddress, this)
     }
 
 
     internal inner class FragmentAdapter(private val mFragmentManager: FragmentManager) : FragmentPagerAdapter(mFragmentManager) {
 
         override fun getItem(position: Int): Fragment? {
-            return fragments!![position]
+            return fragments[position]
         }
 
         override fun getCount(): Int {

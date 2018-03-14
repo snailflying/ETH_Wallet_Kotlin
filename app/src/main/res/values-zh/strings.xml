@@ -248,7 +248,7 @@
     <string name="dialog_disable_ad_title">:(</string>
     <string name="dialog_disable_ad_text">我们在很大程度上依靠捐款和广告收入来积极工作和改进Mercury。如果广告真的让您感到困扰，那么我们明白，我们会让您停用它。这个小小的广告横幅确实对我们有帮助，您的每一笔捐款亦是如此。 请保持横幅启用或考虑一小笔捐款。您需要重新启动应用才能使新设置生效。继续？</string>
 
-    <string name="showcase_got_it">了解</string>
+    <string name="showcase_got_it">已了解</string>
     <string name="show_case_wallet_gen_text">要生成新钱包，只需按+并选择“生成新钱包”</string>
     <string name="show_case_backup">要修改现有钱包或创建备份，只需按住钱包即可。</string>
     <string name="wallet_menu_private_key">显示私钥</string>

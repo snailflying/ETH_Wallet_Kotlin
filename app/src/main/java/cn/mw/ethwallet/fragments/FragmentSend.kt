@@ -13,10 +13,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.LinearLayout
-import android.widget.SeekBar
+import android.widget.*
 import cn.mw.ethwallet.BuildConfig
 import cn.mw.ethwallet.R
 import cn.mw.ethwallet.activities.BaseApplication
@@ -30,6 +27,7 @@ import cn.mw.ethwallet.utils.*
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.fragment_send.*
+import me.grantland.widget.AutofitTextView
 import java.io.IOException
 import java.math.BigDecimal
 import java.math.BigInteger
@@ -49,36 +47,36 @@ class FragmentSend : Fragment() {
     private val DEFAULT_GAS_PRICE = 12
 
     private var ac: SendActivity? = null
-    //    private var send: Button? = null
-//    private var amount: EditText? = null
-//    private var toAddress: TextView? = null
-//    private var toName: TextView? = null
-//    private var usdPrice: TextView? = null
-//    private var gasText: TextView? = null
-//    private var fromName: TextView? = null
-//    private var availableEth: TextView? = null
-//    private var availableFiat: TextView? = null
-//    private var availableFiatSymbol: TextView? = null
-//    private var txCost: TextView? = null
-//    private var txCostFiat: TextView? = null
-//    private var txCostFiatSymbol: TextView? = null
-//    private var totalCost: TextView? = null
-//    private var totalCostFiat: TextView? = null
-//    private var totalCostFiatSymbol: TextView? = null
-//    private var gas: SeekBar? = null
-//    private var toicon: ImageView? = null
-//    private var fromicon: ImageView? = null
-//    private var spinner: Spinner? = null
-//    private var currencySpinner: Spinner? = null
+    private var send: Button? = null
+    private var amount: EditText? = null
+    private var toAddress: AutofitTextView? = null
+    private var toName: TextView? = null
+    private var usdPrice: TextView? = null
+    private var gasText: TextView? = null
+    private var fromName: TextView? = null
+    private var availableEth: TextView? = null
+    private var availableFiat: TextView? = null
+    private var availableFiatSymbol: TextView? = null
+    private var txCost: TextView? = null
+    private var txCostFiat: TextView? = null
+    private var txCostFiatSymbol: TextView? = null
+    private var totalCost: TextView? = null
+    private var totalCostFiat: TextView? = null
+    private var totalCostFiatSymbol: TextView? = null
+    private var gas: SeekBar? = null
+    private var toicon: ImageView? = null
+    private var fromicon: ImageView? = null
+    private var spinner: Spinner? = null
+    private var currencySpinner: Spinner? = null
     private var amountInEther = true
     private var gaslimit = BigInteger("21000")
     private var curAvailable = BigDecimal.ZERO
     private var curTxCost = BigDecimal("0.000252")
     private var curAmount = BigDecimal.ZERO
     private val exchange = ExchangeCalculator.instance
-    //    private var expertMode: LinearLayout? = null
-//    private var data: EditText? = null
-//    private var userGasLimit: EditText? = null
+    private var expertMode: LinearLayout? = null
+    private var data: EditText? = null
+    private var userGasLimit: EditText? = null
     private var realGas: Double = 0.toDouble()
 
     private val curTotalCost: BigDecimal
@@ -90,38 +88,38 @@ class FragmentSend : Fragment() {
 
         ac = this.activity as SendActivity
 
-//        send = rootView.findViewById(R.id.send)
-//        amount = rootView.findViewById(R.id.amount)
-//        gas = rootView.findViewById(seekBar)
-//        toAddress = rootView.findViewById(R.id.toAddress)
-//        toName = rootView.findViewById(R.id.toName)
-//        fromName = rootView.findViewById(R.id.fromName)
-//        usdPrice = rootView.findViewById(R.id.usdPrice)
+        send = rootView.findViewById(R.id.send) as Button?
+        amount = rootView.findViewById(R.id.amount) as EditText?
+        gas = rootView.findViewById(R.id.gas) as SeekBar?
+        toAddress = rootView.findViewById(R.id.toAddress) as AutofitTextView?
+        toName = rootView.findViewById(R.id.toName) as TextView?
+        fromName = rootView.findViewById(R.id.fromName) as TextView?
+        usdPrice = rootView.findViewById(R.id.usdPrice) as TextView?
 
-//        availableEth = rootView.findViewById(R.id.ethAvailable)
-//        availableFiat = rootView.findViewById(R.id.ethAvailableFiat)
-//        availableFiatSymbol = rootView.findViewById(R.id.ethAvailableFiatSymbol)
+        availableEth = rootView.findViewById(R.id.ethAvailable) as TextView?
+        availableFiat = rootView.findViewById(R.id.ethAvailableFiat) as TextView?
+        availableFiatSymbol = rootView.findViewById(R.id.ethAvailableFiatSymbol) as TextView?
 
-//        txCost = rootView.findViewById(R.id.txCost)
-//        txCostFiat = rootView.findViewById(R.id.txCostFiat)
-//        txCostFiatSymbol = rootView.findViewById(R.id.txCostFiatSymbol)
+        txCost = rootView.findViewById(R.id.txCost) as TextView?
+        txCostFiat = rootView.findViewById(R.id.txCostFiat) as TextView?
+        txCostFiatSymbol = rootView.findViewById(R.id.txCostFiatSymbol) as TextView?
 
-//        totalCost = rootView.findViewById(R.id.totalCost)
-//        totalCostFiat = rootView.findViewById(R.id.totalCostFiat)
-//        totalCostFiatSymbol = rootView.findViewById(R.id.totalCostFiatSymbol)
+        totalCost = rootView.findViewById(R.id.totalCost) as TextView?
+        totalCostFiat = rootView.findViewById(R.id.totalCostFiat) as TextView?
+        totalCostFiatSymbol = rootView.findViewById(R.id.totalCostFiatSymbol) as TextView?
 
-//        gasText = rootView.findViewById(R.id.gasText)
-//        toicon = rootView.findViewById(R.id.toicon)
-//        fromicon = rootView.findViewById(R.id.fromicon)
-//        expertMode = rootView.findViewById(R.id.expertmode)
-//        data = rootView.findViewById(R.id.data)
-//        userGasLimit = rootView.findViewById(R.id.userGasLimit)
+        gasText = rootView.findViewById(R.id.gasText) as TextView?
+        toicon = rootView.findViewById(R.id.toicon) as ImageView?
+        fromicon = rootView.findViewById(R.id.fromicon) as ImageView?
+        expertMode = rootView.findViewById(R.id.expertMode) as LinearLayout?
+        data = rootView.findViewById(R.id.data) as EditText?
+        userGasLimit = rootView.findViewById(R.id.userGasLimit) as EditText?
 
         (rootView.findViewById(R.id.expertmodetrigger) as LinearLayout).setOnClickListener {
             if (expertMode!!.visibility == View.GONE) {
-                CollapseAnimator.expand(expertMode)
+                CollapseAnimator.expand(expertMode!!)
             } else {
-                CollapseAnimator.collapse(expertMode)
+                CollapseAnimator.collapse(expertMode!!)
             }
         }
 
@@ -134,7 +132,7 @@ class FragmentSend : Fragment() {
             amount!!.setText(arguments!!.getString("AMOUNT"))
         }
 
-        gas.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+        gas!!.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
                 realGas = (i - 8).toDouble()
                 if (i < 10)
@@ -151,7 +149,7 @@ class FragmentSend : Fragment() {
         })
         gas!!.progress = DEFAULT_GAS_PRICE
 
-//        spinner = rootView.findViewById(R.id.spinner)
+        spinner = rootView.findViewById(R.id.spinner) as Spinner?
         val spinnerArrayAdapter = object : ArrayAdapter<String>(ac, R.layout.address_spinner, WalletStorage.getInstance(ac!!).fullOnly) {
             override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
                 val view = super.getView(position, convertView, parent)
@@ -181,7 +179,7 @@ class FragmentSend : Fragment() {
             }
         })
 
-//        currencySpinner = rootView.findViewById(R.id.currencySpinner)
+        currencySpinner = rootView.findViewById(R.id.currencySpinner) as Spinner
         val currencyList = ArrayList<String>()
         currencyList.add("ETH")
         currencyList.add(ExchangeCalculator.instance.mainCurreny.name)
@@ -236,8 +234,8 @@ class FragmentSend : Fragment() {
         updateAccountBalance()
         updateDisplays()
 
-        if ((ac!!.getApplication() as BaseApplication).isGooglePlayBuild) {
-            (ac!!.getApplication() as BaseApplication).track("Send Fragment")
+        if ((ac!!.application as BaseApplication).isGooglePlayBuild) {
+            (ac!!.application as BaseApplication).track("Send Fragment")
         }
 
         return rootView
@@ -268,26 +266,28 @@ class FragmentSend : Fragment() {
             e.printStackTrace()
         }*/
         EtherscanAPI1.instance.getBalance(ac!!, spinner!!.selectedItem.toString())
-                .subscribe(
-                        object : SingleObserver<Balance> {
-                            override fun onSuccess(t: Balance) {
-                                val balance = if (t.result == "0") "0" else BigDecimal(t.result).divide(BigDecimal(1000000000000000000.0), 6, BigDecimal.ROUND_UP).toPlainString()
-                                curAvailable = BigDecimal(balance)
-                                updateDisplays()
-                            }
-
-                            override fun onSubscribe(d: Disposable) {
-                            }
-
-                            override fun onError(e: Throwable) {
-                                ac!!.snackError("Cant fetch your account balance", Snackbar.LENGTH_LONG)
-                            }
-
+                .subscribe({
+                    object : SingleObserver<Balance> {
+                        override fun onSuccess(t: Balance) {
+                            val balance = if (t.result == "0") "0" else BigDecimal(t.result).divide(BigDecimal(1000000000000000000.0), 6, BigDecimal.ROUND_UP).toPlainString()
+                            curAvailable = BigDecimal(balance)
+                            updateDisplays()
                         }
 
-                )
+                        override fun onSubscribe(d: Disposable) {
+                        }
+
+                        override fun onError(e: Throwable) {
+                            ac!!.snackError("Cant fetch your account balance", Snackbar.LENGTH_LONG)
+                        }
+
+                    }
+
+                }, {
+                    Log.e(TAG, "Cant fetch your account balance")
+                })
         fromicon!!.setImageBitmap(Blockies.createIcon(spinner!!.selectedItem.toString().toLowerCase()))
-        fromName!!.setText(AddressNameConverter.getInstance(ac!!).get(spinner!!.selectedItem.toString().toLowerCase()))
+        fromName!!.text = AddressNameConverter.getInstance(ac!!).get(spinner!!.selectedItem.toString().toLowerCase())
     }
 
     private fun setFromAddress(from: String?) {
@@ -309,9 +309,9 @@ class FragmentSend : Fragment() {
     private fun updateAvailableDisplay() {
         exchange.index = (2)
 
-        ethAvailable!!.text = curAvailable.toString()
-        ethAvailableFiat!!.setText(exchange.convertRateExact(curAvailable, exchange.usdPrice))
-        ethAvailableFiatSymbol!!.setText(exchange.current.shorty)
+        availableEth!!.text = curAvailable.toString()
+        availableFiat!!.text = exchange.convertRateExact(curAvailable, exchange.usdPrice)
+        availableFiatSymbol!!.text = exchange.current.shorty
     }
 
     private fun updateAmount(str: String) {
@@ -346,8 +346,8 @@ class FragmentSend : Fragment() {
         exchange.index = (2)
 
         txCost!!.text = curTxCost.toString()
-        txCostFiat!!.setText(exchange.convertRateExact(curTxCost, exchange.usdPrice))
-        txCostFiatSymbol!!.setText(exchange.current.shorty)
+        txCostFiat!!.text = exchange.convertRateExact(curTxCost, exchange.usdPrice)
+        txCostFiatSymbol!!.text = exchange.current.shorty
     }
 
     private fun updateTotalCostDisplay() {
@@ -356,8 +356,8 @@ class FragmentSend : Fragment() {
         val curTotalCost = curTotalCost
 
         totalCost!!.text = curTotalCost.toString()
-        totalCostFiat!!.setText(exchange.convertRateExact(curTotalCost, exchange.usdPrice))
-        totalCostFiatSymbol!!.setText(exchange.current.shorty)
+        totalCostFiat!!.text = exchange.convertRateExact(curTotalCost, exchange.usdPrice)
+        totalCostFiatSymbol!!.text = exchange.current.shorty
     }
 
     private fun getEstimatedGasPriceLimit() {
@@ -378,21 +378,22 @@ class FragmentSend : Fragment() {
                 }
             })*/
             EtherscanAPI1.instance.getGasLimitEstimate(ac!!, toAddress!!.text.toString())
-                    .subscribe(
-                            object : SingleObserver<GasPrice> {
-                                @SuppressLint("SetTextI18n")
-                                override fun onSuccess(t: GasPrice) {
-                                    gaslimit = BigInteger(t.result.substring(2), 16)
-                                    ac!!.runOnUiThread(Runnable { userGasLimit.setText(gaslimit.toString()) })
-                                }
+                    .subscribe({
+                        object : SingleObserver<GasPrice> {
+                            @SuppressLint("SetTextI18n")
+                            override fun onSuccess(t: GasPrice) {
+                                gaslimit = BigInteger(t.result.substring(2), 16)
+                                ac!!.runOnUiThread(Runnable { userGasLimit!!.setText(gaslimit.toString()) })
+                            }
 
-                                override fun onSubscribe(d: Disposable) {
-                                }
+                            override fun onSubscribe(d: Disposable) {
+                            }
 
-                                override fun onError(e: Throwable) {
-                                }
+                            override fun onError(e: Throwable) {
+                            }
 
-                            })
+                        }
+                    }, {})
         } catch (e: IOException) {
             e.printStackTrace()
         }
@@ -412,8 +413,8 @@ class FragmentSend : Fragment() {
         ac!!.startService(txService)
 
         // For statistics
-        if ((ac!!.getApplication() as BaseApplication).isGooglePlayBuild) {
-            (ac!!.getApplication() as BaseApplication).event("Send Ether")
+        if ((ac!!.application as BaseApplication).isGooglePlayBuild) {
+            (ac!!.application as BaseApplication).event("Send Ether")
         }
 
         val data = Intent()
@@ -428,8 +429,8 @@ class FragmentSend : Fragment() {
         if (toAddress == null) return
         toAddress!!.text = to
         val name = AddressNameConverter.getInstance(c).get(to)
-        toName!!.text = name ?: to!!.substring(0, 10)
-        toicon!!.setImageBitmap(Blockies.createIcon(to!!.toLowerCase()))
+        toName!!.text = name ?: to.substring(0, 10)
+        toicon!!.setImageBitmap(Blockies.createIcon(to.toLowerCase()))
         getEstimatedGasPriceLimit()
     }
 }
