@@ -30,7 +30,7 @@ import cn.mw.ethwallet.domain.response.Balance
 import cn.mw.ethwallet.domain.response.TokenDisplay
 import cn.mw.ethwallet.interfaces.AppBarStateChangeListener
 import cn.mw.ethwallet.interfaces.LastIconLoaded
-import cn.mw.ethwallet.network.EtherscanAPI1
+import cn.mw.ethwallet.network.EtherscanAPI
 import cn.mw.ethwallet.utils.*
 import com.github.clans.fab.FloatingActionButton
 import com.github.clans.fab.FloatingActionMenu
@@ -82,7 +82,7 @@ class FragmentDetailOverview : Fragment(), View.OnClickListener, View.OnCreateCo
 
         val cur = ExchangeCalculator.instance.current
         balanceDouble = BigDecimal(arguments!!.getDouble("BALANCE"))
-        balance!!.text = ExchangeCalculator.instance.convertRateExact(balanceDouble, cur.rate) + ""
+        balance!!.text = ExchangeCalculator.instance.convertRateExact(balanceDouble, cur.rate)
         currency!!.text = cur.name
 
         recyclerView = rootView.findViewById(R.id.recycler_view) as RecyclerView?
@@ -107,9 +107,9 @@ class FragmentDetailOverview : Fragment(), View.OnClickListener, View.OnCreateCo
         }
 
         header!!.setOnClickListener {
-            val cur = ExchangeCalculator.instance.next()
-            balance!!.text = ExchangeCalculator.instance.convertRateExact(balanceDouble, cur.rate) + ""
-            currency!!.text = cur.name
+            val current = ExchangeCalculator.instance.next()
+            balance!!.text = ExchangeCalculator.instance.convertRateExact(balanceDouble, current.rate)
+            currency!!.text = current.name
             walletAdapter!!.notifyDataSetChanged()
             if (ac != null)
                 ac!!.broadCastDataSetChanged()
@@ -123,7 +123,7 @@ class FragmentDetailOverview : Fragment(), View.OnClickListener, View.OnCreateCo
 
         val send_ether = rootView.findViewById(R.id.send_ether) as FloatingActionButton // Send Ether to
         send_ether.setOnClickListener {
-            if (WalletStorage.getInstance(ac!!).fullOnly.size === 0) {
+            if (WalletStorage.getInstance(ac!!).fullOnly.size == 0) {
                 Dialogs.noFullWallet(ac!!)
             } else {
                 val tx = Intent(ac, SendActivity::class.java)
@@ -134,7 +134,7 @@ class FragmentDetailOverview : Fragment(), View.OnClickListener, View.OnCreateCo
 
         val send_ether_from = rootView.findViewById(R.id.send_ether_from) as FloatingActionButton
         send_ether_from.setOnClickListener {
-            if (WalletStorage.getInstance(ac!!).fullOnly.size === 0) {
+            if (WalletStorage.getInstance(ac!!).fullOnly.size == 0) {
                 Dialogs.noFullWallet(ac!!)
             } else {
                 val tx = Intent(ac, SendActivity::class.java)
@@ -182,36 +182,7 @@ class FragmentDetailOverview : Fragment(), View.OnClickListener, View.OnCreateCo
     fun update(force: Boolean) {
         token.clear()
         balanceDouble = BigDecimal("0")
-        /*EtherscanAPI.instance.getBalance(ethaddress!!, object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                ac!!.runOnUiThread(Runnable {
-                    ac!!.snackError("Can't connect to network")
-                    onItemsLoadComplete()
-                })
-            }
-
-            @Throws(IOException::class)
-            override fun onResponse(call: Call, response: Response) {
-                val ethbal: BigDecimal
-                try {
-                    ethbal = BigDecimal(ResponseParser.parseBalance(response.body()!!.string()))
-                    token.add(0, TokenDisplay("Ether", "ETH", ethbal.multiply(BigDecimal(1000.0)), 3, 1.0, "", "", 0.0, 0))
-                    balanceDouble = balanceDouble.add(ethbal)
-                } catch (e: JSONException) {
-                    ac!!.runOnUiThread(Runnable { onItemsLoadComplete() })
-                    e.printStackTrace()
-                }
-
-                val cur = ExchangeCalculator.instance.current
-                ac!!.runOnUiThread(Runnable {
-                    // balance.setText(ExchangeCalculator.instance.convertRateExact(balanceDouble, ExchangeCalculator.instance.getInstance));
-                    balance!!.setText(ExchangeCalculator.instance.convertRateExact(balanceDouble, cur.rate) + "")
-                    currency!!.setText(cur.name)
-                    walletAdapter!!.notifyDataSetChanged()
-                })
-            }
-        })*/
-        EtherscanAPI1.instance.getBalance(ac!!, ethaddress)
+        EtherscanAPI.INSTANCE.getBalance(ac!!, ethaddress)
                 .subscribe(
                         object : SingleObserver<Balance> {
                             override fun onSuccess(t: Balance) {
@@ -222,7 +193,7 @@ class FragmentDetailOverview : Fragment(), View.OnClickListener, View.OnCreateCo
                                 balanceDouble = balanceDouble.add(ethbal)
 
                                 val cur = ExchangeCalculator.instance.current
-                                balance!!.text = ExchangeCalculator.instance.convertRateExact(balanceDouble, cur.rate) + ""
+                                balance!!.text = ExchangeCalculator.instance.convertRateExact(balanceDouble, cur.rate)
                                 currency!!.text = cur.name
                                 walletAdapter!!.notifyDataSetChanged()
                             }
@@ -239,52 +210,20 @@ class FragmentDetailOverview : Fragment(), View.OnClickListener, View.OnCreateCo
 
                 )
 
-        /*EtherscanAPI.instance.getTokenBalances(ethaddress!!, object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                ac!!.runOnUiThread(Runnable {
-                    ac!!.snackError("Can't connect to network")
-                    onItemsLoadComplete()
-                })
-            }
-
-            @Throws(IOException::class)
-            override fun onResponse(call: Call, response: Response) {
-                try {
-                    val restring = response.body()!!.string()
-                    if (restring != null && restring.length > 2)
-                        RequestCache.instance.put(RequestCache.TYPE_TOKEN, ethaddress!!, restring)
-                    token.addAll(ResponseParser.parseTokens(ac!!, restring, this@FragmentDetailOverview))
-
-                    balanceDouble = balanceDouble.add(BigDecimal(ExchangeCalculator.instance.sumUpTokenEther(token)))
-
-                    val cur = ExchangeCalculator.instance.current
-                    ac!!.runOnUiThread(Runnable {
-                        balance!!.setText(ExchangeCalculator.instance.convertRateExact(balanceDouble, cur.rate) + "")
-                        currency!!.setText(cur.name)
-                        walletAdapter!!.notifyDataSetChanged()
-                        onItemsLoadComplete()
-                    })
-                } catch (e: Exception) {
-                    ac!!.runOnUiThread(Runnable { onItemsLoadComplete() })
-                    //ac.snackError("Invalid server response");
-                }
-
-            }
-        }, force)*/
-        EtherscanAPI1.instance.getTokenBalances(ac!!, ethaddress, force)
+        EtherscanAPI.INSTANCE.getTokenBalances(ac!!, ethaddress, force)
 
                 .subscribe(
                         object : SingleObserver<List<TokenDisplay>> {
                             override fun onSuccess(t: List<TokenDisplay>) {
 
                                 for (temp in t) {
-                                    EtherscanAPI1.instance.loadTokenIcon(ac!!, temp.name!!)
+                                    EtherscanAPI.INSTANCE.loadTokenIcon(ac!!, temp.name!!)
                                 }
 
                                 token.addAll(t)
                                 balanceDouble = balanceDouble.add(BigDecimal(ExchangeCalculator.instance.sumUpTokenEther(token)))
                                 val cur = ExchangeCalculator.instance.current
-                                balance!!.text = ExchangeCalculator.instance.convertRateExact(balanceDouble, cur.rate) + ""
+                                balance!!.text = ExchangeCalculator.instance.convertRateExact(balanceDouble, cur.rate)
                                 currency!!.text = cur.name
                                 walletAdapter!!.notifyDataSetChanged()
                                 onItemsLoadComplete()

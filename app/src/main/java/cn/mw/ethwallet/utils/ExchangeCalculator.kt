@@ -5,7 +5,7 @@ import android.util.Log
 import cn.mw.ethwallet.domain.mod.CurrencyEntry
 import cn.mw.ethwallet.domain.response.TokenDisplay
 import cn.mw.ethwallet.interfaces.NetworkUpdateListener
-import cn.mw.ethwallet.network.EtherscanAPI1
+import cn.mw.ethwallet.network.EtherscanAPI
 import java.io.IOException
 import java.math.BigDecimal
 import java.math.RoundingMode
@@ -157,28 +157,7 @@ class ExchangeCalculator private constructor() {
         }
 
         //Log.d("updateingn", "Initialize price update");
-        /*EtherscanAPI.instance.getEtherPrice(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {}
-
-            @Throws(IOException::class)
-            override fun onResponse(call: Call, response: Response) {
-                try {
-                    val data = JSONObject(response.body()!!.string()).getJSONObject("result")
-
-                    conversionNames[1].rate = data.getDouble("ethbtc")
-                    conversionNames[2].rate = data.getDouble("ethusd")
-                    if (currency != "USD")
-                        convert(currency, update)
-                    else
-                        update.onUpdate()
-
-                } catch (e: JSONException) {
-                    e.printStackTrace()
-                }
-
-            }
-        })*/
-        EtherscanAPI1.instance.getEtherPrice(activity)
+        EtherscanAPI.INSTANCE.getEtherPrice(activity)
                 .subscribe({
                     conversionNames[1].rate = it.result.ethbtc
                     conversionNames[2].rate = it.result.ethusd
@@ -194,18 +173,7 @@ class ExchangeCalculator private constructor() {
 
     @Throws(IOException::class)
     private fun convert(currency: String, update: NetworkUpdateListener) {
-//        EtherscanAPI.instance.getPriceConversionRates(currency, object : Callback {
-//            override fun onFailure(call: Call, e: IOException) {}
-//
-//            @Throws(IOException::class)
-//            override fun onResponse(call: Call, response: Response) {
-//
-//                rateForChartDisplay = ResponseParser.parsePriceConversionRate(response.body()!!.string())
-//                conversionNames[2].rate =(Math.floor(conversionNames[2].rate * rateForChartDisplay * 100) / 100)
-//                update.onUpdate()
-//            }
-//        })
-        EtherscanAPI1.instance.getPriceConversionRates(currency)
+        EtherscanAPI.INSTANCE.getPriceConversionRates(currency)
                 .subscribe({
                     rateForChartDisplay = it.rates
                     conversionNames[2].rate = (Math.floor(conversionNames[2].rate * rateForChartDisplay * 100) / 100)

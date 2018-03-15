@@ -40,10 +40,10 @@ class NotificationLauncher private constructor() {
     companion object {
         val instance: NotificationLauncher by lazy { NotificationLauncher() }
 
-//        fun getInstance(): NotificationLauncher {
-//            if (instance == null)
-//                instance = NotificationLauncher()
-//            return instance
+//        fun getINSTANCE(): NotificationLauncher {
+//            if (INSTANCE == null)
+//                INSTANCE = NotificationLauncher()
+//            return INSTANCE
 //        }
     }
 

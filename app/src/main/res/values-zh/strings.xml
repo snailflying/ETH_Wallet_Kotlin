@@ -107,7 +107,7 @@
     <string name="choose_recipient_enterscan">输入/扫描收件人地址</string>
     <string name="choose_recipient_contacts">或从通讯录中选择收件人</string>
 
-    <string name="choose_your_address">来自</string>
+    <string name="choose_your_address">选择地址</string>
     <string name="send_to">发送到</string>
     <string name="choose_ether_amount">可用输入</string>
     <string name="choose_gas">交易成本</string>
@@ -209,7 +209,7 @@
     <string name="prefs_set_pw">设置密码</string>
     <string name="prefs_set_pw_sum">指定您的登录模式</string>
     <string name="prefs_cat_security">安全</string>
-    <string name="fab_sendether_from">来自</string>
+    <string name="fab_sendether_from">发送</string>
     <string name="fab_sendether_to">发送到</string>
     <string name="open_in_browser">在浏览器中打开</string>
     <string name="tx_cost">TX消耗</string>

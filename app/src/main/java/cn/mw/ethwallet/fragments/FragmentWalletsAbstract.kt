@@ -24,7 +24,7 @@ import cn.mw.ethwallet.domain.mod.WalletDisplay
 import cn.mw.ethwallet.interfaces.AppBarStateChangeListener
 import cn.mw.ethwallet.interfaces.PasswordDialogCallback
 import cn.mw.ethwallet.interfaces.StorableWallet
-import cn.mw.ethwallet.network.EtherscanAPI1
+import cn.mw.ethwallet.network.EtherscanAPI
 import cn.mw.ethwallet.network.ResponseParser
 import cn.mw.ethwallet.utils.*
 import com.github.clans.fab.FloatingActionButton
@@ -176,43 +176,7 @@ abstract class FragmentWalletsAbstract : Fragment(), View.OnClickListener, View.
             onItemsLoadComplete()
         } else {
             nothingToShow!!.visibility = View.GONE
-            /*EtherscanAPI.instance.getBalances(storedwallets, object : Callback {
-                override fun onFailure(call: Call, e: IOException) {
-                    if (ac != null)
-                        ac!!.snackError("Can't fetch account balances. Invalid response.")
-                    val w = java.util.ArrayList<WalletDisplay>()
-                    for (cur in storedwallets)
-                        w.add(WalletDisplay(AddressNameConverter.getInstance(ac!!).get(cur.pubKey)!!, cur.pubKey, BigInteger("-1"), WalletDisplay.CONTACT))
-
-                    ac!!.runOnUiThread(Runnable {
-                        wallets.addAll(w)
-                        walletAdapter!!.notifyDataSetChanged()
-                        onItemsLoadComplete()
-                    })
-                }
-
-                @Throws(IOException::class)
-                override fun onResponse(call: Call, response: Response) {
-                    val w: List<WalletDisplay>
-                    try {
-                        w = ResponseParser.parseWallets(response.body()!!.string(), storedwallets, ac!!)
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                        return
-                    }
-
-                    ac!!.runOnUiThread(Runnable {
-                        wallets.addAll(w)
-                        walletAdapter!!.notifyDataSetChanged()
-                        for (i in wallets.indices) {
-                            balance += wallets[i].balance
-                        }
-                        balanceView!!.setText(ExchangeCalculator.instance.displayBalanceNicely(ExchangeCalculator.instance.convertRate(balance, ExchangeCalculator.instance.current.rate)) + " " + ExchangeCalculator.instance.current.name)
-                        onItemsLoadComplete()
-                    })
-                }
-            })*/
-            EtherscanAPI1.instance.getBalances(storedwallets)
+            EtherscanAPI.INSTANCE.getBalances(storedwallets)
                     .compose(RxLifecycle.bind(this).toLifecycleTransformer())
                     .subscribe(
                             object : SingleObserver<String> {

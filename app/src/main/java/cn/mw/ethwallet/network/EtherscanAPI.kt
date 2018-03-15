@@ -1,135 +1,82 @@
 package cn.mw.ethwallet.network
 
-import android.content.Context
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
-import cn.mw.ethwallet.APIKey
-import cn.mw.ethwallet.interfaces.LastIconLoaded
+import android.support.v7.app.AppCompatActivity
+import cn.mw.ethwallet.domain.api.APIService
+import cn.mw.ethwallet.domain.response.*
 import cn.mw.ethwallet.interfaces.StorableWallet
-import cn.mw.ethwallet.utils.Key
-import okhttp3.*
+import cn.mw.ethwallet.utils.cache.Cache
+import com.safframework.lifecycle.RxLifecycle
+import io.reactivex.Single
+import io.reactivex.SingleObserver
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
+import okhttp3.ResponseBody
 import java.io.BufferedInputStream
-import java.io.IOException
+import java.io.Serializable
 import java.util.*
-import java.util.concurrent.TimeUnit
 
 /**
  * @author Aaron
  * @email aaron@magicwindow.cn
- * @date 08/03/2018 14:35
+ * @date 11/03/2018 09:55
  * @description
  */
 class EtherscanAPI private constructor() {
 
-    private val token: String = Key(APIKey.API_KEY).toString()
 
-    @Throws(IOException::class)
-    fun getPriceChart(starttime: Long, period: Int, usd: Boolean, b: Callback) {
-        get("http://poloniex.com/public?command=returnChartData&currencyPair=" + (if (usd) "USDT_ETH" else "BTC_ETH") + "&start=" + starttime + "&end=9999999999&period=" + period, b)
+    companion object {
+        val INSTANCE: EtherscanAPI by lazy { EtherscanAPI() }
+        val CACHE_KEY_TOKEN_BALANCES = "getTokenBalances"
+        val CACHE_KEY_INTERNAL_TRANSACTIONS = "getInternalTransactions"
+        val CACHE_KEY_TRANSACTIONS = "getNormalTransactions"
+    }
+
+    fun getEtherPrice(activity: AppCompatActivity): Single<EtherPrice> {
+        return RetrofitManager.retrofit().create(APIService::class.java).getEtherPrice()
+                .subscribeOn(Schedulers.io())
+                .compose(RxLifecycle.bind(activity).toLifecycleTransformer())
+                .observeOn(AndroidSchedulers.mainThread())
     }
 
 
-    /**
-     * Retrieve all internal transactions from address like contract calls, for normal transactions @see cn.mw.ethwallet.network.EtherscanAPI#getNormalTransactions() )
-     *
-     * @param address Ether address
-     * @param b       Network callback to @see cn.mw.ethwallet.fragments.FragmentTransactions#update() or @see cn.mw.ethwallet.fragments.FragmentTransactionsAll#update()
-     * @param force   Whether to force (true) a network call or use cache (false). Only true if user uses swiperefreshlayout
-     * @throws IOException Network exceptions
-     */
-    @Throws(IOException::class)
-    fun getInternalTransactions(address: String, b: Callback, force: Boolean) {
-        if (!force && RequestCache.instance.contains(RequestCache.TYPE_TXS_INTERNAL, address)) {
-            val request = Request.Builder()
-                    .url("http://api.etherscan.io/api?module=account&action=txlistinternal&address=$address&startblock=0&endblock=99999999&sort=asc&apikey=$token")
-                    .build()
-            val call = OkHttpClient().newCall(request)
-            b.onResponse(call, Response.Builder().code(200).message("").request(Request.Builder()
-                    .url("http://api.etherscan.io/api?module=account&action=txlistinternal&address=$address&startblock=0&endblock=99999999&sort=asc&apikey=$token")
-                    .build()).protocol(Protocol.HTTP_1_0).body(ResponseBody.create(MediaType.parse("JSON"), RequestCache.instance.get(RequestCache.TYPE_TXS_INTERNAL, address))).build())
-            return
+    fun getInternalTransactions(activity: AppCompatActivity, address: String, force: Boolean): Single<String> {
+        if (!force && Cache.getInstanceWithoutDisc(activity).getObject(CACHE_KEY_INTERNAL_TRANSACTIONS) != null) {
+            return Single.just(Cache.getInstanceWithoutDisc(activity).getString(CACHE_KEY_INTERNAL_TRANSACTIONS))
+
         }
-        get("http://api.etherscan.io/api?module=account&action=txlistinternal&address=$address&startblock=0&endblock=99999999&sort=asc&apikey=$token", b)
+        return RetrofitManager.retrofit().create(APIService::class.java).getInternalTransactions(address)
+                .map { t ->
+                    Cache.getInstanceWithoutDisc(activity.applicationContext).put(CACHE_KEY_INTERNAL_TRANSACTIONS, t)
+                    t
+                }
+                .subscribeOn(Schedulers.io())
+                .compose(RxLifecycle.bind(activity).toLifecycleTransformer())
+                .observeOn(AndroidSchedulers.mainThread())
     }
 
+    fun getNormalTransactions(activity: AppCompatActivity, address: String, force: Boolean): Single<String> {
+        if (!force && Cache.getInstanceWithoutDisc(activity).getObject(CACHE_KEY_TRANSACTIONS) != null) {
+            return Single.just(Cache.getInstanceWithoutDisc(activity).getString(CACHE_KEY_TRANSACTIONS))
 
-    /**
-     * Retrieve all normal ether transactions from address (excluding contract calls etc, @see cn.mw.ethwallet.network.EtherscanAPI#getInternalTransactions() )
-     *
-     * @param address Ether address
-     * @param b       Network callback to @see cn.mw.ethwallet.fragments.FragmentTransactions#update() or @see cn.mw.ethwallet.fragments.FragmentTransactionsAll#update()
-     * @param force   Whether to force (true) a network call or use cache (false). Only true if user uses swiperefreshlayout
-     * @throws IOException Network exceptions
-     */
-    @Throws(IOException::class)
-    fun getNormalTransactions(address: String, b: Callback, force: Boolean) {
-        if (!force && RequestCache.instance.contains(RequestCache.TYPE_TXS_NORMAL, address)) {
-
-            val request = Request.Builder()
-                    .url("http://api.etherscan.io/api?module=account&action=txlist&address=$address&startblock=0&endblock=99999999&sort=asc&apikey=$token")
-                    .build()
-            val call = OkHttpClient().newCall(request)
-            b.onResponse(call, Response.Builder().code(200).message("").request(Request.Builder()
-                    .url("http://api.etherscan.io/api?module=account&action=txlist&address=$address&startblock=0&endblock=99999999&sort=asc&apikey=$token")
-                    .build()).protocol(Protocol.HTTP_1_0).body(ResponseBody.create(MediaType.parse("JSON"), RequestCache.instance.get(RequestCache.TYPE_TXS_NORMAL, address))).build())
-            return
         }
-        get("http://api.etherscan.io/api?module=account&action=txlist&address=$address&startblock=0&endblock=99999999&sort=asc&apikey=$token", b)
+        return RetrofitManager.retrofit().create(APIService::class.java).getNormalTransactions(address)
+                .map { t ->
+                    Cache.getInstanceWithoutDisc(activity.applicationContext).put(CACHE_KEY_TRANSACTIONS, t)
+                    t
+                }
+                .subscribeOn(Schedulers.io())
+                .compose(RxLifecycle.bind(activity).toLifecycleTransformer())
+                .observeOn(AndroidSchedulers.mainThread())
     }
 
-
-    @Throws(IOException::class)
-    fun getEtherPrice(b: Callback) {
-        get("http://api.etherscan.io/api?module=stats&action=ethprice&apikey=" + token, b)
-    }
-
-
-    @Throws(IOException::class)
-    fun getGasPrice(b: Callback) {
-        get("http://api.etherscan.io/api?module=proxy&action=eth_gasPrice&apikey=" + token, b)
-    }
-
-
-    /**
-     * Get token balances via ethplorer.io
-     *
-     * @param address Ether address
-     * @param b       Network callback to @see cn.mw.ethwallet.fragments.FragmentDetailOverview#update()
-     * @param force   Whether to force (true) a network call or use cache (false). Only true if user uses swiperefreshlayout
-     * @throws IOException Network exceptions
-     */
-    @Throws(IOException::class)
-    fun getTokenBalances(address: String, b: Callback, force: Boolean) {
-        if (!force && RequestCache.instance.contains(RequestCache.TYPE_TOKEN, address)) {
-
-            val request = Request.Builder()
-                    .url("https://api.ethplorer.io/getAddressInfo/$address?apiKey=freekey")
-                    .build()
-            val call = OkHttpClient().newCall(request)
-            b.onResponse(call, Response.Builder().code(200).message("").request(Request.Builder()
-                    .url("https://api.ethplorer.io/getAddressInfo/$address?apiKey=freekey")
-                    .build()).protocol(Protocol.HTTP_1_0).body(ResponseBody.create(MediaType.parse("JSON"), RequestCache.instance.get(RequestCache.TYPE_TOKEN, address))).build())
-            return
-        }
-        get("http://api.ethplorer.io/getAddressInfo/$address?apiKey=freekey", b)
-    }
-
-
-    /**
-     * Download and save token icon in permanent image cache (TokenIconCache)
-     *
-     * @param c         Application context, used to load TokenIconCache if reinstanced
-     * @param tokenName Name of token
-     * @param lastToken Boolean defining whether this is the last icon to download or not. If so callback is called to refresh recyclerview (notifyDataSetChanged)
-     * @param callback  Callback to @see cn.mw.ethwallet.fragments.FragmentDetailOverview#onLastIconDownloaded()
-     * @throws IOException Network exceptions
-     */
-    @Throws(IOException::class)
-    fun loadTokenIcon(c: Context, tokenName: String, lastToken: Boolean, callback: LastIconLoaded) {
+    fun loadTokenIcon(activity: AppCompatActivity, tokenName: String) {
         var tokenName = tokenName
         if (tokenName.indexOf(" ") > 0)
             tokenName = tokenName.substring(0, tokenName.indexOf(" "))
-        if (TokenIconCache.getInstance(c).contains(tokenName)) return
+        if (TokenIconCache.getInstance(activity).contains(tokenName)) return
 
         if (tokenName.equals("OMGToken", ignoreCase = true))
             tokenName = "omise"
@@ -137,81 +84,101 @@ class EtherscanAPI private constructor() {
             tokenName = "0xtoken_28"
 
         val tokenNamef = tokenName
-        get("http://etherscan.io/token/images/$tokenNamef.PNG", object : Callback {
-            override fun onFailure(call: Call, e: IOException) {}
+        RetrofitManager.retrofit().create(APIService::class.java).loadTokenIcon(tokenNamef)
+                .subscribeOn(Schedulers.io())
+                .compose(RxLifecycle.bind(activity).toLifecycleTransformer())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    object : SingleObserver<ResponseBody> {
+                        override fun onSubscribe(d: Disposable) {
+                        }
 
-            @Throws(IOException::class)
-            override fun onResponse(call: Call, response: Response) {
-                if (c == null) return
-                val `in` = response.body()
-                val inputStream = `in`!!.byteStream()
-                val bufferedInputStream = BufferedInputStream(inputStream)
-                val bitmap = BitmapFactory.decodeStream(bufferedInputStream)
-                TokenIconCache.getInstance(c).put(c, tokenNamef, BitmapDrawable(c.resources, bitmap).bitmap)
-                // if(lastToken) // TODO: resolve race condition
-                callback.onLastIconDownloaded()
-            }
-        })
+                        override fun onSuccess(t: ResponseBody) {
+                            val `in` = t
+                            val inputStream = `in`.byteStream()
+                            val bufferedInputStream = BufferedInputStream(inputStream)
+                            val bitmap = BitmapFactory.decodeStream(bufferedInputStream)
+                            TokenIconCache.getInstance(activity).put(activity, tokenNamef, BitmapDrawable(activity.resources, bitmap).bitmap)
+                        }
+
+                        override fun onError(e: Throwable) {
+                        }
+
+                    }
+                }, {})
     }
 
-
-    @Throws(IOException::class)
-    fun getGasLimitEstimate(to: String, b: Callback) {
-        get("http://api.etherscan.io/api?module=proxy&action=eth_estimateGas&to=$to&value=0xff22&gasPrice=0x051da038cc&gas=0xffffff&apikey=$token", b)
+    fun getGasLimitEstimate(activity: AppCompatActivity, to: String): Single<GasPrice> {
+        return RetrofitManager.retrofit().create(APIService::class.java).getGasLimitEstimate(to)
+                .subscribeOn(Schedulers.io())
+                .compose(RxLifecycle.bind(activity).toLifecycleTransformer())
+                .observeOn(AndroidSchedulers.mainThread())
     }
 
+    fun getBalance(activity: AppCompatActivity, address: String): Single<Balance> {
+        return RetrofitManager.retrofit().create(APIService::class.java).getBalance(address)
+                .subscribeOn(Schedulers.io())
+                .compose(RxLifecycle.bind(activity).toLifecycleTransformer())
+                .observeOn(AndroidSchedulers.mainThread())
 
-    @Throws(IOException::class)
-    fun getBalance(address: String, b: Callback) {
-        get("http://api.etherscan.io/api?module=account&action=balance&address=$address&apikey=$token", b)
     }
 
+    fun getNonceForAddress(address: String): Single<NonceForAddress> {
+        return RetrofitManager.retrofit().create(APIService::class.java).getNonceForAddress(address)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
 
-    @Throws(IOException::class)
-    fun getNonceForAddress(address: String, b: Callback) {
-        get("http://api.etherscan.io/api?module=proxy&action=eth_getTransactionCount&address=$address&tag=latest&apikey=$token", b)
     }
 
-
-    @Throws(IOException::class)
-    fun getPriceConversionRates(currencyConversion: String, b: Callback) {
-        get("https://api.fixer.io/latest?base=USD&symbols=" + currencyConversion, b)
-    }
-
-
-    @Throws(IOException::class)
-    fun getBalances(addresses: ArrayList<StorableWallet>, b: Callback) {
-        var url = "http://api.etherscan.io/api?module=account&action=balancemulti&address="
+    fun getBalances(addresses: ArrayList<StorableWallet>): Single<String> {
+        var queryMap = ""
         for (address in addresses)
-            url += address.pubKey + ","
-        url = url.substring(0, url.length - 1) + "&tag=latest&apikey=" + token // remove last , AND add token
-        get(url, b)
+            queryMap += address.pubKey + ","
+
+        return RetrofitManager.retrofit().create(APIService::class.java).getBalances(queryMap.substring(0, queryMap.length - 1))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+
+    }
+
+    fun forwardTransaction(raw: String): Single<ForwardTX> {
+        return RetrofitManager.retrofit().create(APIService::class.java).forwardTransaction(raw)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+
     }
 
 
-    @Throws(IOException::class)
-    fun forwardTransaction(raw: String, b: Callback) {
-        get("http://api.etherscan.io/api?module=proxy&action=eth_sendRawTransaction&hex=$raw&apikey=$token", b)
+    fun getPriceChart(startTime: Long, period: Int, usd: Boolean): Single<List<PriceChart>> {
+
+        val param = hashMapOf<String, String>("start" to startTime.toString(),
+                "end" to "9999999999",
+                "period" to period.toString(),
+                "currencyPair" to (if (usd) "USDT_ETH" else "BTC_ETH"))
+        return RetrofitManager.retrofit().create(APIService::class.java).getPriceChart(param)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
     }
 
-
-    @Throws(IOException::class)
-    operator fun get(url: String, b: Callback) {
-        val request = Request.Builder()
-                .url(url)
-                .build()
-        val client = OkHttpClient.Builder()
-                .connectTimeout(10, TimeUnit.SECONDS)
-                .writeTimeout(10, TimeUnit.SECONDS)
-                .readTimeout(30, TimeUnit.SECONDS)
-                .build()
-
-        client.newCall(request).enqueue(b)
+    fun getPriceConversionRates(currencyConversion: String): Single<Rate> {
+        return RetrofitManager.retrofit().create(APIService::class.java).getPriceConversionRates(currencyConversion)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
     }
 
-    companion object {
+    fun getTokenBalances(activity: AppCompatActivity, address: String, force: Boolean): Single<List<TokenDisplay>> {
+        if (!force && Cache.getInstanceWithoutDisc(activity).getObject(CACHE_KEY_TOKEN_BALANCES) != null) {
+            return Single.just(Cache.getInstanceWithoutDisc(activity, CACHE_KEY_TOKEN_BALANCES).getObject(CACHE_KEY_TOKEN_BALANCES) as List<TokenDisplay>)
 
-        val instance: EtherscanAPI by lazy { EtherscanAPI() }
+        }
+        return RetrofitManager.retrofit().create(APIService::class.java).getTokenBalances(address)
+                .map { t ->
+                    Cache.getInstanceWithoutDisc(activity.applicationContext).put(CACHE_KEY_TOKEN_BALANCES, t as Serializable)
+                    t
+                }
+                .subscribeOn(Schedulers.io())
+                .compose(RxLifecycle.bind(activity).toLifecycleTransformer())
+                .observeOn(AndroidSchedulers.mainThread())
     }
 
 }

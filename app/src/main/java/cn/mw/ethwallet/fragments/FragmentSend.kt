@@ -21,12 +21,11 @@ import cn.mw.ethwallet.activities.SendActivity
 import cn.mw.ethwallet.domain.response.Balance
 import cn.mw.ethwallet.domain.response.GasPrice
 import cn.mw.ethwallet.interfaces.PasswordDialogCallback
-import cn.mw.ethwallet.network.EtherscanAPI1
+import cn.mw.ethwallet.network.EtherscanAPI
 import cn.mw.ethwallet.services.TransactionService
 import cn.mw.ethwallet.utils.*
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
-import kotlinx.android.synthetic.main.fragment_send.*
 import me.grantland.widget.AutofitTextView
 import java.io.IOException
 import java.math.BigDecimal
@@ -210,7 +209,7 @@ class FragmentSend : Fragment() {
             try {
                 if (BuildConfig.DEBUG)
                     Log.d("etherbalance", (curTotalCost.compareTo(curAvailable) < 0).toString() + " | " + curTotalCost + " | " + curAvailable + " | " + data!!.text + " | " + curAmount)
-                if (curTotalCost.compareTo(curAvailable) < 0 || BuildConfig.DEBUG || data!!.text.length > 0) {
+                if (curTotalCost.compareTo(curAvailable) < 0 || BuildConfig.DEBUG || data!!.text.isNotEmpty()) {
                     Dialogs.askForPasswordAndDecode(ac!!, spinner!!.selectedItem.toString(), object : PasswordDialogCallback {
 
                         override fun success(password: String) {
@@ -242,30 +241,7 @@ class FragmentSend : Fragment() {
     }
 
     private fun updateAccountBalance() {
-        /*try {
-            EtherscanAPI.instance.getBalance(spinner!!.selectedItem.toString(), object : Callback {
-                override fun onFailure(call: Call, e: IOException) {
-                    ac!!.runOnUiThread(Runnable { ac!!.snackError("Cant fetch your account balance", Snackbar.LENGTH_LONG) })
-
-                }
-
-                @Throws(IOException::class)
-                override fun onResponse(call: Call, response: Response) {
-                    ac!!.runOnUiThread(Runnable {
-                        try {
-                            curAvailable = BigDecimal(ResponseParser.parseBalance(response.body()!!.string(), 6))
-                            updateDisplays()
-                        } catch (e: Exception) {
-                            ac!!.snackError("Cant fetch your account balance")
-                            e.printStackTrace()
-                        }
-                    })
-                }
-            })
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }*/
-        EtherscanAPI1.instance.getBalance(ac!!, spinner!!.selectedItem.toString())
+        EtherscanAPI.INSTANCE.getBalance(ac!!, spinner!!.selectedItem.toString())
                 .subscribe({
                     object : SingleObserver<Balance> {
                         override fun onSuccess(t: Balance) {
@@ -362,22 +338,7 @@ class FragmentSend : Fragment() {
 
     private fun getEstimatedGasPriceLimit() {
         try {
-            /*EtherscanAPI.instance.getGasLimitEstimate(toAddress!!.text.toString(), object : Callback {
-                override fun onFailure(call: Call, e: IOException) {}
-
-                @SuppressLint("SetTextI18n")
-                @Throws(IOException::class)
-                override fun onResponse(call: Call, response: Response) {
-                    try {
-                        gaslimit = ResponseParser.parseGasPrice(response.body()!!.string())
-                        ac!!.runOnUiThread(Runnable { userGasLimit.setText(gaslimit.toString()) })
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                    }
-
-                }
-            })*/
-            EtherscanAPI1.instance.getGasLimitEstimate(ac!!, toAddress!!.text.toString())
+            EtherscanAPI.INSTANCE.getGasLimitEstimate(ac!!, toAddress!!.text.toString())
                     .subscribe({
                         object : SingleObserver<GasPrice> {
                             @SuppressLint("SetTextI18n")

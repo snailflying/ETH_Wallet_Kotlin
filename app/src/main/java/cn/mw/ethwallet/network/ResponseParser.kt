@@ -112,7 +112,7 @@ object ResponseParser {
             }
 
             // Download icon and cache it
-            EtherscanAPI.instance.loadTokenIcon(c, currentToken.getJSONObject("tokenInfo").getString("name"), i == data.length() - 1, callback)
+            EtherscanAPI.INSTANCE.loadTokenIcon(c, currentToken.getJSONObject("tokenInfo").getString("name"), i == data.length() - 1, callback)
         }
         return display
     }*/
@@ -136,8 +136,8 @@ object ResponseParser {
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(c);
             long curNonce = -1;
             for(int i=tx.size()-1; i >= 0; i--){
-                if(tx.getInstance(i).getFromAddress().equals(address)) { // From address is always our address (thanks to @parseTransactions above for that)
-                    curNonce = Long.parseLong(tx.getInstance(tx.size() - 1).getNounce());
+                if(tx.getINSTANCE(i).getFromAddress().equals(address)) { // From address is always our address (thanks to @parseTransactions above for that)
+                    curNonce = Long.parseLong(tx.getINSTANCE(tx.size() - 1).getNounce());
                     break;
                 }
             }

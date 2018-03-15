@@ -12,7 +12,7 @@ import cn.mw.ethwallet.R
 import cn.mw.ethwallet.activities.MainActivity
 import cn.mw.ethwallet.domain.response.ForwardTX
 import cn.mw.ethwallet.domain.response.NonceForAddress
-import cn.mw.ethwallet.network.EtherscanAPI1
+import cn.mw.ethwallet.network.EtherscanAPI
 import cn.mw.ethwallet.utils.ExchangeCalculator
 import cn.mw.ethwallet.utils.WalletStorage
 import io.reactivex.SingleObserver
@@ -50,46 +50,7 @@ class TransactionService : IntentService("Transaction Service") {
 
             val keys = WalletStorage.getInstance(applicationContext).getFullWallet(applicationContext, password, fromAddress)
 
-            /*EtherscanAPI.instance.getNonceForAddress(fromAddress, object : Callback {
-                override fun onFailure(call: Call, e: IOException) {
-                    error("Can't connect to network, retry it later")
-                }
-
-                @Throws(IOException::class)
-                override fun onResponse(call: Call, response: Response) {
-                    try {
-                        val o = JSONObject(response.body()!!.string())
-                        val nonce = BigInteger(o.getString("result").substring(2), 16)
-
-                        val tx = RawTransaction.createTransaction(
-                                nonce,
-                                BigInteger(gas_price),
-                                BigInteger(gas_limit),
-                                toAddress,
-                                BigDecimal(amount).multiply(ExchangeCalculator.ONE_ETHER).toBigInteger(),
-                                data
-                        )
-
-                        Log.d("txx",
-                                "Nonce: " + tx.nonce + "\n" +
-                                        "gasPrice: " + tx.gasPrice + "\n" +
-                                        "gasLimit: " + tx.gasLimit + "\n" +
-                                        "To: " + tx.to + "\n" +
-                                        "Amount: " + tx.value + "\n" +
-                                        "Data: " + tx.data
-                        )
-
-                        val signed = TransactionEncoder.signMessage(tx, 1.toByte(), keys)
-
-                        forwardTX(signed)
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                        error("Can't connect to network, retry it later")
-                    }
-
-                }
-            })*/
-            EtherscanAPI1.instance.getNonceForAddress(fromAddress)
+            EtherscanAPI.INSTANCE.getNonceForAddress(fromAddress)
                     .subscribe(
                             object : SingleObserver<NonceForAddress> {
                                 override fun onSuccess(t: NonceForAddress) {
@@ -139,33 +100,8 @@ class TransactionService : IntentService("Transaction Service") {
 
     @Throws(IOException::class)
     private fun forwardTX(signed: ByteArray) {
-        /*EtherscanAPI.instance.forwardTransaction("0x" + Hex.toHexString(signed), object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                error("Can't connect to network, retry it later")
-            }
 
-            @Throws(IOException::class)
-            override fun onResponse(call: Call, response: Response) {
-                val received = response.body()!!.string()
-                try {
-                    suc(JSONObject(received).getString("result"))
-                } catch (e: Exception) {
-                    // Advanced error handling. If etherscan returns error message show the shortened version in notification. Else abbort with unknown error
-                    try {
-                        var errormsg = JSONObject(received).getJSONObject("error").getString("message")
-                        if (errormsg.indexOf(".") > 0)
-                            errormsg = errormsg.substring(0, errormsg.indexOf("."))
-                        error(errormsg) // f.E Insufficient funds
-                    } catch (e1: JSONException) {
-                        error("Unknown error occured")
-                    }
-
-                }
-
-            }
-        })*/
-
-        EtherscanAPI1.instance.forwardTransaction("0x" + Hex.toHexString(signed))
+        EtherscanAPI.INSTANCE.forwardTransaction("0x" + Hex.toHexString(signed))
                 .subscribe(
                         object : SingleObserver<ForwardTX> {
                             override fun onSuccess(t: ForwardTX) {

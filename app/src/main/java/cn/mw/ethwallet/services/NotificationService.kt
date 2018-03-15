@@ -11,7 +11,7 @@ import android.provider.Settings
 import android.support.v4.app.NotificationCompat
 import cn.mw.ethwallet.R
 import cn.mw.ethwallet.activities.MainActivity
-import cn.mw.ethwallet.network.EtherscanAPI1
+import cn.mw.ethwallet.network.EtherscanAPI
 import cn.mw.ethwallet.utils.Blockies
 import cn.mw.ethwallet.utils.ExchangeCalculator
 import cn.mw.ethwallet.utils.WalletStorage
@@ -38,47 +38,7 @@ class NotificationService : IntentService("Notification Service") {
         }
 
         try {
-            /*EtherscanAPI.instance.getBalances(WalletStorage.getInstance(this).get()!!, object : Callback {
-                override fun onFailure(call: Call, e: IOException) {}
-
-                @Throws(IOException::class)
-                override fun onResponse(call: Call, response: Response) {
-                    var data: JSONArray? = null
-                    try {
-                        data = JSONObject(response.body()!!.string()).getJSONArray("result")
-                        val preferences = PreferenceManager.getDefaultSharedPreferences(this@NotificationService)
-
-                        var notify = false
-                        var amount = BigInteger("0")
-                        var address = ""
-                        val editor = preferences.edit()
-                        for (i in 0 until data!!.length()) {
-                            if (preferences.getString(data.getJSONObject(i).getString("account"), data.getJSONObject(i).getString("balance")) != data.getJSONObject(i).getString("balance")) {
-                                if (BigInteger(preferences.getString(data.getJSONObject(i).getString("account"), data.getJSONObject(i).getString("balance"))).compareTo(BigInteger(data.getJSONObject(i).getString("balance"))) < 1) { // Nur wenn höhere Balance als vorher
-                                    notify = true
-                                    address = data.getJSONObject(i).getString("account")
-                                    amount = amount.add(BigInteger(data.getJSONObject(i).getString("balance")).subtract(BigInteger(preferences.getString(address, "0"))))
-                                }
-                            }
-                            editor.putString(data.getJSONObject(i).getString("account"), data.getJSONObject(i).getString("balance"))
-                        }
-                        editor.commit()
-                        if (notify) {
-                            try {
-                                val amountS = BigDecimal(amount).divide(ExchangeCalculator.ONE_ETHER, 4, BigDecimal.ROUND_DOWN).toPlainString()
-                                sendNotification(address, amountS)
-                            } catch (e: Exception) {
-
-                            }
-
-                        }
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                    }
-
-                }
-            })*/
-            EtherscanAPI1.instance.getBalances(WalletStorage.getInstance(this).get()!!)
+            EtherscanAPI.INSTANCE.getBalances(WalletStorage.getInstance(this).get()!!)
                     .subscribe({
                         var data: JSONArray? = null
                         try {

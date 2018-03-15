@@ -664,7 +664,7 @@
                 android:id="@+id/send"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:backgroundTint="@color/colorPrimaryDark"
+                android:backgroundTint="@color/colorPrimaryDark"
                 android:textColor="#FFFFFF"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="5dp"

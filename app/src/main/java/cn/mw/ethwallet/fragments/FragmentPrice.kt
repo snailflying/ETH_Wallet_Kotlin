@@ -19,7 +19,7 @@ import android.widget.TextView
 import cn.mw.ethwallet.R
 import cn.mw.ethwallet.activities.BaseApplication
 import cn.mw.ethwallet.activities.MainActivity
-import cn.mw.ethwallet.network.EtherscanAPI1
+import cn.mw.ethwallet.network.EtherscanAPI
 import cn.mw.ethwallet.utils.ExchangeCalculator
 import cn.mw.ethwallet.views.DontShowNegativeFormatter
 import cn.mw.ethwallet.views.HourXFormatter
@@ -142,55 +142,12 @@ class FragmentPrice : Fragment() {
 
     @Throws(IOException::class)
     private fun loadPriceData(time: Long, period: Int) {
-
-        /*EtherscanAPI.instance.getPriceChart(System.currentTimeMillis() / 1000 - time, period, displayInUsd, object : Callback { // 1467321600,
-            override fun onFailure(call: Call, e: IOException) {
-                if (ac == null) return
-                ac!!.runOnUiThread(Runnable {
-                    try {
-                        onItemsLoadComplete()
-                        ac!!.snackError(getString(R.string.err_no_con), Snackbar.LENGTH_LONG)
-                    } catch (e: Exception) {
-                    }
-                })
-            }
-
-            @Throws(IOException::class)
-            override fun onResponse(call: Call, response: Response) {
-                val yVals = ArrayList<Entry>()
-                try {
-                    val data = JSONArray(response.body()!!.string())
-                    val exchangeRate = ExchangeCalculator.instance.rateForChartDisplay
-                    val commas = (if (displayInUsd) 100 else 10000).toFloat()
-                    for (i in 0 until data.length()) {
-                        val o = data.getJSONObject(i)
-                        yVals.add(Entry(o.getLong("date").toFloat(),
-                                Math.floor(o.getDouble("high") * exchangeRate * commas.toDouble()).toFloat() / commas))
-                    }
-                    if (ac == null) return
-                    ac!!.runOnUiThread(Runnable {
-                        priceChart!!.visibility = View.VISIBLE
-                        onItemsLoadComplete()
-                        if (isAdded) {
-//                            setupChart(priceChart, getData(yVals), resources.getColor(R.color.colorPrimaryLittleDarker))
-                            update(false)
-                        }
-                    })
-
-                } catch (e: JSONException) {
-                    e.printStackTrace()
-                }
-
-            }
-        }
-
-        )*/
-        EtherscanAPI1.instance.getPriceChart(System.currentTimeMillis() / 1000 - time, period, displayInUsd)
+        EtherscanAPI.INSTANCE.getPriceChart(System.currentTimeMillis() / 1000 - time, period, displayInUsd)
                 .compose(RxLifecycle.bind(this).toLifecycleTransformer())
                 .subscribe({
                     if (!it.isEmpty()) {
                         val yVals = ArrayList<Entry>()
-//                            val exchangeRate = ExchangeCalculator.instance.rateForChartDisplay
+//                            val exchangeRate = ExchangeCalculator.INSTANCE.rateForChartDisplay
                         val exchangeRate = 5
                         val commas = (if (displayInUsd) 100 else 10000).toFloat()
                         for (price in it) {

@@ -10,7 +10,7 @@ import cn.mw.ethwallet.activities.MainActivity
 import cn.mw.ethwallet.domain.response.TransactionDisplay
 import cn.mw.ethwallet.interfaces.AppBarStateChangeListener
 import cn.mw.ethwallet.interfaces.StorableWallet
-import cn.mw.ethwallet.network.EtherscanAPI1
+import cn.mw.ethwallet.network.EtherscanAPI
 import cn.mw.ethwallet.network.RequestCache
 import cn.mw.ethwallet.network.ResponseParser
 import cn.mw.ethwallet.utils.WalletStorage
@@ -64,28 +64,7 @@ class FragmentTransactionsAll : FragmentTransactionsAbstract() {
                 try {
                     val currentWallet = storedwallets.get(i)
 
-                    /*EtherscanAPI.instance.getNormalTransactions(currentWallet.pubKey, object : Callback {
-                        override fun onFailure(call: Call, e: IOException) {
-                            if (isAdded) {
-                                ac!!.runOnUiThread(Runnable {
-                                    onItemsLoadComplete()
-                                    (ac as MainActivity).snackError("No internet connection")
-                                })
-                            }
-                        }
-
-                        @Throws(IOException::class)
-                        override fun onResponse(call: Call, response: Response) {
-                            val restring = response.body()!!.string()
-                            if (restring != null && restring.length > 2)
-                                RequestCache.instance.put(RequestCache.TYPE_TXS_NORMAL, currentWallet.pubKey, restring)
-                            val w = ArrayList<TransactionDisplay>(ResponseParser.parseTransactions(restring, "Unnamed Address", currentWallet.pubKey, TransactionDisplay.NORMAL))
-                            if (isAdded) {
-                                ac!!.runOnUiThread(Runnable { onComplete(w, storedwallets) })
-                            }
-                        }
-                    }, force)*/
-                    EtherscanAPI1.instance.getNormalTransactions(ac!!, currentWallet.pubKey, force)
+                    EtherscanAPI.INSTANCE.getNormalTransactions(ac!!, currentWallet.pubKey, force)
                             .subscribe(
                                     object : SingleObserver<String> {
                                         override fun onSuccess(t: String) {
@@ -109,28 +88,7 @@ class FragmentTransactionsAll : FragmentTransactionsAbstract() {
                                     }
 
                             )
-                    /*EtherscanAPI.instance.getInternalTransactions(currentWallet.pubKey, object : Callback {
-                        override fun onFailure(call: Call, e: IOException) {
-                            if (isAdded) {
-                                ac!!.runOnUiThread(Runnable {
-                                    onItemsLoadComplete()
-                                    (ac as MainActivity).snackError("No internet connection")
-                                })
-                            }
-                        }
-
-                        @Throws(IOException::class)
-                        override fun onResponse(call: Call, response: Response) {
-                            val restring = response.body()!!.string()
-                            if (restring != null && restring.length > 2)
-                                RequestCache.instance.put(RequestCache.TYPE_TXS_INTERNAL, currentWallet.pubKey, restring)
-                            val w = ArrayList<TransactionDisplay>(ResponseParser.parseTransactions(restring, "Unnamed Address", currentWallet.pubKey, TransactionDisplay.CONTRACT))
-                            if (isAdded) {
-                                ac!!.runOnUiThread(Runnable { onComplete(w, storedwallets) })
-                            }
-                        }
-                    }, force)*/
-                    EtherscanAPI1.instance.getInternalTransactions(ac!!, currentWallet.pubKey, force)
+                    EtherscanAPI.INSTANCE.getInternalTransactions(ac!!, currentWallet.pubKey, force)
                             .subscribe(
                                     object : SingleObserver<String> {
                                         override fun onSuccess(t: String) {

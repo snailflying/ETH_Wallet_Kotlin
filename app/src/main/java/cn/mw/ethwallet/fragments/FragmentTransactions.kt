@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import cn.mw.ethwallet.R
 import cn.mw.ethwallet.activities.AddressDetailActivity
 import cn.mw.ethwallet.domain.response.TransactionDisplay
-import cn.mw.ethwallet.network.EtherscanAPI1
+import cn.mw.ethwallet.network.EtherscanAPI
 import cn.mw.ethwallet.network.RequestCache
 import cn.mw.ethwallet.network.ResponseParser
 import io.reactivex.SingleObserver
@@ -40,28 +40,7 @@ class FragmentTransactions : FragmentTransactionsAbstract() {
             swipeLayout!!.isRefreshing = true
 
         try {
-            /*EtherscanAPI.instance.getNormalTransactions(this.address!!, object : Callback {
-                override fun onFailure(call: Call, e: IOException) {
-                    if (isAdded()) {
-                        ac!!.runOnUiThread(Runnable {
-                            onItemsLoadComplete()
-                            (ac as AddressDetailActivity).snackError(getString(R.string.err_no_con))
-                        })
-                    }
-                }
-
-                @Throws(IOException::class)
-                override fun onResponse(call: Call, response: Response) {
-                    val restring = response.body()!!.string()
-                    if (restring != null && restring.length > 2)
-                        RequestCache.instance.put(RequestCache.TYPE_TXS_NORMAL, address!!, restring)
-                    val w = ArrayList<TransactionDisplay>(ResponseParser.parseTransactions(restring, "Unnamed Address", address!!, TransactionDisplay.NORMAL))
-                    if (isAdded()) {
-                        ac!!.runOnUiThread(Runnable { onComplete(w) })
-                    }
-                }
-            }, force)*/
-            EtherscanAPI1.instance.getNormalTransactions(ac!!, address!!, force)
+            EtherscanAPI.INSTANCE.getNormalTransactions(ac!!, address!!, force)
                     .subscribe(
                             object : SingleObserver<String> {
                                 override fun onSuccess(t: String) {
@@ -85,28 +64,7 @@ class FragmentTransactions : FragmentTransactionsAbstract() {
                             }
 
                     )
-            /*EtherscanAPI.instance.getInternalTransactions(address!!, object : Callback {
-                override fun onFailure(call: Call, e: IOException) {
-                    if (isAdded()) {
-                        ac!!.runOnUiThread(Runnable {
-                            onItemsLoadComplete()
-                            (ac as AddressDetailActivity).snackError(getString(R.string.err_no_con))
-                        })
-                    }
-                }
-
-                @Throws(IOException::class)
-                override fun onResponse(call: Call, response: Response) {
-                    val restring = response.body()!!.string()
-                    if (restring != null && restring.length > 2)
-                        RequestCache.instance.put(RequestCache.TYPE_TXS_INTERNAL, address!!, restring)
-                    val w = ArrayList<TransactionDisplay>(ResponseParser.parseTransactions(restring, "Unnamed Address", address!!, TransactionDisplay.CONTRACT))
-                    if (isAdded()) {
-                        ac!!.runOnUiThread(Runnable { onComplete(w) })
-                    }
-                }
-            }, force)*/
-            EtherscanAPI1.instance.getInternalTransactions(ac!!, address!!, force)
+            EtherscanAPI.INSTANCE.getInternalTransactions(ac!!, address!!, force)
                     .subscribe(
                             object : SingleObserver<String> {
                                 override fun onSuccess(t: String) {

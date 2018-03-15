@@ -236,7 +236,7 @@ object FileUtils {
             stream = BufferedOutputStream(fstream)
             stream.write(b)
         } catch (e: Exception) {
-            // log.error("helper:getInstance file from byte process error!");
+            // log.error("helper:getINSTANCE file from byte process error!");
             e.printStackTrace()
         } finally {
             closeQuietly(stream)

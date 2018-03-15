@@ -1,5 +1,6 @@
 package cn.mw.ethwallet.views
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.support.v4.view.ViewPager
 import android.util.AttributeSet
@@ -19,6 +20,7 @@ class NonSwipeViewPager(context: Context, attrs: AttributeSet) : ViewPager(conte
         this.enabled1 = true
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent): Boolean {
         return if (this.enabled1) {
             super.onTouchEvent(event)
