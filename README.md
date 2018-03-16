@@ -40,3 +40,6 @@
 * [Poloniex.com](https://poloniex.com/)  
 * [Ethplorer.io](https://ethplorer.io)
 
+## Licence
+GPL3
+
