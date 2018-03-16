@@ -1,5 +1,4 @@
 # ETH_Wallet_Kotlin
-根据[Lunary-Ethereum-Wallet](https://github.com/manuelsc/Lunary-Ethereum-Wallet)修改的Kotlin版本
 <div align="center">
 <img src="pic/git1.jpg" width = "150" height = "230"  style="display: inline-block" >
 <img src="pic/git2.jpg" width = "150" height = "230" style="display: inline-block" >
@@ -24,6 +23,7 @@
 * 支持ERC-67和ICAP
 * 现在支持8种货币: USD, EUR, GBP, CHF, AUD, CAD, JPY, RUB  
 * 支持 中文、英语、德语、西班牙语、葡萄牙语和匈牙利语
+根据[Lunary](https://github.com/manuelsc/Lunary-Ethereum-Wallet)修改优化
 
 ## Dependencies:
 * [Web3j](https://github.com/web3j/web3j)
