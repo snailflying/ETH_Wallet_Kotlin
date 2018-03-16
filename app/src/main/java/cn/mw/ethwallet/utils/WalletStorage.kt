@@ -230,10 +230,10 @@ class WalletStorage private constructor(context: Context) {
 
     @Throws(IOException::class, JSONException::class, CipherException::class)
     fun getFullWallet(context: Context, password: String, wallet: String): Credentials {
-        var wallet = wallet
-        if (wallet.startsWith("0x"))
-            wallet = wallet.substring(2, wallet.length)
-        return WalletUtils.loadCredentials(password, File(context.filesDir, wallet))
+        var walletShadowed = wallet
+        if (walletShadowed.startsWith("0x"))
+            walletShadowed = walletShadowed.substring(2, walletShadowed.length)
+        return WalletUtils.loadCredentials(password, File(context.filesDir, walletShadowed))
     }
 
 
@@ -272,12 +272,12 @@ class WalletStorage private constructor(context: Context) {
         }
 
         fun stripWalletName(s: String): String {
-            var s = s
-            if (s.lastIndexOf("--") > 0)
-                s = s.substring(s.lastIndexOf("--") + 2)
-            if (s.endsWith(".json"))
-                s = s.substring(0, s.indexOf(".json"))
-            return s
+            var sShadowed = s
+            if (sShadowed.lastIndexOf("--") > 0)
+                sShadowed = sShadowed.substring(sShadowed.lastIndexOf("--") + 2)
+            if (sShadowed.endsWith(".json"))
+                sShadowed = sShadowed.substring(0, sShadowed.indexOf(".json"))
+            return sShadowed
         }
     }
 

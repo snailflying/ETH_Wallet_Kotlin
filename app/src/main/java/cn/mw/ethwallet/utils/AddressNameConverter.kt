@@ -29,12 +29,12 @@ class AddressNameConverter private constructor(context: Context) {
     init {
         try {
             load(context)
-            if (!contains("0xa9981a33f6b1a18da5db58148b2357f22b44e1e0")) {
-                put("0xa9981a33f6b1a18da5db58148b2357f22b44e1e0", "Mercury Development ✓", context)
+            if (!contains("0x6fdAA53b727Ef42a039Eaef94445caf716D0E681")) {
+                put("0x6fdAA53b727Ef42a039Eaef94445caf716D0E681", "Mercury Development ✓", context)
             }
         } catch (e: Exception) {
             addressbook = HashMap()
-            put("0xa9981a33f6b1a18da5db58148b2357f22b44e1e0", "Mercury Development ✓", context)
+            put("0x6fdAA53b727Ef42a039Eaef94445caf716D0E681", "Mercury Development ✓", context)
         }
 
         wellknown_addresses = WellKnownAddresses()

@@ -56,8 +56,8 @@ android {
     }
 
     productFlavors {
-        googleplay {
-        }
+//        googleplay {
+//        }
 
         fdroid {
         }
@@ -92,6 +92,20 @@ android {
     tasks.withType(JavaCompile) {
         compileTask -> compileTask.dependsOn ndkBuild
     }
+    signingConfigs { // 签名，你可以配置多个签名，然后再在buildTypes 进行指定。
+        release {
+            storeFile file("../keystore") // 签名文件存放路径
+            storePassword "eth123456"
+            keyAlias "eth"
+            keyPassword "eth123456"
+        }
+        release {
+            storeFile file("../keystore") // 签名文件存放路径
+            storePassword "eth123456"
+            keyAlias "eth"
+            keyPassword "eth123456"
+        }
+    }
 }
 
 dependencies {
@@ -106,8 +120,8 @@ dependencies {
     compile 'com.android.support:multidex:1.0.1'
     compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'com.android.support:support-v4:25.3.1'
-    googleplayCompile 'com.google.android.gms:play-services-analytics:11.0.4'
-    googleplayCompile 'com.google.android.gms:play-services-ads:11.0.4'
+//    googleplayCompile 'com.google.android.gms:play-services-analytics:11.0.4'
+//    googleplayCompile 'com.google.android.gms:play-services-ads:11.0.4'
     //[end]
     testCompile 'junit:junit:4.12'
 

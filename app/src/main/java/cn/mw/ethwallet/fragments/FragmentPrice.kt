@@ -271,7 +271,7 @@ class FragmentPrice : Fragment() {
                 ExchangeCalculator.instance.displayEthNicely(ExchangeCalculator.instance.btcPrice) + " BTC"
                     )
 
-        if (refreshChart && updateChart) {
+        if (refreshChart && updateChart && priceChart != null) {
             try {
                 loadPriceData(TIMESTAMPS[displayType].toLong(), PERIOD[displayType])
             } catch (e: IOException) {

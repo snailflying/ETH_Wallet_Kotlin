@@ -67,7 +67,7 @@ class TransactionService : IntentService("Transaction Service") {
                                             data
                                     )
 
-                                    Log.d("txx",
+                                    Log.d("Aaron",
                                             "Nonce: " + tx.nonce + "\n" +
                                                     "gasPrice: " + tx.gasPrice + "\n" +
                                                     "gasLimit: " + tx.gasLimit + "\n" +
